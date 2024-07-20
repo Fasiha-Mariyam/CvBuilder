@@ -1,0 +1,17 @@
+.App {
+    font-family: 'Helvetica Neue', sans-serif;
+  }
+  
+  .cropped-image {
+    border-radius: 50%;
+  }
+  
+  .container {
+    width:"500px";
+    position: relative;
+  }
+  
+  .crop-container {
+    height: 200px;
+    width:200px ;
+  }
