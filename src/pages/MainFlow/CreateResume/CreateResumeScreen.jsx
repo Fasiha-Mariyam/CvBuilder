@@ -1,20 +1,27 @@
+/* eslint-disable no-unused-vars */
 import React, { useState } from "react";
 import ResponsiveAppBar from "../../../components/Navbar/ResponsiveAppBar";
 import { Grid, Paper, useMediaQuery } from "@mui/material";
 import SectionsList from "../../../components/CvSections/SectionsList";
 import PersonalInfo from "../../../components/Forms/PersonalInfo";
-import DefaultTemplate from "../../../components/Templates/DefaultTemplate";
+import DefaultTemplate from "../../../components/Templates/DefaultTemplate/DefaultTemplate";
 import CustomizeForm from "../../../components/Forms/CustomizeForm";
 import Summary from "../../../components/Forms/Summary";
 import Experience from "../../../components/Forms/Experience";
 import Education from "../../../components/Forms/Education";
 import Skills from "../../../components/Forms/Skills";
 import Interests from "../../../components/Forms/Interest";
-import Project from "../../../components/Forms/Project"
+import Project from "../../../components/Forms/Project";
+import { useLocation } from "react-router-dom";
+import FirstStyledTemplate from "../../../components/Templates/StyledTemplate/FirstStyledTemplate";
+import SecondStyleTemp from "../../../components/Templates/StyledTemplate/SecondStyleTemp";
+import ThirdStyleTemp from "../../../components/Templates/StyledTemplate/ThirdStyleTemp";
 
 export default function CreateResumeScreen() {
   const below400 = useMediaQuery("(max-width:400px)");
-  const [currentSection, setCurrentSection] = useState('Personal Details');
+  const [currentSection, setCurrentSection] = useState("Personal Details");
+  const location = useLocation();
+  const templateValue = location.state;
 
   const handleSectionChange = (section) => {
     setCurrentSection(currentSection === section ? null : section);
@@ -33,20 +40,34 @@ export default function CreateResumeScreen() {
       case "Skills":
         return <Skills />;
       case "Interests":
-        return <Interests/>;
+        return <Interests />;
       case "Projects":
         return <Project />;
       default:
         return <CustomizeForm />;
     }
   };
-
+  const renderTemplate = () => {
+    console.log(templateValue);
+    switch (templateValue) {
+      case 1:
+        return <DefaultTemplate />;
+      case 2:
+        return <FirstStyledTemplate />;
+      case 3:
+        return <SecondStyleTemp />;
+      case 4:
+        return <ThirdStyleTemp />;
+      default:
+        return <DefaultTemplate />;
+    }
+  };
   return (
     <>
       <ResponsiveAppBar current={"Create Resume"} />
 
       <Grid container spacing={2} sx={{ padding: 2 }}>
-        <Grid item xs={below400?12:6} md={6} lg={2}>
+        <Grid item xs={below400 ? 12 : 6} md={6} lg={2}>
           <Paper sx={{ p: 1 }}>
             <SectionsList
               currentSection={currentSection}
@@ -55,14 +76,12 @@ export default function CreateResumeScreen() {
           </Paper>
         </Grid>
 
-        <Grid item xs={below400?12:6} md={6} lg={4}>
+        <Grid item xs={below400 ? 12 : 6} md={6} lg={4}>
           <Paper sx={{ padding: 2, textAlign: "center" }}>{renderForm()}</Paper>
         </Grid>
 
         <Grid item xs={12} md={12} lg={6}>
-          <Paper sx={{ padding: 2, textAlign: "center" }}>
-            <DefaultTemplate />
-          </Paper>
+          <Paper sx={{ padding: 2 }}>{renderTemplate()}</Paper>
         </Grid>
       </Grid>
     </>

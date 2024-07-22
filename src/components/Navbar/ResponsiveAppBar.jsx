@@ -148,21 +148,7 @@ function ResponsiveAppBar({ current }) {
                 {page}
               </Button>
             ))}
-           {current === "Create Resume" && <Button
-                sx={{
-                  my: 2,
-                  color: "#498fcd",
-                  display: "block",
-                  background: "rgb(234 235 235)",
-                  ml:2,
-                  "&:hover": {
-                    backgroundColor: "#003d4d",
-                  },
-                }}
-                onClick={() => navigate("/createResume")}
-              >
-              Download
-              </Button>}
+          
           </Box>
           <Box
             sx={{

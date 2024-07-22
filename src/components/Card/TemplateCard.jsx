@@ -3,13 +3,10 @@ import { useNavigate } from "react-router-dom";
 import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
 import CardMedia from "@mui/material/CardMedia";
-import CardContent from "@mui/material/CardContent";
-import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
-import templateImg from "../../assets/images/logo1.png";
 
-export default function TemplateCard({image,title,subheader}) {
+export default function TemplateCard({ image, title, subheader, number }) {
   const navigate = useNavigate();
   const [hover, setHover] = React.useState(false);
 
@@ -22,7 +19,7 @@ export default function TemplateCard({image,title,subheader}) {
   };
 
   const handleClick = () => {
-    navigate("/createResume");
+    navigate("/createResume", { state: number });
   };
 
   return (
@@ -36,16 +33,9 @@ export default function TemplateCard({image,title,subheader}) {
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      <CardHeader
-        title={"Template 1"}
-        subheader="September 14, 2016"
-      />
-      <CardMedia
-        component="img"
-        image={templateImg}
-        alt="Paella dish"
-      />
-      
+      <CardHeader title={title} subheader={subheader} sx={{background:"#498fcd"}}/>
+      <CardMedia component="img" image={image} alt="Paella dish" height={400}/>
+
       {hover && (
         <Box
           sx={{
