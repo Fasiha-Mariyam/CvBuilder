@@ -24,7 +24,7 @@ const descriptionStyle = {
   my: 2,
 };
 
-export default function Skills() {
+export default function Skills({handleInputChange}) {
   const below600 = useMediaQuery("(max-width:600px)");
   const [inputValue, setInputValue] = React.useState("");
   const [skillList, setSkillList] = React.useState([]);
@@ -46,14 +46,21 @@ export default function Skills() {
 
   const handleAddSkill = () => {
     if (inputValue && !skillList.includes(inputValue)) {
-      setSkillList([...skillList, inputValue]);
-      setInputValue(""); // Clear the input field after adding the skill
+      setSkillList(prevSkillList => {
+        const newSkillList = [...prevSkillList, inputValue];
+        handleInputChange({ target: { name: "skills", value: newSkillList } });
+        return newSkillList;
+      });
+      setInputValue(""); 
     }
   };
 
   const handleDeleteSkill = (skillToDelete) => {
-    setSkillList(skillList.filter((skill) => skill !== skillToDelete));
+    const newSkillList = skillList.filter((skill) => skill !== skillToDelete);
+    setSkillList(newSkillList);
+    handleInputChange({ target: { name: "skills", value: newSkillList } });
   };
+
 
   return (
     <div>
@@ -90,7 +97,8 @@ export default function Skills() {
                 setInputValue(newInputValue);
               }}
               renderInput={(params) => (
-                <TextField {...params} placeholder="Skills" />
+                <TextField {...params} placeholder="Skills" name="skills"
+                />
               )}
             />
           </Grid>

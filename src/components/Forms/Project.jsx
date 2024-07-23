@@ -3,7 +3,7 @@ import CollapsibleProject from "../Collapsible/CollapsibleProjects";
 import { Button, Typography, useMediaQuery } from "@mui/material";
 import { Box } from "@mui/system";
 
-export default function Project() {
+export default function Project({handleInputChange}) {
   const below600 = useMediaQuery("(max-width:600px)");
   const [Project, setProject] = React.useState([1]);
   const [openProject, setOpenProject] = React.useState(1);
@@ -37,6 +37,7 @@ export default function Project() {
         <CollapsibleProject
           key={index}
           index={index + 1}
+          handleInputChange={handleInputChange}
           onDelete={() => handleDeleteProject(index)}
           onToggle={() => handleToggleProject(index + 1)}
           isOpen={openProject === index + 1}

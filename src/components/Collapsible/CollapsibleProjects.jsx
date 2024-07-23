@@ -35,6 +35,7 @@ export default function CollapsibleProjects({
   index,
   onDelete,
   onToggle,
+  handleInputChange,
   totalProjects,
 }) {
   const [aboutText, setAboutText] = React.useState("");
@@ -51,13 +52,28 @@ export default function CollapsibleProjects({
     { label: "2022", year: 2023 },
   ];
 
+  React.useEffect(() => {
+    if (isCurrentlyWorking) {
+      handleInputChange({
+        target: { name: "endYearOfProject", value: "Present" },
+      });
+      handleInputChange({
+        target: { name: "endDateOfProject", value: "Present" },
+      });
+    }
+  }, [isCurrentlyWorking]);
+
   const handleChange = (event) => {
     const inputText = event.target.value;
     if (inputText.length <= maxLength) {
       setAboutText(inputText);
+      handleInputChange(event);
     }
   };
-
+  const handleAutocompleteChange = (newValue, fieldName) => {
+    handleInputChange({ target: { name: fieldName, value: newValue.label } });
+    console.log(newValue.label, fieldName);
+  };
   const handleCheckboxChange = (event) => {
     setIsCurrentlyWorking(event.target.checked);
   };
@@ -102,6 +118,8 @@ export default function CollapsibleProjects({
             <Grid item xs={12} md={12}>
               <Typography sx={textStyle}>Project Name*</Typography>
               <TextField
+              name="projectName"
+              onChange={handleInputChange}
                 id="outlined-basic"
                 variant="outlined"
                 placeholder="Ex: Website "
@@ -109,7 +127,7 @@ export default function CollapsibleProjects({
               />
             </Grid>
           </Grid>
-        
+
           <Grid container spacing={2} sx={{ mb: 1 }}>
             <Grid item xs={12} md={6}>
               <Typography sx={textStyle}>Start date*</Typography>
@@ -118,8 +136,12 @@ export default function CollapsibleProjects({
                 id="combo-box-demo"
                 options={Month}
                 renderInput={(params) => (
-                  <TextField {...params} placeholder="Month" />
+                  <TextField {...params} placeholder="Month"   name="startDateOfProject"
+                  />
                 )}
+                onChange={(event, newValue) => {
+                  handleAutocompleteChange(newValue, "startDateOfProject");
+                }}
               />
             </Grid>
             <Grid item xs={12} md={6}>
@@ -129,8 +151,12 @@ export default function CollapsibleProjects({
                 id="combo-box-demo"
                 options={Year}
                 renderInput={(params) => (
-                  <TextField {...params} placeholder="Year" />
+                  <TextField {...params} placeholder="Year"   name="startYearOfProject"
+                  />
                 )}
+                onChange={(event, newValue) => {
+                  handleAutocompleteChange(newValue, "startYearOfProject");
+                }}
               />
             </Grid>
           </Grid>
@@ -143,8 +169,13 @@ export default function CollapsibleProjects({
                 options={Month}
                 sx={{ background: "rgba(232, 232, 232, 1)" }}
                 renderInput={(params) => (
-                  <TextField {...params} placeholder="Month" />
+                  <TextField {...params} placeholder="Month"   name="endDateOfProject"
+                  />
                 )}
+                onChange={(event, newValue) => {
+                  handleAutocompleteChange(newValue, "endDateOfProject");
+                }}
+                disabled={isCurrentlyWorking} 
               />
             </Grid>
             <Grid item xs={12} md={6}>
@@ -155,9 +186,13 @@ export default function CollapsibleProjects({
                 options={Year}
                 sx={{ background: "rgba(232, 232, 232, 1)" }}
                 renderInput={(params) => (
-                  <TextField {...params} placeholder="Year" />
+                  <TextField {...params} placeholder="Year"   name="endYearOfProject"
+                  />
                 )}
-                disabled={isCurrentlyWorking} // Disable if "Currently Working" checkbox is checked
+                onChange={(event, newValue) => {
+                  handleAutocompleteChange(newValue, "endYearOfProject");
+                }}
+                disabled={isCurrentlyWorking} 
               />
             </Grid>
           </Grid>
@@ -178,6 +213,7 @@ export default function CollapsibleProjects({
               placeholder="Write about your Project (2,000 words max)"
               minRows={6}
               maxRows={10}
+              name="projectDescription"
               value={aboutText}
               onChange={handleChange}
               style={{

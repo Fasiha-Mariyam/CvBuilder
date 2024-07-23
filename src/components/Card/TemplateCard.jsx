@@ -6,7 +6,7 @@ import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 
-export default function TemplateCard({ image, title, subheader, number }) {
+export default function TemplateCard({ image, title, number }) {
   const navigate = useNavigate();
   const [hover, setHover] = React.useState(false);
 
@@ -33,7 +33,7 @@ export default function TemplateCard({ image, title, subheader, number }) {
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      <CardHeader title={title} subheader={subheader} sx={{background:"#498fcd"}}/>
+      <CardHeader title={title} sx={{background:"#498fcd",color:"white"}}/>
       <CardMedia component="img" image={image} alt="Paella dish" height={400}/>
 
       {hover && (

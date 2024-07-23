@@ -1,20 +1,14 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import {
-  Divider,
-  Grid,
-  TextField,
-  useMediaQuery,
-} from "@mui/material";
+import { Divider, Grid, TextField, useMediaQuery } from "@mui/material";
 
 const textStyle = {
   color: "rgba(131, 131, 131, 1)",
   fontSize: "15px",
   textAlign: "start",
 };
-export default function PersonalInfo() {
-  const below900 = useMediaQuery("(max-width:900px)");
+export default function PersonalInfo({ handleInputChange }) {
   const below600 = useMediaQuery("(max-width:600px)");
 
   return (
@@ -38,6 +32,8 @@ export default function PersonalInfo() {
           <Grid item xs={12} md={6}>
             <Typography sx={textStyle}>First Name</Typography>
             <TextField
+              name="firstName"
+              onChange={handleInputChange}
               id="outlined-basic"
               variant="outlined"
               placeholder="First Name"
@@ -47,6 +43,8 @@ export default function PersonalInfo() {
           <Grid item xs={12} md={6}>
             <Typography sx={textStyle}>Last Name</Typography>
             <TextField
+             name="lastName"
+             onChange={handleInputChange}
               id="outlined-basic"
               placeholder="Last Name"
               variant="outlined"
@@ -58,6 +56,8 @@ export default function PersonalInfo() {
           <Grid item xs={12} md={6}>
             <Typography sx={textStyle}>Email</Typography>
             <TextField
+             name="email"
+             onChange={handleInputChange}
               id="outlined-basic"
               variant="outlined"
               placeholder="Email"
@@ -67,6 +67,8 @@ export default function PersonalInfo() {
           <Grid item xs={12} md={6}>
             <Typography sx={textStyle}>Job Title</Typography>
             <TextField
+             name="jobTitle"
+             onChange={handleInputChange}
               id="outlined-basic"
               placeholder="Job Title"
               variant="outlined"
@@ -78,6 +80,8 @@ export default function PersonalInfo() {
           <Grid item xs={12} md={6}>
             <Typography sx={textStyle}>Address</Typography>
             <TextField
+             name="Address"
+             onChange={handleInputChange}
               id="outlined-basic"
               variant="outlined"
               placeholder="Address"
@@ -87,6 +91,8 @@ export default function PersonalInfo() {
           <Grid item xs={12} md={6}>
             <Typography sx={textStyle}>Phone Number</Typography>
             <TextField
+             name="phoneNumber"
+             onChange={handleInputChange}
               id="outlined-basic"
               placeholder="Phone Number"
               variant="outlined"
@@ -109,6 +115,8 @@ export default function PersonalInfo() {
           <Grid item xs={12} md={6}>
             <Typography sx={textStyle}>LinkedIn</Typography>
             <TextField
+             name="LinkedIn"
+             onChange={handleInputChange}
               id="outlined-basic"
               variant="outlined"
               placeholder="LinkedIn"
@@ -118,6 +126,8 @@ export default function PersonalInfo() {
           <Grid item xs={12} md={6}>
             <Typography sx={textStyle}>GitHub</Typography>
             <TextField
+              name="GitHub"
+              onChange={handleInputChange}
               id="outlined-basic"
               placeholder="GitHub"
               variant="outlined"

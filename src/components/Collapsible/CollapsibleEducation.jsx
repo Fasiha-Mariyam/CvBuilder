@@ -35,6 +35,7 @@ export default function CollapsibleEducation({
   onDelete,
   onToggle,
   totalEducations,
+  handleInputChange,
 }) {
   const [aboutText, setAboutText] = React.useState("");
   const [isCurrentlyStudying, setIsCurrentlyStudying] = React.useState(false);
@@ -49,14 +50,28 @@ export default function CollapsibleEducation({
     { label: "2023", year: 2023 },
     { label: "2022", year: 2023 },
   ];
+  React.useEffect(() => {
+    if (isCurrentlyStudying === true) {
+      handleInputChange({
+        target: { name: "endYearOfSchool", value: "Present" },
+      });
+      handleInputChange({
+        target: { name: "endDateOfSchool", value: "Present" },
+      });
+    }
+  }, [isCurrentlyStudying]);
 
   const handleChange = (event) => {
     const inputText = event.target.value;
     if (inputText.length <= maxLength) {
       setAboutText(inputText);
+      handleInputChange(event);
     }
   };
-
+  const handleAutocompleteChange = (newValue, fieldName) => {
+    handleInputChange({ target: { name: fieldName, value: newValue.label } });
+    console.log(newValue.label, fieldName);
+  };
   const handleCheckboxChange = (event) => {
     setIsCurrentlyStudying(event.target.checked);
   };
@@ -95,12 +110,14 @@ export default function CollapsibleEducation({
         <Box>
           <Divider flexItem />
           <Typography sx={descriptionStyle}>
-          Education display authentication of your expertise 
+            Education display authentication of your expertise
           </Typography>
           <Grid container spacing={2} sx={{ mb: 1 }}>
             <Grid item xs={12} md={6}>
               <Typography sx={textStyle}>School*</Typography>
               <TextField
+                name="Institute"
+                onChange={handleInputChange}
                 id="outlined-basic"
                 variant="outlined"
                 placeholder="Ex: Boston University "
@@ -110,6 +127,8 @@ export default function CollapsibleEducation({
             <Grid item xs={12} md={6}>
               <Typography sx={textStyle}>Degree</Typography>
               <TextField
+                name="Degree"
+                onChange={handleInputChange}
                 id="outlined-basic"
                 variant="outlined"
                 placeholder="Ex: Bachelor’s "
@@ -119,25 +138,29 @@ export default function CollapsibleEducation({
           </Grid>
 
           <Grid container spacing={2} sx={{ mb: 1 }}>
-          <Grid item xs={12} md={6}>
-            <Typography sx={textStyle}>Filed of study</Typography>
-            <TextField
-              id="outlined-basic"
-              variant="outlined"
-              placeholder="Ex: Business"
-              fullWidth
-            />
+            <Grid item xs={12} md={6}>
+              <Typography sx={textStyle}>Filed of study</Typography>
+              <TextField
+                name="Field"
+                onChange={handleInputChange}
+                id="outlined-basic"
+                variant="outlined"
+                placeholder="Ex: Business"
+                fullWidth
+              />
+            </Grid>
+            <Grid item xs={12} md={6}>
+              <Typography sx={textStyle}>Grade</Typography>
+              <TextField
+                name="Grade"
+                onChange={handleInputChange}
+                id="outlined-basic"
+                variant="outlined"
+                fullWidth
+              />
+            </Grid>
           </Grid>
-          <Grid item xs={12} md={6} >
-            <Typography sx={textStyle}>Grade</Typography>
-            <TextField
-              id="outlined-basic"
-              variant="outlined"
-              fullWidth
-            />
-          </Grid>
-          </Grid>
-        
+
           <Grid container spacing={2} sx={{ mb: 1 }}>
             <Grid item xs={12} md={6}>
               <Typography sx={textStyle}>Start date*</Typography>
@@ -146,8 +169,15 @@ export default function CollapsibleEducation({
                 id="combo-box-demo"
                 options={Month}
                 renderInput={(params) => (
-                  <TextField {...params} placeholder="Month" />
+                  <TextField
+                    {...params}
+                    placeholder="Month"
+                    name="startDateOfSchool"
+                  />
                 )}
+                onChange={(event, newValue) => {
+                  handleAutocompleteChange(newValue, "startDateOfSchool");
+                }}
               />
             </Grid>
             <Grid item xs={12} md={6}>
@@ -157,8 +187,15 @@ export default function CollapsibleEducation({
                 id="combo-box-demo"
                 options={Year}
                 renderInput={(params) => (
-                  <TextField {...params} placeholder="Year" />
+                  <TextField
+                    {...params}
+                    placeholder="Year"
+                    name="startYearOfSchool"
+                  />
                 )}
+                onChange={(event, newValue) => {
+                  handleAutocompleteChange(newValue, "startYearOfSchool");
+                }}
               />
             </Grid>
           </Grid>
@@ -171,8 +208,16 @@ export default function CollapsibleEducation({
                 options={Month}
                 sx={{ background: "rgba(232, 232, 232, 1)" }}
                 renderInput={(params) => (
-                  <TextField {...params} placeholder="Month" />
+                  <TextField
+                    {...params}
+                    placeholder="Month"
+                    name="endDateOfSchool"
+                  />
                 )}
+                onChange={(event, newValue) => {
+                  handleAutocompleteChange(newValue, "endDateOfSchool");
+                }}
+                disabled={isCurrentlyStudying}
               />
             </Grid>
             <Grid item xs={12} md={6}>
@@ -183,20 +228,30 @@ export default function CollapsibleEducation({
                 options={Year}
                 sx={{ background: "rgba(232, 232, 232, 1)" }}
                 renderInput={(params) => (
-                  <TextField {...params} placeholder="Year" />
+                  <TextField
+                    {...params}
+                    placeholder="Year"
+                    name="endYearOfSchool"
+                  />
                 )}
+                onChange={(event, newValue) => {
+                  handleAutocompleteChange(newValue, "endYearOfSchool");
+                }}
                 disabled={isCurrentlyStudying}
               />
             </Grid>
           </Grid>
           <div style={{ display: "flex", alignItems: "center", gap: 2 }}>
-            <Checkbox sx={{ ml: -1.5 }} checked={isCurrentlyStudying}
-              onChange={handleCheckboxChange}/>
+            <Checkbox
+              sx={{ ml: -1.5 }}
+              checked={isCurrentlyStudying}
+              onChange={handleCheckboxChange}
+            />
             <Typography sx={descriptionStyle}>
               I am currently studying
             </Typography>
           </div>
-          <Grid item xs={12} md={12} >
+          <Grid item xs={12} md={12}>
             <Typography sx={textStyle}>Description</Typography>
             <TextareaAutosize
               id="outlined-basic"
@@ -204,6 +259,7 @@ export default function CollapsibleEducation({
               minRows={6}
               maxRows={10}
               value={aboutText}
+              name="DescriptionOfSchool"
               onChange={handleChange}
               style={{
                 width: "100%",

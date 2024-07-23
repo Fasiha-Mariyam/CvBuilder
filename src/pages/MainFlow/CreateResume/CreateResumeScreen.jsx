@@ -16,9 +16,21 @@ import { useLocation } from "react-router-dom";
 import FirstStyledTemplate from "../../../components/Templates/StyledTemplate/FirstStyledTemplate";
 import SecondStyleTemp from "../../../components/Templates/StyledTemplate/SecondStyleTemp";
 import ThirdStyleTemp from "../../../components/Templates/StyledTemplate/ThirdStyleTemp";
+import FourthStyledTemplate from "../../../components/Templates/StyledTemplate/FourthStyledTemplate";
+import FifthStyledTemplate from "../../../components/Templates/StyledTemplate/FifthStyledTemplate";
+import SixthStyledTemplate from "../../../components/Templates/StyledTemplate/SixthStyledTemp";
 
 export default function CreateResumeScreen() {
   const below400 = useMediaQuery("(max-width:400px)");
+  const [formValues, setFormValues] = useState({});
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setFormValues((prevValues) => ({
+      ...prevValues,
+      [name]: value,
+    }));
+  };
+  console.log(formValues, "form form");
   const [currentSection, setCurrentSection] = useState("Personal Details");
   const location = useLocation();
   const templateValue = location.state;
@@ -30,19 +42,19 @@ export default function CreateResumeScreen() {
   const renderForm = () => {
     switch (currentSection) {
       case "Personal Details":
-        return <PersonalInfo />;
+        return <PersonalInfo handleInputChange={handleInputChange} />;
       case "Summary":
-        return <Summary />;
+        return <Summary handleInputChange={handleInputChange} />;
       case "Education":
-        return <Education />;
+        return <Education handleInputChange={handleInputChange} />;
       case "Experience":
-        return <Experience />;
+        return <Experience handleInputChange={handleInputChange} />;
       case "Skills":
-        return <Skills />;
+        return <Skills handleInputChange={handleInputChange} />;
       case "Interests":
-        return <Interests />;
+        return <Interests handleInputChange={handleInputChange} />;
       case "Projects":
-        return <Project />;
+        return <Project handleInputChange={handleInputChange} />;
       default:
         return <CustomizeForm />;
     }
@@ -51,15 +63,21 @@ export default function CreateResumeScreen() {
     console.log(templateValue);
     switch (templateValue) {
       case 1:
-        return <DefaultTemplate />;
+        return <DefaultTemplate formValues={formValues} />;
       case 2:
-        return <FirstStyledTemplate />;
+        return <FirstStyledTemplate formValues={formValues} />;
       case 3:
-        return <SecondStyleTemp />;
+        return <SecondStyleTemp formValues={formValues} />;
       case 4:
-        return <ThirdStyleTemp />;
+        return <ThirdStyleTemp formValues={formValues} />;
+      case 5:
+        return <FourthStyledTemplate formValues={formValues} />;
+      case 6:
+        return <FifthStyledTemplate formValues={formValues} />;
+      case 7:
+        return <SixthStyledTemplate formValues={formValues} />;
       default:
-        return <DefaultTemplate />;
+        return <DefaultTemplate formValues={formValues} />;
     }
   };
   return (

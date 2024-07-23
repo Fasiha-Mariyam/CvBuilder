@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { Box, Button } from "@mui/material";
 import React, { useRef } from "react";
 import PersonalInfo from "../TemplateSections/PersonalInfo";
@@ -10,7 +11,7 @@ import Projects from "../TemplateSections/Projects";
 import { jsPDF } from "jspdf";
 import html2canvas from "html2canvas";
 
-export default function DefaultTemplate() {
+export default function DefaultTemplate({ formValues }) {
   const templateRef = useRef(null);
 
   const downloadCV = () => {
@@ -31,7 +32,16 @@ export default function DefaultTemplate() {
 
   return (
     <>
-      <Box sx={{ display: "flex", justifyContent: "flex-end", mb: 1 }}>
+      <Box sx={{ display: "flex", justifyContent: "space-between", mb: 1 }}>
+        <Button
+          sx={{
+            background: "rgb(234 235 235)",
+            textTransform: "none",
+          }}
+          disabled
+        >
+          Template 1
+        </Button>
         <Button
           sx={{
             color: "#498fcd",
@@ -46,14 +56,14 @@ export default function DefaultTemplate() {
         </Button>
       </Box>
       <Box sx={{ border: "1px solid black", p: 1 }} ref={templateRef}>
-        <PersonalInfo />
-        <Summary />
-        <Education />
-        <Experience />
+        <PersonalInfo formValues={formValues} />
+        <Summary formValues={formValues} />
+        <Education formValues={formValues} />
+        <Experience formValues={formValues} />
 
-        <Skill />
-        <Projects />
-        <Interest />
+        <Skill formValues={formValues} />
+        <Projects formValues={formValues} />
+        <Interest formValues={formValues} />
       </Box>
     </>
   );

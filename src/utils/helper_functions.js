@@ -1,3 +1,7 @@
+import { jsPDF } from "jspdf";
+import html2canvas from "html2canvas";
+
+
 export const validateName = (name) => {
   const regex = /^(?![0-9])[a-zA-Z]+$/;
   return regex.test(String(name));
@@ -26,5 +30,22 @@ export const setStorageItem = async (key, value) => {
   } catch (e) {
     console.log("Error in setting key -->", e);
     return null;
+  }
+};
+
+export const downloadCV = (templateRef) => {
+  console.log("working");
+  if (templateRef.current) {
+    html2canvas(templateRef.current).then((canvas) => {
+      const imgData = canvas.toDataURL("image/jpeg");
+
+      const pdf = new jsPDF("p", "mm", "a4");
+      const width = 210; // A4 width in mm
+      const height = 297; // A4 height in mm
+      pdf.addImage(imgData, "JPEG", 0, 0, width, height);
+      pdf.save("cv.pdf");
+    });
+  } else {
+    console.error("No element found to capture");
   }
 };

@@ -3,7 +3,7 @@ import CollapsibleEducation from "../Collapsible/CollapsibleEducation";
 import { Button, Typography, useMediaQuery } from "@mui/material";
 import { Box } from "@mui/system";
 
-export default function Education() {
+export default function Education({handleInputChange}) {
   const below600 = useMediaQuery("(max-width:600px)");
   const [education, setEducation] = React.useState([1]);
   const [openEducation, setOpenEducation] = React.useState(1);
@@ -37,6 +37,7 @@ export default function Education() {
         <CollapsibleEducation
           key={index}
           index={index + 1}
+          handleInputChange={handleInputChange}
           onDelete={() => handleDeleteEducation(index)}
           onToggle={() => handleToggleEducation(index + 1)}
           isOpen={openEducation === index + 1}

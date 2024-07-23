@@ -24,10 +24,10 @@ const descriptionStyle = {
   my: 2,
 };
 
-export default function Interest() {
+export default function Interest({handleInputChange}) {
   const below600 = useMediaQuery("(max-width:600px)");
   const [inputValue, setInputValue] = React.useState("");
-  const [skillList, setSkillList] = React.useState([]);
+  const [InterestList, setInterestList] = React.useState([]);
 
   const Interest = [
     "Artificial Intelligence and Machine Learning",
@@ -68,15 +68,22 @@ export default function Interest() {
   ];
   
 
-  const handleAddSkill = () => {
-    if (inputValue && !skillList.includes(inputValue)) {
-      setSkillList([...skillList, inputValue]);
-      setInputValue(""); // Clear the input field after adding the skill
+  const handleAddInterest = () => {
+    if (inputValue &&  !InterestList.includes(inputValue)) {
+      setInterestList(prevInterestList => {
+        const newInterestList = [...prevInterestList, inputValue];
+        handleInputChange({ target: { name: "Interests", value: newInterestList } });
+        return newInterestList;
+      });
+      setInputValue(""); 
     }
   };
 
-  const handleDeleteSkill = (skillToDelete) => {
-    setSkillList(skillList.filter((skill) => skill !== skillToDelete));
+  const handleDeleteInterest = (InterestToDelete) => {
+    setInterestList(InterestList.filter((Interest) => Interest !== InterestToDelete));
+    const newInterestList = InterestList.filter((skill) => skill !== InterestToDelete);
+    setInterestList(newInterestList);
+    handleInputChange({ target: { name: "Interests", value: newInterestList } });
   };
 
   return (
@@ -119,7 +126,7 @@ export default function Interest() {
             />
           </Grid>
           <Grid item xs={12} md={12}>
-            <Button variant="contained" onClick={handleAddSkill}>
+            <Button variant="contained" onClick={handleAddInterest}>
               Add
             </Button>
           </Grid>
@@ -132,7 +139,7 @@ export default function Interest() {
           sx={{ border: "1px solid  rgba(0, 0, 0, 0.1)", px: 2 }}
         >
           <Typography sx={descriptionStyle}>Areas of Interest</Typography>
-          {skillList.map((skill, index) => (
+          {InterestList.map((Interest, index) => (
             <Box
               key={index}
               sx={{
@@ -149,11 +156,11 @@ export default function Interest() {
               }}
             >
               <Typography sx={{ marginRight: "8px", fontSize: "12px" }}>
-                {skill}
+                {Interest}
               </Typography>
               <IconButton
                 size="small"
-                onClick={() => handleDeleteSkill(skill)}
+                onClick={() => handleDeleteInterest(Interest)}
                 sx={{ padding: "4px" }}
               >
                 <CloseIcon fontSize="small" />

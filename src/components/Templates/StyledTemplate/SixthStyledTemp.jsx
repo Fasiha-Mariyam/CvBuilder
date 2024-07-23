@@ -1,16 +1,17 @@
+/* eslint-disable react/prop-types */
 import React, { useRef } from "react";
 import PersonalInfo from "../TemplateSections/PersonalInfo";
 import Summary from "../TemplateSections/Summary";
 import { jsPDF } from "jspdf";
 import html2canvas from "html2canvas";
-import { Box, Button, Grid } from "@mui/material";
-import Experience from "../TemplateSections/Experience";
-import Education from "../TemplateSections/Education";
+import { Box, Button, Divider, Grid, Typography } from "@mui/material";
 import Skill from "../TemplateSections/Skill";
-import Projects from "../TemplateSections/Projects";
 import Interest from "../TemplateSections/Interest";
+import Education from "../TemplateSections/Education";
+import Experience from "../TemplateSections/Experience";
+import Projects from "../TemplateSections/Projects";
 
-export default function FirstStyledTemplate({ formValues }) {
+export default function SixthStyledTemplate({ formValues }) {
   const templateRef = useRef(null);
 
   const downloadCV = () => {
@@ -38,7 +39,7 @@ export default function FirstStyledTemplate({ formValues }) {
           }}
           disabled
         >
-          Template 2
+          Template 7
         </Button>
         <Button
           sx={{
@@ -54,25 +55,37 @@ export default function FirstStyledTemplate({ formValues }) {
         </Button>
       </Box>
       <Box sx={{ border: "1px solid black", p: 1 }} ref={templateRef}>
-        <PersonalInfo temp={"first"} formValues={formValues} />
-        <Summary formValues={formValues} />
-        <Box sx={{ flexGrow: 1 }}>
-          <Grid container spacing={3}>
-            <Grid item xs={12} sm={6} md={6}>
-              <Box>
-                <Education formValues={formValues} />
-                <Experience formValues={formValues} />
-                <Skill formValues={formValues} />
-              </Box>
-            </Grid>
-            <Grid item xs={12} sm={6} md={6}>
-              <Box>
-                <Projects temp={"first"} formValues={formValues} />
-                <Interest formValues={formValues} />
-              </Box>
+        <Grid container spacing={1}>
+          {/* First Grid */}
+          <Grid
+            item
+            xs={12}
+            sm={5}
+            md={4}
+            sx={{ background: "rgb(240 240 240)", mx: 2, px: 1 }}
+          >
+            <Grid container direction="column" spacing={2}>
+              <Grid item>
+                <PersonalInfo temp={"sixth"} formValues={formValues} />
+              </Grid>
+              <Grid item>
+                <Education formValues={formValues} temp={"sixth"} />
+              </Grid>
+              {/* <Grid item>
+               
+              </Grid> */}
             </Grid>
           </Grid>
-        </Box>
+
+          {/* Second Grid */}
+          <Grid item xs={12} sm={6} md={7}>
+            <Summary formValues={formValues} temp={"sixth"} />
+            <Experience formValues={formValues} temp={"sixth"} />
+            <Projects formValues={formValues} temp={"sixth"} />
+            <Skill formValues={formValues} temp={"sixth"} />
+            <Interest formValues={formValues} temp={"sixth"} />
+          </Grid>
+        </Grid>
       </Box>
     </>
   );

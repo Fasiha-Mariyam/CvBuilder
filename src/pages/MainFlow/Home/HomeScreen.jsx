@@ -6,41 +6,79 @@ import templateImg1 from "../../../assets/images/t1.png";
 import templateImg2 from "../../../assets/images/t2.png";
 import templateImg3 from "../../../assets/images/t3.png";
 import templateImg4 from "../../../assets/images/t4.png";
-import { Box, Divider } from "@mui/material";
+import templateImg5 from "../../../assets/images/t5.png";
+import templateImg6 from "../../../assets/images/t6.png";
+import templateImg7 from "../../../assets/images/t7.png";
+import { Box, Divider, Typography } from "@mui/material";
 
 export default function HomeScreen() {
   return (
     <>
       <ResponsiveAppBar current={"Home"} />
       <Divider sx={{ mb: 3 }} />
+      <Typography
+        sx={{
+          fontSize: "20px",
+          textAlign: "center",
+          fontWeight: "bold",
+          color: "#f89421",
+        }}
+      >
+        Templates
+      </Typography>
       <Box
         sx={{
           display: "flex",
           justifyContent: "space-between",
-          flexWrap: "wrap", // Allows items to wrap to the next line on smaller screens
-          gap: 2, // Adds spacing between items
-          p: 2, // Adds padding around the Box
+          flexWrap: "wrap",
+          gap: 2, 
+          p: 2, 
         }}
       >
         <TemplateCard
           image={templateImg1}
           title={"Template 1"}
-          subheader={"September 14, 2016"}
+          number={1}
         />
         <TemplateCard
           image={templateImg2}
           title={"Template 2"}
-          subheader={"September 14, 2016"}
+          number={2}
         />
         <TemplateCard
           image={templateImg3}
           title={"Template 3"}
-          subheader={"September 14, 2016"}
+          number={3}
         />
         <TemplateCard
           image={templateImg4}
           title={"Template 4"}
-          subheader={"September 14, 2016"}
+          number={4}
+        />
+          <TemplateCard
+          image={templateImg5}
+          title={"Template 5"}
+          number={5}
+        />
+          <TemplateCard
+          image={templateImg6}
+          title={"Template 6"}
+          number={6}
+        />
+          <TemplateCard
+          image={templateImg7}
+          title={"Template 7"}
+          number={7}
+        />
+          <TemplateCard
+          image={templateImg4}
+          title={"Template 8"}
+          number={8}
+        />
+          <TemplateCard
+          image={templateImg4}
+          title={"Template 9"}
+          number={9}
         />
       </Box>
     </>

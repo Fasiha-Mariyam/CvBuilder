@@ -2,7 +2,7 @@ import * as React from "react";
 import { Box, Button, Typography, useMediaQuery } from "@mui/material";
 import CollapsibleExperience from "../Collapsible/CollapsibleExperience";
 
-export default function Experience() {
+export default function Experience({handleInputChange}) {
   const below600 = useMediaQuery("(max-width:600px)");
   const [experiences, setExperiences] = React.useState([1]);
   const [openExperience, setOpenExperience] = React.useState(1);
@@ -36,6 +36,7 @@ export default function Experience() {
         <CollapsibleExperience
           key={index}
           index={index + 1}
+          handleInputChange={handleInputChange}
           onDelete={() => handleDeleteExperience(index)}
           onToggle={() => handleToggleExperience(index + 1)}
           isOpen={openExperience === index + 1}

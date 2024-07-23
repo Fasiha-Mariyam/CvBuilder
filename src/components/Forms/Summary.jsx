@@ -1,19 +1,18 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { Divider, Grid, TextareaAutosize, useMediaQuery } from "@mui/material";
 
-export default function Summary() {
+export default function Summary({handleInputChange}) {
   const [aboutText, setAboutText] = React.useState("");
   const maxLength = 2000;
-  const below900 = useMediaQuery("(max-width:900px)");
   const below600 = useMediaQuery("(max-width:600px)");
 
   const handleChange = (event) => {
     const inputText = event.target.value;
     if (inputText.length <= maxLength) {
-      setAboutText(inputText);
+      handleInputChange(event)
+      setAboutText(inputText)
     }
   };
 
@@ -48,6 +47,7 @@ export default function Summary() {
           </Typography>
           <TextareaAutosize
             id="outlined-basic"
+            name="Summary"
             placeholder="Write about yourself (2,000 words max)"
             minRows={6}
             maxRows={10}

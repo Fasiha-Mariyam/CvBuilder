@@ -5,14 +5,18 @@ import Summary from "../TemplateSections/Summary";
 import { jsPDF } from "jspdf";
 import html2canvas from "html2canvas";
 import { Box, Button, Divider, Grid, Typography } from "@mui/material";
-import Interest from "../TemplateSections/Interest";
 import Skill from "../TemplateSections/Skill";
+import Interest from "../TemplateSections/Interest";
 import Education from "../TemplateSections/Education";
 import Experience from "../TemplateSections/Experience";
 import Projects from "../TemplateSections/Projects";
 
-const textStyle = { fontSize: "1em", fontWeight: "600" };
-export default function ThirdStyleTemp({formValues}) {
+const textStyle = {
+  fontSize: "1em",
+  fontWeight: "600",
+  color: "rgb(30 55 99)",
+};
+export default function FourthStyledTemplate({ formValues }) {
   const templateRef = useRef(null);
 
   const downloadCV = () => {
@@ -40,8 +44,8 @@ export default function ThirdStyleTemp({formValues}) {
           }}
           disabled
         >
-          Template 4
-        </Button>{" "}
+          Template 5
+        </Button>
         <Button
           sx={{
             color: "#498fcd",
@@ -56,35 +60,52 @@ export default function ThirdStyleTemp({formValues}) {
         </Button>
       </Box>
       <Box sx={{ border: "1px solid black", p: 1 }} ref={templateRef}>
-        <PersonalInfo temp={"third"} formValues={formValues}/>
-        <Grid container spacing={2}>
+        <Grid container spacing={1}>
           {/* First Grid */}
-          <Grid item xs={12} sm={5} md={5}>
+          <Grid item xs={12} sm={5} md={4} sx={{ background: "rgb(30 55 99)" }}>
             <Grid container direction="column" spacing={2}>
               <Grid item>
-                <Divider sx={{ mb: 1 }} />
-                <Typography sx={textStyle}>Summary</Typography>
-                <Summary temp={"third"} formValues={formValues}/>
+                <PersonalInfo temp={"fourth"} formValues={formValues} />
               </Grid>
               <Grid item>
-                <Skill temp={"third"} formValues={formValues}/>
+                <Skill formValues={formValues} temp={"fourth"} />
               </Grid>
               <Grid item>
-                <Interest formValues={formValues}/>
+                <Interest formValues={formValues} temp={"fourth"} />
               </Grid>
             </Grid>
           </Grid>
 
-          <Grid item>
-            <Divider orientation="vertical" />
-          </Grid>
-
           {/* Second Grid */}
-          <Grid item xs={12} sm={6} md={6}>
-            <Divider sx={{ mb: 1 }} />
-            <Education formValues={formValues}/>
-            <Experience formValues={formValues}/>
-            <Projects formValues={formValues}/>
+          <Grid item xs={12} sm={7} md={8}>
+            <div style={{ marginBottom: "30px" }}>
+              <Typography
+                sx={{
+                  fontSize: "2.5em",
+                  fontWeight: "600",
+                  lineHeight: "1.1",
+                }}
+              >
+                {formValues.firstName ? formValues.firstName : "Fasiha"}
+                {formValues.lastName ? formValues.lastName : " Mariyam"}
+              </Typography>
+              <Typography
+                sx={{
+                  fontSize: "1.2em",
+                  fontWeight: "500",
+                  lineHeight: "2",
+                }}
+              >
+                {formValues.jobTitle
+                  ? formValues.jobTitle
+                  : `Frontend Developer`}
+              </Typography>
+            </div>{" "}
+            <Typography sx={textStyle}>PROFILE</Typography>
+            <Summary formValues={formValues} temp={"fourth"} />
+            <Education formValues={formValues} temp={"fourth"} />
+            <Experience formValues={formValues} temp={"fourth"} />
+            <Projects formValues={formValues} temp={"fourth"} />
           </Grid>
         </Grid>
       </Box>

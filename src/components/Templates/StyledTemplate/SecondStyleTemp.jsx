@@ -11,7 +11,7 @@ import Experience from "../TemplateSections/Experience";
 import Projects from "../TemplateSections/Projects";
 
 const textStyle = { fontSize: "1em", fontWeight: "600" };
-export default function SecondStyleTemp() {
+export default function SecondStyleTemp({formValues}) {
   const templateRef = useRef(null);
 
   const downloadCV = () => {
@@ -31,8 +31,16 @@ export default function SecondStyleTemp() {
   };
   return (
     <>
-      <Box sx={{ display: "flex", justifyContent: "flex-end", mb: 1 }}>
-        <Button
+      <Box sx={{ display: "flex", justifyContent: "space-between", mb: 1 }}>
+      <Button
+          sx={{
+            background: "rgb(234 235 235)",
+            textTransform: "none",
+          }}
+          disabled
+        >
+          Template 3
+        </Button><Button
           sx={{
             color: "#498fcd",
             background: "rgb(234 235 235)",
@@ -51,13 +59,13 @@ export default function SecondStyleTemp() {
           <Grid item xs={12} sm={5} md={5}>
             <Grid container direction="column" spacing={2}>
               <Grid item>
-                <PersonalInfo temp={"second"} />
+                <PersonalInfo temp={"second"} formValues={formValues}/>
               </Grid>
               <Grid item>
-                <Skill />
+                <Skill formValues={formValues}/>
               </Grid>
               <Grid item>
-                <Interest />
+                <Interest formValues={formValues}/>
               </Grid>
             </Grid>
           </Grid>
@@ -69,10 +77,10 @@ export default function SecondStyleTemp() {
           {/* Second Grid */}
           <Grid item xs={12} sm={6} md={6}>
             <Typography sx={textStyle}>Summary</Typography>
-            <Summary />
-            <Education />
-            <Experience />
-            <Projects />
+            <Summary formValues={formValues}/>
+            <Education formValues={formValues}/>
+            <Experience formValues={formValues}/>
+            <Projects formValues={formValues}/>
           </Grid>
         </Grid>
       </Box>
