@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import * as React from "react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
@@ -24,10 +25,12 @@ const descriptionStyle = {
   my: 2,
 };
 
-export default function Interest({handleInputChange}) {
+export default function Interest({ handleInputChange, formValues }) {
   const below600 = useMediaQuery("(max-width:600px)");
   const [inputValue, setInputValue] = React.useState("");
-  const [InterestList, setInterestList] = React.useState([]);
+  const [InterestList, setInterestList] = React.useState(
+    formValues?.Interests || []
+  );
 
   const Interest = [
     "Artificial Intelligence and Machine Learning",
@@ -64,26 +67,33 @@ export default function Interest({handleInputChange}) {
     "Human-Computer Interaction",
     "Health Technology",
     "International Relations and Diplomacy",
-    "Education Technology"
+    "Education Technology",
   ];
-  
 
   const handleAddInterest = () => {
-    if (inputValue &&  !InterestList.includes(inputValue)) {
-      setInterestList(prevInterestList => {
+    if (inputValue && !InterestList.includes(inputValue)) {
+      setInterestList((prevInterestList) => {
         const newInterestList = [...prevInterestList, inputValue];
-        handleInputChange({ target: { name: "Interests", value: newInterestList } });
+        handleInputChange({
+          target: { name: "Interests", value: newInterestList },
+        });
         return newInterestList;
       });
-      setInputValue(""); 
+      setInputValue("");
     }
   };
 
   const handleDeleteInterest = (InterestToDelete) => {
-    setInterestList(InterestList.filter((Interest) => Interest !== InterestToDelete));
-    const newInterestList = InterestList.filter((skill) => skill !== InterestToDelete);
+    setInterestList(
+      InterestList.filter((Interest) => Interest !== InterestToDelete)
+    );
+    const newInterestList = InterestList.filter(
+      (skill) => skill !== InterestToDelete
+    );
     setInterestList(newInterestList);
-    handleInputChange({ target: { name: "Interests", value: newInterestList } });
+    handleInputChange({
+      target: { name: "Interests", value: newInterestList },
+    });
   };
 
   return (

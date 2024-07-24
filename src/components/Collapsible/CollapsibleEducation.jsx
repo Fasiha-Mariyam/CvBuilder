@@ -29,6 +29,7 @@ const descriptionStyle = {
   my: 2,
   textAlign: "start",
 };
+
 export default function CollapsibleEducation({
   isOpen,
   index,
@@ -36,9 +37,15 @@ export default function CollapsibleEducation({
   onToggle,
   totalEducations,
   handleInputChange,
+  formValues,
 }) {
-  const [aboutText, setAboutText] = React.useState("");
-  const [isCurrentlyStudying, setIsCurrentlyStudying] = React.useState(false);
+  const [aboutText, setAboutText] = React.useState(
+    formValues?.DescriptionOfSchool || ""
+  );
+  console.log(aboutText, "mmmm");
+  const [isCurrentlyStudying, setIsCurrentlyStudying] = React.useState(
+    formValues.isCurrentlyStudying || false
+  );
   const maxLength = 2000;
   const Month = [
     { label: "Jan", year: 2023 },
@@ -50,13 +57,17 @@ export default function CollapsibleEducation({
     { label: "2023", year: 2023 },
     { label: "2022", year: 2023 },
   ];
+
   React.useEffect(() => {
     if (isCurrentlyStudying === true) {
       handleInputChange({
-        target: { name: "endYearOfSchool", value: "Present" },
+        target: { name: `education${index}_endYearOfSchool`, value: "Present" },
       });
       handleInputChange({
-        target: { name: "endDateOfSchool", value: "Present" },
+        target: {
+          name: `education${index}_endMonthOfSchool`,
+          value: "Present",
+        },
       });
     }
   }, [isCurrentlyStudying]);
@@ -116,23 +127,25 @@ export default function CollapsibleEducation({
             <Grid item xs={12} md={6}>
               <Typography sx={textStyle}>School*</Typography>
               <TextField
-                name="Institute"
+                name={`education${index}_Institute`}
                 onChange={handleInputChange}
                 id="outlined-basic"
                 variant="outlined"
                 placeholder="Ex: Boston University "
                 fullWidth
+                value={formValues.Institute || ""}
               />
             </Grid>
             <Grid item xs={12} md={6}>
               <Typography sx={textStyle}>Degree</Typography>
               <TextField
-                name="Degree"
+                name={`education${index}_Degree`}
                 onChange={handleInputChange}
                 id="outlined-basic"
                 variant="outlined"
                 placeholder="Ex: Bachelor’s "
                 fullWidth
+                value={formValues.Degree || ""}
               />
             </Grid>
           </Grid>
@@ -141,22 +154,24 @@ export default function CollapsibleEducation({
             <Grid item xs={12} md={6}>
               <Typography sx={textStyle}>Filed of study</Typography>
               <TextField
-                name="Field"
+                name={`education${index}_Field`}
                 onChange={handleInputChange}
                 id="outlined-basic"
                 variant="outlined"
                 placeholder="Ex: Business"
                 fullWidth
+                value={formValues.Field || ""}
               />
             </Grid>
             <Grid item xs={12} md={6}>
               <Typography sx={textStyle}>Grade</Typography>
               <TextField
-                name="Grade"
+                name={`education${index}_Grade`}
                 onChange={handleInputChange}
                 id="outlined-basic"
                 variant="outlined"
                 fullWidth
+                value={formValues.Grade || ""}
               />
             </Grid>
           </Grid>
@@ -168,6 +183,7 @@ export default function CollapsibleEducation({
                 disablePortal
                 id="combo-box-demo"
                 options={Month}
+                value={formValues.startDateOfSchool || ""}
                 renderInput={(params) => (
                   <TextField
                     {...params}
@@ -176,7 +192,10 @@ export default function CollapsibleEducation({
                   />
                 )}
                 onChange={(event, newValue) => {
-                  handleAutocompleteChange(newValue, "startDateOfSchool");
+                  handleAutocompleteChange(
+                    newValue,
+                    `education${index}_startDateOfSchool`
+                  );
                 }}
               />
             </Grid>
@@ -185,6 +204,7 @@ export default function CollapsibleEducation({
               <Autocomplete
                 disablePortal
                 id="combo-box-demo"
+                value={formValues.startYearOfSchool || ""}
                 options={Year}
                 renderInput={(params) => (
                   <TextField
@@ -194,7 +214,10 @@ export default function CollapsibleEducation({
                   />
                 )}
                 onChange={(event, newValue) => {
-                  handleAutocompleteChange(newValue, "startYearOfSchool");
+                  handleAutocompleteChange(
+                    newValue,
+                    `education${index}_startYearOfSchool`
+                  );
                 }}
               />
             </Grid>
@@ -206,18 +229,25 @@ export default function CollapsibleEducation({
                 disablePortal
                 id="combo-box-demo"
                 options={Month}
-                sx={{ background: "rgba(232, 232, 232, 1)" }}
+                value={
+                  isCurrentlyStudying
+                    ? "Present"
+                    : formValues.endMonthOfSchool || ""
+                }
                 renderInput={(params) => (
                   <TextField
                     {...params}
                     placeholder="Month"
-                    name="endDateOfSchool"
+                    name="endMonthOfSchool"
+                    disabled={isCurrentlyStudying}
                   />
                 )}
                 onChange={(event, newValue) => {
-                  handleAutocompleteChange(newValue, "endDateOfSchool");
+                  handleAutocompleteChange(
+                    newValue,
+                    `education${index}_endMonthOfSchool`
+                  );
                 }}
-                disabled={isCurrentlyStudying}
               />
             </Grid>
             <Grid item xs={12} md={6}>
@@ -226,58 +256,74 @@ export default function CollapsibleEducation({
                 disablePortal
                 id="combo-box-demo"
                 options={Year}
-                sx={{ background: "rgba(232, 232, 232, 1)" }}
+                value={
+                  isCurrentlyStudying
+                    ? "Present"
+                    : formValues.endYearOfSchool || ""
+                }
                 renderInput={(params) => (
                   <TextField
                     {...params}
                     placeholder="Year"
                     name="endYearOfSchool"
+                    disabled={isCurrentlyStudying}
                   />
                 )}
                 onChange={(event, newValue) => {
-                  handleAutocompleteChange(newValue, "endYearOfSchool");
+                  handleAutocompleteChange(
+                    newValue,
+                    `education${index}_endYearOfSchool`
+                  );
                 }}
-                disabled={isCurrentlyStudying}
               />
+              <Box
+                sx={{
+                  display: "flex",
+                  justifyContent: "flex-start",
+                  alignItems: "center",
+                }}
+              >
+                <Checkbox
+                  name="isCurrentlyStudying"
+                  checked={isCurrentlyStudying}
+                  onChange={(event) => {
+                    handleCheckboxChange(event);
+                    handleInputChange({
+                      target: {
+                        name: `education${index}_isCurrentlyStudying`,
+                        value: event.target.checked,
+                      },
+                    });
+                  }}
+                />
+                <Typography sx={textStyle}>I currently study here</Typography>
+              </Box>
             </Grid>
           </Grid>
-          <div style={{ display: "flex", alignItems: "center", gap: 2 }}>
-            <Checkbox
-              sx={{ ml: -1.5 }}
-              checked={isCurrentlyStudying}
-              onChange={handleCheckboxChange}
-            />
-            <Typography sx={descriptionStyle}>
-              I am currently studying
-            </Typography>
-          </div>
-          <Grid item xs={12} md={12}>
-            <Typography sx={textStyle}>Description</Typography>
-            <TextareaAutosize
-              id="outlined-basic"
-              placeholder="Write about your Achievements (2,000 words max)"
-              minRows={6}
-              maxRows={10}
-              value={aboutText}
-              name="DescriptionOfSchool"
-              onChange={handleChange}
-              style={{
-                width: "100%",
-                resize: "vertical",
-                border: "1px solid rgba(64, 64, 64, 1)",
-              }}
-            />
-            <Grid
-              item
-              xs={12}
-              sx={{ display: "flex", justifyContent: "flex-end" }}
-            >
-              <Typography
-                fontSize={"13px"}
-                color={aboutText.length > maxLength ? "error" : "textSecondary"}
+          <Grid container spacing={2} sx={{ mb: 1 }}>
+            <Grid item xs={12}>
+              <Typography sx={textStyle}>Description</Typography>
+              <TextareaAutosize
+                aria-label="minimum height"
+                minRows={5}
+                placeholder="I managed multiple designers for several projects; I've already completed 10+ projects."
+                style={{ width: "100%", borderRadius: "5px"}}
+                name={`education${index}_DescriptionOfSchool`}
+                onChange={handleChange}
+                value={aboutText}
+              />
+              <Box
+                sx={{
+                  display: "flex",
+                  justifyContent: "flex-end",
+                  mt: 1,
+                  flexWrap: "wrap",
+                }}
               >
-                {aboutText.length}/2,000
-              </Typography>
+                <Typography sx={{ fontSize: "12px" }}>
+                  {aboutText.length}/{maxLength}
+                </Typography>
+              </Box>
             </Grid>
           </Grid>
         </Box>

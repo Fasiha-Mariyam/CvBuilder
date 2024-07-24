@@ -3,10 +3,21 @@ import CollapsibleProject from "../Collapsible/CollapsibleProjects";
 import { Button, Typography, useMediaQuery } from "@mui/material";
 import { Box } from "@mui/system";
 
-export default function Project({handleInputChange}) {
+export default function Project({handleInputChange , formValues}) {
   const below600 = useMediaQuery("(max-width:600px)");
   const [Project, setProject] = React.useState([1]);
   const [openProject, setOpenProject] = React.useState(1);
+  const projects = {};
+  Object.keys(formValues).forEach((key) => {
+    let match = key.match(/^(project\d+)_/);
+    if (match) {
+      const prefix = match[1];
+      if (!projects[prefix]) {
+        projects[prefix] = {};
+      }
+      projects[prefix][key.replace(`${prefix}_`, "")] = formValues[key];
+    }
+  });
 
   const handleAddProject = () => {
     const newProject = Project.length + 1;
@@ -33,7 +44,11 @@ export default function Project({handleInputChange}) {
       >
         {`Add Project`}
       </Typography>
-      {Project.map((exp, index) => (
+      {Project.map((exp, index) => {
+          const proKey = `project${index + 1}`;
+          const currentFormValues = projects[proKey] || {};
+          console.log("propro",currentFormValues);
+          return (
         <CollapsibleProject
           key={index}
           index={index + 1}
@@ -42,8 +57,10 @@ export default function Project({handleInputChange}) {
           onToggle={() => handleToggleProject(index + 1)}
           isOpen={openProject === index + 1}
           totalProjects={Project.length}
-        />
-      ))}
+          formValues={currentFormValues}
+          />
+        );
+      })}
       <Box sx={{ display: "flex", justifyContent: "flex-start", mt: 2 }}>
         <Button
           variant="outline"

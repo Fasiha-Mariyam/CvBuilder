@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import PersonalInfo from "../TemplateSections/PersonalInfo";
 import Summary from "../TemplateSections/Summary";
 import { jsPDF } from "jspdf";
@@ -10,9 +10,15 @@ import Skill from "../TemplateSections/Skill";
 import Projects from "../TemplateSections/Projects";
 import Interest from "../TemplateSections/Interest";
 
-export default function FirstStyledTemplate({ formValues }) {
+export default function FirstStyledTemplate({
+  formValues,
+  fontFamily,
+  primaryColor,
+  secondaryColor,
+  backgroundImage,
+  fontSize,
+}) {
   const templateRef = useRef(null);
-
   const downloadCV = () => {
     if (templateRef.current) {
       html2canvas(templateRef.current).then((canvas) => {
@@ -53,22 +59,63 @@ export default function FirstStyledTemplate({ formValues }) {
           Download
         </Button>
       </Box>
-      <Box sx={{ border: "1px solid black", p: 1 }} ref={templateRef}>
-        <PersonalInfo temp={"first"} formValues={formValues} />
-        <Summary formValues={formValues} />
+      <Box sx={{ border: "1px solid black", p: 1 ,
+          backgroundImage: `url(${backgroundImage})`,
+          backgroundSize: "cover", // Adjust the background size as needed
+          backgroundPosition: "center", // A
+      }} ref={templateRef}>
+        <PersonalInfo
+          temp={"first"}
+          formValues={formValues}
+          fontFamily={fontFamily}
+          primaryColor={primaryColor}
+          secondaryColor={secondaryColor}
+        />
+        <Summary
+          formValues={formValues}
+          fontFamily={fontFamily}
+          primaryColor={primaryColor}
+          secondaryColor={secondaryColor}
+        />
         <Box sx={{ flexGrow: 1 }}>
           <Grid container spacing={3}>
             <Grid item xs={12} sm={6} md={6}>
               <Box>
-                <Education formValues={formValues} />
-                <Experience formValues={formValues} />
-                <Skill formValues={formValues} />
+                <Education
+                  formValues={formValues}
+                  fontFamily={fontFamily}
+                  primaryColor={primaryColor}
+                  secondaryColor={secondaryColor}
+                />
+                <Experience
+                  formValues={formValues}
+                  fontFamily={fontFamily}
+                  primaryColor={primaryColor}
+                  secondaryColor={secondaryColor}
+                />
+                <Skill
+                  formValues={formValues}
+                  fontFamily={fontFamily}
+                  primaryColor={primaryColor}
+                  secondaryColor={secondaryColor}
+                />
               </Box>
             </Grid>
             <Grid item xs={12} sm={6} md={6}>
               <Box>
-                <Projects temp={"first"} formValues={formValues} />
-                <Interest formValues={formValues} />
+                <Projects
+                  temp={"first"}
+                  formValues={formValues}
+                  fontFamily={fontFamily}
+                  primaryColor={primaryColor}
+                  secondaryColor={secondaryColor}
+                />
+                <Interest
+                  formValues={formValues}
+                  fontFamily={fontFamily}
+                  primaryColor={primaryColor}
+                  secondaryColor={secondaryColor}
+                />
               </Box>
             </Grid>
           </Grid>

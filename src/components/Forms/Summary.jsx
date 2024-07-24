@@ -3,8 +3,8 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import { Divider, Grid, TextareaAutosize, useMediaQuery } from "@mui/material";
 
-export default function Summary({handleInputChange}) {
-  const [aboutText, setAboutText] = React.useState("");
+export default function Summary({handleInputChange , formValues }) {
+  const [aboutText, setAboutText] = React.useState(formValues?.Summary|| "");
   const maxLength = 2000;
   const below600 = useMediaQuery("(max-width:600px)");
 

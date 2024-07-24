@@ -2,11 +2,21 @@ import * as React from "react";
 import { Box, Button, Typography, useMediaQuery } from "@mui/material";
 import CollapsibleExperience from "../Collapsible/CollapsibleExperience";
 
-export default function Experience({handleInputChange}) {
+export default function Experience({handleInputChange , formValues}) {
   const below600 = useMediaQuery("(max-width:600px)");
   const [experiences, setExperiences] = React.useState([1]);
   const [openExperience, setOpenExperience] = React.useState(1);
-
+  const exp = {};
+  Object.keys(formValues).forEach((key) => {
+    const match = key.match(/^(experience\d+)_/);
+    if (match) {
+      const prefix = match[1];
+      if (!exp[prefix]) {
+        exp[prefix] = {};
+      }
+      exp[prefix][key.replace(`${prefix}_`, "")] = formValues[key];
+    }
+  });
   const handleAddExperience = () => {
     const newExperience = experiences.length + 1;
     setExperiences([...experiences, newExperience]);
@@ -32,7 +42,11 @@ export default function Experience({handleInputChange}) {
       >
         {`Add Experience`}
       </Typography>
-      {experiences.map((exp, index) => (
+      {experiences.map((no, index) => {
+          const expKey = `experience${index + 1}`;
+          const currentFormValues = exp[expKey] || {};
+          console.log("expexp",currentFormValues);
+         return (
         <CollapsibleExperience
           key={index}
           index={index + 1}
@@ -41,8 +55,10 @@ export default function Experience({handleInputChange}) {
           onToggle={() => handleToggleExperience(index + 1)}
           isOpen={openExperience === index + 1}
           totalExperiences={experiences.length}
-        />
-      ))}
+          formValues={currentFormValues}
+          />
+        );
+      })}
       <Box sx={{ display: "flex", justifyContent: "flex-start", mt: 2 }}>
         <Button
           variant="outline"

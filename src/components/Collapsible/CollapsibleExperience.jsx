@@ -36,18 +36,29 @@ export default function CollapsibleExperience({
   onToggle,
   handleInputChange,
   totalExperiences,
+  formValues,
 }) {
-  const [aboutText, setAboutText] = React.useState("");
-  const [isCurrentlyWorking, setIsCurrentlyWorking] = React.useState(false);
+  const [aboutText, setAboutText] = React.useState(
+    formValues?.ExperienceDescription || ""
+  );
+  const [isCurrentlyWorking, setIsCurrentlyWorking] = React.useState(
+    formValues.isCurrentlyWorking || false
+  );
   const maxLength = 2000;
 
   React.useEffect(() => {
     if (isCurrentlyWorking) {
       handleInputChange({
-        target: { name: "endYearOfExperience", value: "Present" },
+        target: {
+          name: `experience${index}_endYearOfExperience`,
+          value: "Present",
+        },
       });
       handleInputChange({
-        target: { name: "endDateOfExperience", value: "Present" },
+        target: {
+          name: `experience${index}_endDateOfExperience`,
+          value: "Present",
+        },
       });
     }
   }, [isCurrentlyWorking]);
@@ -131,8 +142,9 @@ export default function CollapsibleExperience({
             <Grid item xs={12} md={6}>
               <Typography sx={textStyle}>Title*</Typography>
               <TextField
-                name="title"
+                name={`experience${index}_title`}
                 onChange={handleInputChange}
+                value={formValues.title || ""}
                 id="outlined-basic"
                 variant="outlined"
                 placeholder="Ex: Retail sales Manager"
@@ -144,13 +156,17 @@ export default function CollapsibleExperience({
               <Autocomplete
                 disablePortal
                 id="combo-box-demo"
+                value={formValues.Type || ""}
                 options={top10EmploymentTypes}
                 renderInput={(params) => (
-                  <TextField {...params} placeholder="Please Select" name="Type"
+                  <TextField
+                    {...params}
+                    placeholder="Please Select"
+                    name="Type"
                   />
                 )}
                 onChange={(event, newValue) => {
-                  handleAutocompleteChange(newValue, "Type");
+                  handleAutocompleteChange(newValue, `experience${index}_Type`);
                 }}
               />
             </Grid>
@@ -160,10 +176,11 @@ export default function CollapsibleExperience({
             <Grid item xs={12} md={6}>
               <Typography sx={textStyle}>Company name*</Typography>
               <TextField
-                name="companyName"
+                name={`experience${index}_companyName`}
                 onChange={handleInputChange}
                 id="outlined-basic"
                 variant="outlined"
+                value={formValues.companyName || ""}
                 placeholder="Ex: Amazon"
                 fullWidth
               />
@@ -171,9 +188,10 @@ export default function CollapsibleExperience({
             <Grid item xs={12} md={6}>
               <Typography sx={textStyle}>Location</Typography>
               <TextField
-                name="location"
+                name={`experience${index}_location`}
                 onChange={handleInputChange}
                 id="outlined-basic"
+                value={formValues.location || ""}
                 variant="outlined"
                 placeholder="Ex: London, United state"
                 fullWidth
@@ -184,7 +202,15 @@ export default function CollapsibleExperience({
             <Checkbox
               sx={{ ml: -1.5 }}
               checked={isCurrentlyWorking}
-              onChange={handleCheckboxChange}
+              onChange={(event) => {
+                handleCheckboxChange(event);
+                handleInputChange({
+                  target: {
+                    name: `experience${index}_isCurrentlyWorking`,
+                    value: event.target.checked,
+                  },
+                });
+              }}
             />
             <Typography sx={descriptionStyle}>
               I am currently working in this role
@@ -197,12 +223,19 @@ export default function CollapsibleExperience({
                 disablePortal
                 id="combo-box-demo"
                 options={Month}
+                value={formValues.startDateOfExperience || ""}
                 renderInput={(params) => (
-                  <TextField {...params} placeholder="Month"    name="startDateOfExperience"
+                  <TextField
+                    {...params}
+                    placeholder="Month"
+                    name="startDateOfExperience"
                   />
                 )}
                 onChange={(event, newValue) => {
-                  handleAutocompleteChange(newValue, "startDateOfExperience");
+                  handleAutocompleteChange(
+                    newValue,
+                    `experience${index}_startDateOfExperience`
+                  );
                 }}
               />
             </Grid>
@@ -211,13 +244,20 @@ export default function CollapsibleExperience({
               <Autocomplete
                 disablePortal
                 id="combo-box-demo"
+                value={formValues.startYearOfExperience || ""}
                 options={Year}
                 renderInput={(params) => (
-                  <TextField {...params} placeholder="Year"    name="startYearOfExperience"
+                  <TextField
+                    {...params}
+                    placeholder="Year"
+                    name="startYearOfExperience"
                   />
                 )}
                 onChange={(event, newValue) => {
-                  handleAutocompleteChange(newValue, "startYearOfExperience");
+                  handleAutocompleteChange(
+                    newValue,
+                    `experience${index}_startYearOfExperience`
+                  );
                 }}
               />
             </Grid>
@@ -228,14 +268,25 @@ export default function CollapsibleExperience({
               <Autocomplete
                 disablePortal
                 id="combo-box-demo"
+                value={
+                  isCurrentlyWorking
+                    ? "Present"
+                    : formValues.endDateOfExperience || ""
+                }
                 options={Month}
                 sx={{ background: "rgba(232, 232, 232, 1)" }}
                 renderInput={(params) => (
-                  <TextField {...params} placeholder="Month"    name="endDateOfExperience"
+                  <TextField
+                    {...params}
+                    placeholder="Month"
+                    name="endDateOfExperience"
                   />
                 )}
                 onChange={(event, newValue) => {
-                  handleAutocompleteChange(newValue, "endDateOfExperience");
+                  handleAutocompleteChange(
+                    newValue,
+                    `experience${index}_endDateOfExperience`
+                  );
                 }}
                 disabled={isCurrentlyWorking}
               />
@@ -246,13 +297,24 @@ export default function CollapsibleExperience({
                 disablePortal
                 id="combo-box-demo"
                 options={Year}
+                value={
+                  isCurrentlyWorking
+                    ? "Present"
+                    : formValues.endYearOfExperience || ""
+                }
                 sx={{ background: "rgba(232, 232, 232, 1)" }}
                 renderInput={(params) => (
-                  <TextField {...params} placeholder="Year"  name="endYearOfExperience"
+                  <TextField
+                    {...params}
+                    placeholder="Year"
+                    name="endYearOfExperience"
                   />
                 )}
                 onChange={(event, newValue) => {
-                  handleAutocompleteChange(newValue, "endYearOfExperience");
+                  handleAutocompleteChange(
+                    newValue,
+                    `experience${index}_endYearOfExperience`
+                  );
                 }}
                 disabled={isCurrentlyWorking}
               />
@@ -266,11 +328,12 @@ export default function CollapsibleExperience({
               minRows={6}
               maxRows={10}
               value={aboutText}
-              name="ExperienceDescription"
+              name={`experience${index}_ExperienceDescription`}
               onChange={handleChange}
               style={{
                 width: "100%",
                 resize: "vertical",
+                borderRadius: "5px",
                 border: "1px solid rgba(64, 64, 64, 1)",
               }}
             />

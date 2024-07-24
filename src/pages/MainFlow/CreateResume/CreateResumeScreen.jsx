@@ -1,7 +1,6 @@
-/* eslint-disable no-unused-vars */
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ResponsiveAppBar from "../../../components/Navbar/ResponsiveAppBar";
-import { Grid, Paper, useMediaQuery } from "@mui/material";
+import { Box, Button, Grid, Paper, useMediaQuery } from "@mui/material";
 import SectionsList from "../../../components/CvSections/SectionsList";
 import PersonalInfo from "../../../components/Forms/PersonalInfo";
 import DefaultTemplate from "../../../components/Templates/DefaultTemplate/DefaultTemplate";
@@ -19,10 +18,38 @@ import ThirdStyleTemp from "../../../components/Templates/StyledTemplate/ThirdSt
 import FourthStyledTemplate from "../../../components/Templates/StyledTemplate/FourthStyledTemplate";
 import FifthStyledTemplate from "../../../components/Templates/StyledTemplate/FifthStyledTemplate";
 import SixthStyledTemplate from "../../../components/Templates/StyledTemplate/SixthStyledTemp";
+import SeventhStyledTemplate from "../../../components/Templates/StyledTemplate/SeventhStyledTemp";
+import EighthStyledTemplate from "../../../components/Templates/StyledTemplate/EighthStyledTemp";
+import BasicModal from "../../../components/Modal/SwitchTemplateModal";
+import SelectFont from "../../../components/Forms/FontSelect";
 
 export default function CreateResumeScreen() {
   const below400 = useMediaQuery("(max-width:400px)");
-  const [formValues, setFormValues] = useState({});
+  const [formValues, setFormValues] = useState(() => {
+    const savedValues = localStorage.getItem("formValues");
+    return savedValues ? JSON.parse(savedValues) : {};
+  });
+  const [primaryColor, setPrimaryColor] = React.useState("");
+  const [secondaryColor, setSecondaryColor] = React.useState("");
+  const [backgroundImage, setBackgroundImage] = React.useState("");
+  const [fontSize, setFontSize] = React.useState(2);
+
+  const handleFontSizeChange = (newValue) => {
+    setFontSize(newValue);
+  };
+
+  const handleBackgroundImageChange = (image) => setBackgroundImage(image);
+  const handleColorChange = (primary) => {
+    setPrimaryColor(primary);
+  };
+  const handleSecColorChange = (secondary) => {
+    setSecondaryColor(secondary);
+  };
+
+  useEffect(() => {
+    localStorage.setItem("formValues", JSON.stringify(formValues));
+  }, [formValues]);
+
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setFormValues((prevValues) => ({
@@ -30,56 +57,204 @@ export default function CreateResumeScreen() {
       [name]: value,
     }));
   };
-  console.log(formValues, "form form");
+  console.log(fontSize, "sizeeeee");
   const [currentSection, setCurrentSection] = useState("Personal Details");
   const location = useLocation();
+  const [fontFamily, setFontFamily] = useState("select");
   const templateValue = location.state;
 
   const handleSectionChange = (section) => {
-    setCurrentSection(currentSection === section ? null : section);
+    setCurrentSection((prevSection) =>
+      prevSection === section ? section : section
+    );
+  };
+
+  const handleFontChange = (event) => {
+    setFontFamily(event.target.value);
   };
 
   const renderForm = () => {
     switch (currentSection) {
       case "Personal Details":
-        return <PersonalInfo handleInputChange={handleInputChange} />;
+        return (
+          <PersonalInfo
+            handleInputChange={handleInputChange}
+            formValues={formValues}
+          />
+        );
       case "Summary":
-        return <Summary handleInputChange={handleInputChange} />;
+        return (
+          <Summary
+            handleInputChange={handleInputChange}
+            formValues={formValues}
+          />
+        );
       case "Education":
-        return <Education handleInputChange={handleInputChange} />;
+        return (
+          <Education
+            handleInputChange={handleInputChange}
+            formValues={formValues}
+          />
+        );
       case "Experience":
-        return <Experience handleInputChange={handleInputChange} />;
+        return (
+          <Experience
+            handleInputChange={handleInputChange}
+            formValues={formValues}
+          />
+        );
       case "Skills":
-        return <Skills handleInputChange={handleInputChange} />;
+        return (
+          <Skills
+            handleInputChange={handleInputChange}
+            formValues={formValues}
+          />
+        );
       case "Interests":
-        return <Interests handleInputChange={handleInputChange} />;
+        return (
+          <Interests
+            handleInputChange={handleInputChange}
+            formValues={formValues}
+          />
+        );
       case "Projects":
-        return <Project handleInputChange={handleInputChange} />;
+        return (
+          <Project
+            handleInputChange={handleInputChange}
+            formValues={formValues}
+          />
+        );
+      case "Font":
+        return (
+          <SelectFont
+            fontFamily={fontFamily}
+            handleFontChange={handleFontChange}
+            priColor={primaryColor}
+            secColor={secondaryColor}
+            handleColorChange={handleColorChange}
+            handleSecColorChange={handleSecColorChange}
+            backgroundImage={backgroundImage}
+            handleBackgroundImageChange={handleBackgroundImageChange}
+            fontSize={fontSize}
+            handleFontSizeChange={handleFontSizeChange}
+          />
+        );
       default:
-        return <CustomizeForm />;
+        return (
+          <PersonalInfo
+            handleInputChange={handleInputChange}
+            formValues={formValues}
+          />
+        );
     }
   };
+
   const renderTemplate = () => {
-    console.log(templateValue);
     switch (templateValue) {
       case 1:
-        return <DefaultTemplate formValues={formValues} />;
+        return (
+          <DefaultTemplate
+            formValues={formValues}
+            fontFamily={fontFamily}
+            primaryColor={primaryColor}
+            secondaryColor={secondaryColor}
+            backgroundImage={backgroundImage}
+            fontSize={fontSize}
+          />
+        );
       case 2:
-        return <FirstStyledTemplate formValues={formValues} />;
+        return (
+          <FirstStyledTemplate
+            formValues={formValues}
+            fontFamily={fontFamily}
+            primaryColor={primaryColor}
+            secondaryColor={secondaryColor}
+            backgroundImage={backgroundImage}
+          />
+        );
       case 3:
-        return <SecondStyleTemp formValues={formValues} />;
+        return (
+          <SecondStyleTemp
+            formValues={formValues}
+            fontFamily={fontFamily}
+            primaryColor={primaryColor}
+            secondaryColor={secondaryColor}
+            backgroundImage={backgroundImage}
+          />
+        );
       case 4:
-        return <ThirdStyleTemp formValues={formValues} />;
+        return (
+          <ThirdStyleTemp
+            formValues={formValues}
+            fontFamily={fontFamily}
+            primaryColor={primaryColor}
+            secondaryColor={secondaryColor}
+            backgroundImage={backgroundImage}
+          />
+        );
       case 5:
-        return <FourthStyledTemplate formValues={formValues} />;
+        return (
+          <FourthStyledTemplate
+            formValues={formValues}
+            fontFamily={fontFamily}
+            primaryColor={primaryColor}
+            secondaryColor={secondaryColor}
+            backgroundImage={backgroundImage}
+          />
+        );
       case 6:
-        return <FifthStyledTemplate formValues={formValues} />;
+        return (
+          <FifthStyledTemplate
+            formValues={formValues}
+            fontFamily={fontFamily}
+            primaryColor={primaryColor}
+            secondaryColor={secondaryColor}
+            backgroundImage={backgroundImage}
+          />
+        );
       case 7:
-        return <SixthStyledTemplate formValues={formValues} />;
+        return (
+          <SixthStyledTemplate
+            formValues={formValues}
+            fontFamily={fontFamily}
+            primaryColor={primaryColor}
+            secondaryColor={secondaryColor}
+            backgroundImage={backgroundImage}
+          />
+        );
+      case 8:
+        return (
+          <SeventhStyledTemplate
+            formValues={formValues}
+            fontFamily={fontFamily}
+            primaryColor={primaryColor}
+            secondaryColor={secondaryColor}
+            backgroundImage={backgroundImage}
+          />
+        );
+      case 9:
+        return (
+          <EighthStyledTemplate
+            formValues={formValues}
+            fontFamily={fontFamily}
+            primaryColor={primaryColor}
+            secondaryColor={secondaryColor}
+            backgroundImage={backgroundImage}
+          />
+        );
       default:
-        return <DefaultTemplate formValues={formValues} />;
+        return (
+          <DefaultTemplate
+            formValues={formValues}
+            fontFamily={fontFamily}
+            primaryColor={primaryColor}
+            secondaryColor={secondaryColor}
+            backgroundImage={backgroundImage}
+          />
+        );
     }
   };
+
   return (
     <>
       <ResponsiveAppBar current={"Create Resume"} />
@@ -87,6 +262,19 @@ export default function CreateResumeScreen() {
       <Grid container spacing={2} sx={{ padding: 2 }}>
         <Grid item xs={below400 ? 12 : 6} md={6} lg={2}>
           <Paper sx={{ p: 1 }}>
+            <Box sx={{ m: 2 }}>
+              <BasicModal />
+            </Box>
+            <Box sx={{ m: 2 }}>
+              <Button
+                variant="contained"
+                fullWidth
+                sx={{ py: 1.5 }}
+                onClick={() => handleSectionChange("Font")}
+              >
+                Fonts & Colors
+              </Button>
+            </Box>
             <SectionsList
               currentSection={currentSection}
               onSectionChange={handleSectionChange}

@@ -24,10 +24,11 @@ const descriptionStyle = {
   my: 2,
 };
 
-export default function Skills({handleInputChange}) {
+export default function Skills({handleInputChange,formValues}) {
   const below600 = useMediaQuery("(max-width:600px)");
   const [inputValue, setInputValue] = React.useState("");
-  const [skillList, setSkillList] = React.useState([]);
+  console.log(formValues,"form");
+  const [skillList, setSkillList] = React.useState(formValues?.skills || []);
 
   const skills = [
     "JavaScript",

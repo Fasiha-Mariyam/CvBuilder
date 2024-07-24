@@ -5,8 +5,9 @@ import CardHeader from "@mui/material/CardHeader";
 import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
+import { Typography } from "@mui/material";
 
-export default function TemplateCard({ image, title, number }) {
+export default function TemplateCard({ image, title, number , handleClose }) {
   const navigate = useNavigate();
   const [hover, setHover] = React.useState(false);
 
@@ -20,12 +21,16 @@ export default function TemplateCard({ image, title, number }) {
 
   const handleClick = () => {
     navigate("/createResume", { state: number });
+    if(handleClose){
+      handleClose()
+    }
   };
 
   return (
     <Card
       sx={{
         maxWidth: 345,
+        maxHeight:"200px",
         boxShadow: hover ? 10 : 5,
         position: "relative",
         transition: "box-shadow 0.3s",
@@ -33,8 +38,8 @@ export default function TemplateCard({ image, title, number }) {
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      <CardHeader title={title} sx={{background:"#498fcd",color:"white"}}/>
-      <CardMedia component="img" image={image} alt="Paella dish" height={400}/>
+      <CardMedia component="img" image={image} alt="Paella dish"  height={190}/>
+    
 
       {hover && (
         <Box

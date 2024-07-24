@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import { Box, Button } from "@mui/material";
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import PersonalInfo from "../TemplateSections/PersonalInfo";
 import Summary from "../TemplateSections/Summary";
 import Experience from "../TemplateSections/Experience";
@@ -11,9 +11,15 @@ import Projects from "../TemplateSections/Projects";
 import { jsPDF } from "jspdf";
 import html2canvas from "html2canvas";
 
-export default function DefaultTemplate({ formValues }) {
+export default function DefaultTemplate({
+  formValues,
+  fontFamily,
+  primaryColor,
+  secondaryColor,
+  fontSize,
+  backgroundImage,
+}) {
   const templateRef = useRef(null);
-
   const downloadCV = () => {
     if (templateRef.current) {
       html2canvas(templateRef.current).then((canvas) => {
@@ -55,15 +61,66 @@ export default function DefaultTemplate({ formValues }) {
           Download
         </Button>
       </Box>
-      <Box sx={{ border: "1px solid black", p: 1 }} ref={templateRef}>
-        <PersonalInfo formValues={formValues} />
-        <Summary formValues={formValues} />
-        <Education formValues={formValues} />
-        <Experience formValues={formValues} />
+      <Box
+        sx={{
+          border: "1px solid black",
+          p: 1,
+          backgroundImage: `url(${backgroundImage})`,
+          backgroundSize: "cover", // Adjust the background size as needed
+          backgroundPosition: "center", 
+        }}
+        ref={templateRef}
+      >
+        <PersonalInfo
+          formValues={formValues}
+          fontFamily={fontFamily}
+          primaryColor={primaryColor}
+          secondaryColor={secondaryColor}
+          fontSize={fontSize}
+        />
+        <Summary
+          formValues={formValues}
+          fontFamily={fontFamily}
+          primaryColor={primaryColor}
+          secondaryColor={secondaryColor}
+          fontSize={fontSize}
+        />
+        <Education
+          formValues={formValues}
+          fontFamily={fontFamily}
+          primaryColor={primaryColor}
+          secondaryColor={secondaryColor}
+          fontSize={fontSize}
+        />
+        <Experience
+          formValues={formValues}
+          fontFamily={fontFamily}
+          primaryColor={primaryColor}
+          secondaryColor={secondaryColor}
+          fontSize={fontSize}
+        />
 
-        <Skill formValues={formValues} />
-        <Projects formValues={formValues} />
-        <Interest formValues={formValues} />
+        <Skill
+          formValues={formValues}
+          fontFamily={fontFamily}
+          primaryColor={primaryColor}
+          secondaryColor={secondaryColor}
+          fontSize={fontSize}
+        />
+        <Projects
+          formValues={formValues}
+          fontFamily={fontFamily}
+          primaryColor={primaryColor}
+          secondaryColor={secondaryColor}
+          fontSize={fontSize}
+        />
+        <Interest
+          formValues={formValues}
+          fontFamily={fontFamily}
+          primaryColor={primaryColor}
+          secondaryColor={secondaryColor}
+          fontSize={fontSize}
+        />
       </Box>
     </>
   );

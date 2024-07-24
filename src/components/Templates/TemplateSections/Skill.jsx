@@ -3,14 +3,22 @@ import { Box, colors, Divider, Typography } from "@mui/material";
 import SportsBasketballIcon from "@mui/icons-material/SportsBasketball";
 import React from "react";
 
-const temp6style = {
-  fontSize: "1.2em",
-  fontWeight: "600",
-  display: "flex",
-  gap: 1,
-};
-export default function Skill({ temp, formValues }) {
+export default function Skill({
+  temp,
+  formValues,
+  fontFamily,
+  secondaryColor,
+  primaryColor,
+}) {
   const skills = ["JavaScript", "React", "Node.js", "HTML", "CSS"];
+  const temp6style = {
+    fontSize: "1.2em",
+    fontWeight: "600",
+    display: "flex",
+    color: secondaryColor ? secondaryColor : "black",
+    fontFamily: fontFamily,
+    gap: 1,
+  };
   return (
     <>
       {temp !== "sixth" && (
@@ -20,21 +28,32 @@ export default function Skill({ temp, formValues }) {
             sx={{
               fontSize: temp === "fourth" ? "20px" : "1em",
               fontWeight: "600",
-              mt: temp && -1,
-              ml: temp == "fifth" && 2.5,
-              textAlign: temp === "fourth" && "center",
-              color:
-                temp == "fourth"
-                  ? "white"
-                  : temp == "fifth"
-                  ? "rgb(35 72 116 / 87%)"
-                  : "",
+              fontFamily: fontFamily,
+              border: temp === "seventh" && "1px solid rgb(4 118 188)",
+              borderRadius: temp === "seventh" && "50px",
+              mt: temp !== "seventh" || (temp !== "eighth" && -1),
+              ml: (temp == "fifth" || temp === "eighth") && 2.5,
+              display: temp === "eighth" && "flex",
+              gap: temp === "eighth" && 1,
+              textAlign: (temp === "fourth" || temp === "seventh") && "center",
+              color: secondaryColor
+                ? secondaryColor
+                : temp == "fourth"
+                ? "white"
+                : temp == "fifth"
+                ? "rgb(35 72 116 / 87%)"
+                : temp === "seventh"
+                ? "rgba(131, 131, 131, 1)"
+                : temp === "eighth"
+                ? "rgb(0 35 43)"
+                : "",
             }}
           >
-            SKILLS
+            {temp === "eighth" && <SportsBasketballIcon />}
+            {temp === "seventh" ? `Expertise` : `SKILLS`}
           </Typography>
 
-          {temp !== "fourth" && (
+          {temp !== "fourth" && temp !== "seventh" && (
             <>
               {" "}
               <Divider sx={{ mb: 1 }} />
@@ -45,29 +64,45 @@ export default function Skill({ temp, formValues }) {
                     sx={{
                       display: temp == "fifth" ? "flex" : "inline-flex",
                       alignItems: "center",
+                      fontFamily: fontFamily,
                       color: temp == "fifth" ? "white" : "rgba(83, 97, 103, 1)",
                       border: "1px solid rgba(217, 217, 217, 0.85)",
                       borderRadius: temp == "fifth" ? "10px" : "17px",
                       background: temp == "fifth" && "rgb(19 71 119)",
                       padding: ".5rem",
+                      ml: temp === "eighth" && 2.5,
                       mb: 0.5,
                       cursor: "pointer",
                       fontSize: "10px",
                       marginRight: "8px",
                     }}
                   >
-                    <Typography sx={{ fontSize: "12px" }}>{skill}</Typography>
+                    <Typography
+                      sx={{ fontSize: "12px", fontFamily: fontFamily ,  }}
+                    >
+                      {skill}
+                    </Typography>
                   </Box>
                 )
               )}
             </>
           )}
-          {temp === "fourth" && (
+          {(temp === "fourth" || temp === "seventh") && (
             <>
               {(formValues.skills ? formValues.skills : skills).map(
                 (skill, index) => (
-                  <ul key={index}>
-                    <li style={{ fontSize: "12px", color: "white" }}>
+                  <ul key={index} style={{ fontFamily: fontFamily }}>
+                    <li
+                      style={{
+                        fontSize: "12px",
+                        fontFamily: fontFamily,
+                        color: primaryColor
+                          ? primaryColor
+                          : temp === "seventh"
+                          ? "rgba(131, 131, 131, 1)"
+                          : "white",
+                      }}
+                    >
                       {skill}
                     </li>
                   </ul>
@@ -78,7 +113,7 @@ export default function Skill({ temp, formValues }) {
         </Box>
       )}
       {temp === "sixth" && (
-        <Box sx={{mb:3}}>
+        <Box sx={{ mb: 3 }}>
           <Typography sx={temp6style}>
             <SportsBasketballIcon /> SKILLS
           </Typography>
@@ -90,6 +125,7 @@ export default function Skill({ temp, formValues }) {
                 sx={{
                   display: temp == "fifth" ? "flex" : "inline-flex",
                   alignItems: "center",
+                  fontFamily: fontFamily,
                   color: temp == "fifth" ? "white" : "rgba(83, 97, 103, 1)",
                   border: "1px solid rgba(217, 217, 217, 0.85)",
                   borderRadius: temp == "fifth" ? "10px" : "17px",
@@ -101,7 +137,14 @@ export default function Skill({ temp, formValues }) {
                   marginRight: "8px",
                 }}
               >
-                <Typography sx={{ fontSize: "12px" }}>{skill}</Typography>
+                <Typography
+                  sx={{
+                    fontSize: "12px",
+                    fontFamily: fontFamily,
+                  }}
+                >
+                  {skill}
+                </Typography>
               </Box>
             )
           )}

@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import PersonalInfo from "../TemplateSections/PersonalInfo";
 import Summary from "../TemplateSections/Summary";
 import { jsPDF } from "jspdf";
@@ -11,14 +11,15 @@ import Education from "../TemplateSections/Education";
 import Experience from "../TemplateSections/Experience";
 import Projects from "../TemplateSections/Projects";
 
-const textStyle = {
-  fontSize: "1em",
-  fontWeight: "600",
-  color: "rgb(30 55 99)",
-};
-export default function FifthStyledTemplate({ formValues }) {
+export default function FifthStyledTemplate({
+  formValues,
+  fontFamily,
+  primaryColor,
+  secondaryColor,
+  backgroundImage,
+  fontSize,
+}) {
   const templateRef = useRef(null);
-
   const downloadCV = () => {
     if (templateRef.current) {
       html2canvas(templateRef.current).then((canvas) => {
@@ -59,19 +60,39 @@ export default function FifthStyledTemplate({ formValues }) {
           Download
         </Button>
       </Box>
-      <Box sx={{ border: "1px solid black", p: 1 }} ref={templateRef}>
+      <Box sx={{ border: "1px solid black", p: 1,backgroundImage: `url(${backgroundImage})`,
+          backgroundSize: "cover", // Adjust the background size as needed
+          backgroundPosition: "center",  }} ref={templateRef}>
         <Grid container spacing={1}>
           {/* First Grid */}
-          <Grid item xs={12} sm={5} md={4} >
+          <Grid item xs={12} sm={5} md={4}>
             <Grid container direction="column" spacing={2}>
               <Grid item>
-                <PersonalInfo temp={"fifth"} formValues={formValues} />
+                <PersonalInfo
+                  temp={"fifth"}
+                  formValues={formValues}
+                  fontFamily={fontFamily}
+                  primaryColor={primaryColor}
+                  secondaryColor={secondaryColor}
+                />
               </Grid>
               <Grid item>
-                <Skill formValues={formValues} temp={"fifth"} />
+                <Skill
+                  formValues={formValues}
+                  temp={"fifth"}
+                  fontFamily={fontFamily}
+                  primaryColor={primaryColor}
+                  secondaryColor={secondaryColor}
+                />
               </Grid>
               <Grid item>
-                <Interest formValues={formValues} temp={"fifth"} />
+                <Interest
+                  formValues={formValues}
+                  temp={"fifth"}
+                  fontFamily={fontFamily}
+                  primaryColor={primaryColor}
+                  secondaryColor={secondaryColor}
+                />
               </Grid>
             </Grid>
           </Grid>
@@ -82,7 +103,7 @@ export default function FifthStyledTemplate({ formValues }) {
               style={{
                 marginBottom: "10px",
                 background: "rgb(19 71 119)",
-                color: "white",
+                color:secondaryColor?secondaryColor:"white",
                 padding: "20px",
               }}
             >
@@ -91,6 +112,7 @@ export default function FifthStyledTemplate({ formValues }) {
                   fontSize: "2.5em",
                   fontWeight: "600",
                   lineHeight: "1.1",
+                  fontFamily: fontFamily,
                 }}
               >
                 {formValues.firstName ? formValues.firstName : "Fasiha"}
@@ -101,6 +123,8 @@ export default function FifthStyledTemplate({ formValues }) {
                   fontSize: "1.2em",
                   fontWeight: "500",
                   lineHeight: "2",
+                  color:secondaryColor?secondaryColor:"white",
+                  fontFamily: fontFamily,
                 }}
               >
                 {formValues.jobTitle
@@ -113,6 +137,7 @@ export default function FifthStyledTemplate({ formValues }) {
                 sx={{
                   lineHeight: "1",
                   mt: 0.5,
+                  fontFamily: fontFamily,
                   color: "white",
                   fontSize: "12px",
                 }}
@@ -129,9 +154,27 @@ export default function FifthStyledTemplate({ formValues }) {
         continuously enhance technical skills in fast-paced environments.`}
               </Typography>
             </div>
-            <Education formValues={formValues} temp={"fifth"} />
-            <Experience formValues={formValues} temp={"fifth"} />
-            <Projects formValues={formValues} temp={"fifth"} />
+            <Education
+              formValues={formValues}
+              temp={"fifth"}
+              fontFamily={fontFamily}
+              primaryColor={primaryColor}
+              secondaryColor={secondaryColor}
+            />
+            <Experience
+              formValues={formValues}
+              temp={"fifth"}
+              fontFamily={fontFamily}
+              primaryColor={primaryColor}
+              secondaryColor={secondaryColor}
+            />
+            <Projects
+              formValues={formValues}
+              temp={"fifth"}
+              fontFamily={fontFamily}
+              primaryColor={primaryColor}
+              secondaryColor={secondaryColor}
+            />
           </Grid>
         </Grid>
       </Box>

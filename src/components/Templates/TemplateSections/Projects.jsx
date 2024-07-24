@@ -1,16 +1,35 @@
 /* eslint-disable react/prop-types */
-import { Box, Divider, Typography } from "@mui/material";
+import { Box, colors, Divider, Typography } from "@mui/material";
 import AccountTreeIcon from "@mui/icons-material/AccountTree";
 import React from "react";
 
-const temp6style = {
-  fontSize: "1.2em",
-  fontWeight: "600",
-  display: "flex",
-  gap: 1,
-
-};
-export default function Projects({ temp, formValues }) {
+export default function Projects({
+  temp,
+  formValues,
+  fontFamily,
+  primaryColor,
+  secondaryColor,
+}) {
+  const temp6style = {
+    fontSize: "1.2em",
+    fontWeight: "600",
+    fontFamily: fontFamily,
+    color: secondaryColor ? secondaryColor : "",
+    display: "flex",
+    gap: 1,
+  };
+  const projects = {};
+  Object.keys(formValues).forEach((key) => {
+    let match = key.match(/^(project\d+)_/);
+    if (match) {
+      const prefix = match[1];
+      if (!projects[prefix]) {
+        projects[prefix] = {};
+      }
+      projects[prefix][key.replace(`${prefix}_`, "")] = formValues[key];
+    }
+  });
+  console.log("projectTemp", projects);
   return (
     <>
       {temp !== "sixth" && (
@@ -20,166 +39,283 @@ export default function Projects({ temp, formValues }) {
             sx={{
               fontSize: "1em",
               fontWeight: "600",
-              mt: (temp == "fourth" || temp == "fifth") && 1,
-              color:
-                temp === "fourth"
-                  ? "rgb(30 55 99)"
-                  : temp === "fifth"
-                  ? "rgb(19 71 119)"
+              mt:
+                (temp == "fourth" || temp == "fifth" || temp == "eighth") && 2,
+              ml: temp === "eighth" && 2.5,
+              border: temp === "seventh" && "1px solid rgb(4 50 128)",
+              borderRadius: temp === "seventh" && "50px",
+              background: temp === "seventh" && "rgb(4 50 128)",
+              px: temp === "seventh" && 5,
+              fontFamily: fontFamily,
+              mb: temp === "seventh" && 2,
+              gap: temp === "eighth" && 1,
+              color: secondaryColor
+                ? secondaryColor
+                : temp === "fourth"
+                ? "rgb(30 55 99)"
+                : temp === "fifth"
+                ? "rgb(19 71 119)"
+                : temp === "seventh"
+                ? "white"
+                : temp === "eighth"
+                ? "rgb(0 35 43)"
+                : "",
+              display:
+                temp === "seventh"
+                  ? "inline-block"
+                  : temp === "eighth"
+                  ? "flex"
                   : "",
             }}
           >
-            PROJECTS
+            {temp === "eighth" && <AccountTreeIcon />}{" "}
+            {temp === "seventh" ? `Projects` : `PROJECTS`}
           </Typography>
 
-          <Divider
-            sx={{
-              mb: 1,
-              background: (temp == "fourth" || temp == "fifth") && "black",
-            }}
-          />
+          {temp !== "seventh" && (
+            <Divider
+              sx={{
+                mb: 1,
+                background: (temp == "fourth" || temp == "fifth") && "black",
+              }}
+            />
+          )}
           {/* Project Name and date */}
-          {temp !== "fourth" && temp !== "fifth" && (
+          {temp !== "fourth" && temp !== "fifth" && temp !== "eighth" && (
             <>
-              {" "}
-              <div style={{ display: "flex", justifyContent: "space-between" }}>
-                <Typography sx={{ fontSize: ".9em", fontWeight: "600" }}>
-                  {formValues.projectName
-                    ? formValues.projectName
-                    : `FoodPanda Website Clone`}
-                </Typography>
-                <Typography sx={{ fontSize: ".7em", fontWeight: "600" }}>
-                  {formValues.startDateOfProject
-                    ? formValues.startDateOfProject
-                    : `03`}
-                  /
-                  {formValues.startYearOfProject
-                    ? formValues.startYearOfProject
-                    : ` 2021`}{" "}
-                  -{" "}
-                  {formValues.endDateOfProject &&
-                  formValues.endDateOfProject === "Present" ? (
-                    `Present`
-                  ) : (
-                    <>
-                      {formValues.endDateOfProject
-                        ? formValues.endDateOfProject
-                        : `03`}
-                      /
-                      {formValues.endYearOfProject
-                        ? formValues.endYearOfProject
-                        : `2021`}
-                    </>
-                  )}
-                </Typography>
-              </div>
-            </>
-          )}
-          {temp === "fourth" && (
-            <>
-              {" "}
-              <div style={{ display: "flex", flexDirection: "column" }}>
-                <Typography
-                  sx={{
-                    fontSize: ".9em",
-                    fontWeight: "500",
-                    color: "rgb(30 55 99)",
-                  }}
-                >
-                  {formValues.projectName
-                    ? formValues.projectName
-                    : `FoodPanda Website Clone`}
-                </Typography>
-                <Typography
-                  sx={{ fontSize: ".7em", fontWeight: "500", color: "black" }}
-                >
-                  {formValues.startDateOfProject
-                    ? formValues.startDateOfProject
-                    : `03`}
-                  /
-                  {formValues.startYearOfProject
-                    ? formValues.startYearOfProject
-                    : ` 2021`}{" "}
-                  -{" "}
-                  {formValues.endDateOfProject &&
-                  formValues.endDateOfProject === "Present" ? (
-                    `Present`
-                  ) : (
-                    <>
-                      {formValues.endDateOfProject
-                        ? formValues.endDateOfProject
-                        : `03`}
-                      /
-                      {formValues.endYearOfProject
-                        ? formValues.endYearOfProject
-                        : `2021`}
-                    </>
-                  )}
-                </Typography>
-              </div>
-            </>
-          )}
-          {temp === "fifth" && (
-            <>
-              <div style={{ display: "flex", flexDirection: "column" }}>
-                <Typography
-                  sx={{
-                    fontSize: ".9em",
-                    fontWeight: "500",
-                    color: "rgb(19 71 119)",
-                  }}
-                >
-                  {formValues.projectName
-                    ? formValues.projectName
-                    : `FoodPanda Website Clone`}
-                </Typography>
-                <Box
-                  sx={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    alignItems: "center",
-                    fontStyle: "italic",
-                    color: "rgb(19 71 119)",
-                  }}
-                >
-                  <Typography sx={{ fontSize: ".7em", fontWeight: "500" }}>
-                    {formValues.startDateOfProject
-                      ? formValues.startDateOfProject
-                      : `03`}
-                    /
-                    {formValues.startYearOfProject
-                      ? formValues.startYearOfProject
-                      : ` 2021`}{" "}
-                    -{" "}
-                    {formValues.endDateOfProject &&
-                    formValues.endDateOfProject === "Present" ? (
-                      `Present`
-                    ) : (
-                      <>
-                        {formValues.endDateOfProject
-                          ? formValues.endDateOfProject
+              {Object.keys(projects).map((projectKey, index) => {
+                const project = projects[projectKey];
+                return (
+                  <div key={index}>
+                    <div
+                      style={{
+                        display: "flex",
+                        justifyContent: "space-between",
+                      }}
+                    >
+                      <Typography
+                        sx={{
+                          fontSize: ".9em",
+                          fontWeight: "600",
+                          fontFamily: fontFamily,
+                          color:primaryColor?primaryColor:""
+                        }}
+                      >
+                        {project.name
+                          ? project.name
+                          : `FoodPanda Website Clone`}
+                      </Typography>
+                      <Typography
+                        sx={{
+                          fontSize: ".7em",
+                          fontWeight: "600",
+                          fontFamily: fontFamily,                         
+
+                        }}
+                      >
+                        {project.startDateOfProject
+                          ? project.startDateOfProject
                           : `03`}
                         /
-                        {formValues.endYearOfProject
-                          ? formValues.endYearOfProject
-                          : `2021`}
-                      </>
-                    )}
-                  </Typography>
-                </Box>
-              </div>
-            </>
-          )}
-          {/* Details of working experience */}
-          <Typography sx={{ fontSize: "10px" }}>
-            {formValues.ExperienceDescription
-              ? formValues.ExperienceDescription
-              : `Developed and maintained responsive web applications using React and
+                        {project.startYearOfProject
+                          ? project.startYearOfProject
+                          : ` 2021`}{" "}
+                        -{" "}
+                        {project.endDateOfProject &&
+                        project.endDateOfProject === "Present" ? (
+                          `Present`
+                        ) : (
+                          <>
+                            {project.endDateOfProject
+                              ? project.endDateOfProject
+                              : `03`}
+                            /
+                            {project.endYearOfProject
+                              ? project.endYearOfProject
+                              : `2021`}
+                          </>
+                        )}
+                      </Typography>
+                    </div>
+                    <Typography
+                      sx={{
+                        fontSize: "10px",
+                        mb: 2,
+                        fontFamily: fontFamily,
+                        ml: temp === "eighth" && 2.5,
+                      }}
+                    >
+                      {project?.projectDescription
+                        ? project?.projectDescription
+                        : `Developed and maintained responsive web applications using React and
           Material-UI, Collaborated with designers and backend developers to
           enhance user Education, Implemented best practices in coding
           standards, testing, and optimization,Improved website performance,
           resulting in a 20% increase in user engagement.`}
-          </Typography>
+                    </Typography>
+                  </div>
+                );
+              })}
+            </>
+          )}
+          {temp === "fourth" && (
+            <>
+              {Object.keys(projects).map((projectKey, index) => {
+                const project = projects[projectKey];
+                return (
+                  <div key={index}>
+                    <div style={{ display: "flex", flexDirection: "column" }}>
+                      <Typography
+                        sx={{
+                          fontSize: ".9em",
+                          fontFamily: fontFamily,
+                          fontWeight: "500",
+                          color:primaryColor?primaryColor: "rgb(30 55 99)",
+                        }}
+                      >
+                        {project.name
+                          ? project.name
+                          : `FoodPanda Website Clone`}
+                      </Typography>
+                      <Typography
+                        sx={{
+                          fontSize: ".7em",
+                          fontWeight: "500",
+                          color: "black",
+                          fontFamily: fontFamily,
+                        }}
+                      >
+                        {project.startDateOfProject
+                          ? project.startDateOfProject
+                          : `03`}
+                        /
+                        {project.startYearOfProject
+                          ? project.startYearOfProject
+                          : ` 2021`}{" "}
+                        -{" "}
+                        {project.endDateOfProject &&
+                        project.endDateOfProject === "Present" ? (
+                          `Present`
+                        ) : (
+                          <>
+                            {project.endDateOfProject
+                              ? project.endDateOfProject
+                              : `03`}
+                            /
+                            {project.endYearOfProject
+                              ? project.endYearOfProject
+                              : `2021`}
+                          </>
+                        )}
+                      </Typography>
+                    </div>
+                    {/* Details of working experience */}
+                    <Typography
+                      sx={{
+                        fontSize: "10px",
+                        mb: 2,
+                        fontFamily: fontFamily,
+                        ml: temp === "eighth" && 2.5,
+                      }}
+                    >
+                      {project?.projectDescription
+                        ? project?.projectDescription
+                        : `Developed and maintained responsive web applications using React and
+          Material-UI, Collaborated with designers and backend developers to
+          enhance user Education, Implemented best practices in coding
+          standards, testing, and optimization,Improved website performance,
+          resulting in a 20% increase in user engagement.`}
+                    </Typography>
+                  </div>
+                );
+              })}
+            </>
+          )}
+          {(temp === "fifth" || temp === "eighth") && (
+            <>
+              {Object.keys(projects).map((projectKey, index) => {
+                const project = projects[projectKey];
+                return (
+                  <div key={index}>
+                    <div style={{ display: "flex", flexDirection: "column" }}>
+                      <Typography
+                        sx={{
+                          fontSize: ".9em",
+                          fontWeight: "500",
+                          fontFamily: fontFamily,
+                          ml: temp === "eighth" && 2.5,
+                          color:primaryColor?primaryColor: "rgb(19 71 119)",
+                        }}
+                      >
+                        {project.name
+                          ? project.name
+                          : `FoodPanda Website Clone`}
+                      </Typography>
+                      <Box
+                        sx={{
+                          display: "flex",
+                          justifyContent: "space-between",
+                          ml: temp === "eighth" && 2.5,
+                          alignItems: "center",
+                          fontFamily: fontFamily,
+                          fontStyle: "italic",
+                          color: "rgb(19 71 119)",
+                        }}
+                      >
+                        <Typography
+                          sx={{
+                            fontSize: ".7em",
+                            fontWeight: "500",
+                            fontFamily: fontFamily,
+                          }}
+                        >
+                          {project.startDateOfProject
+                            ? project.startDateOfProject
+                            : `03`}
+                          /
+                          {project.startYearOfProject
+                            ? project.startYearOfProject
+                            : ` 2021`}{" "}
+                          -{" "}
+                          {project.endDateOfProject &&
+                          project.endDateOfProject === "Present" ? (
+                            `Present`
+                          ) : (
+                            <>
+                              {project.endDateOfProject
+                                ? project.endDateOfProject
+                                : `03`}
+                              /
+                              {project.endYearOfProject
+                                ? project.endYearOfProject
+                                : `2021`}
+                            </>
+                          )}
+                        </Typography>
+                      </Box>
+                    </div>
+                    {/* Details of working experience */}
+                    <Typography
+                      sx={{
+                        fontSize: "10px",
+                        mb: 2,
+                        fontFamily: fontFamily,
+                        ml: temp === "eighth" && 2.5,
+                      }}
+                    >
+                      {project?.projectDescription
+                        ? project?.projectDescription
+                        : `Developed and maintained responsive web applications using React and
+          Material-UI, Collaborated with designers and backend developers to
+          enhance user Education, Implemented best practices in coding
+          standards, testing, and optimization,Improved website performance,
+          resulting in a 20% increase in user engagement.`}
+                    </Typography>
+                  </div>
+                );
+              })}
+            </>
+          )}
         </Box>
       )}
       {temp === "sixth" && (
@@ -193,47 +329,69 @@ export default function Projects({ temp, formValues }) {
             }}
           />
           {/* Project Name and date */}{" "}
-          <div style={{ display: "flex", justifyContent: "space-between" }}>
-            <Typography sx={{ fontSize: ".9em", fontWeight: "600" }}>
-              {formValues.projectName
-                ? formValues.projectName
-                : `FoodPanda Website Clone`}
-            </Typography>
-            <Typography sx={{ fontSize: ".7em", fontWeight: "600" }}>
-              {formValues.startDateOfProject
-                ? formValues.startDateOfProject
-                : `03`}
-              /
-              {formValues.startYearOfProject
-                ? formValues.startYearOfProject
-                : ` 2021`}{" "}
-              -{" "}
-              {formValues.endDateOfProject &&
-              formValues.endDateOfProject === "Present" ? (
-                `Present`
-              ) : (
-                <>
-                  {formValues.endDateOfProject
-                    ? formValues.endDateOfProject
-                    : `03`}
-                  /
-                  {formValues.endYearOfProject
-                    ? formValues.endYearOfProject
-                    : `2021`}
-                </>
-              )}
-            </Typography>
-          </div>
-          {/* Details of working experience */}
-          <Typography sx={{ fontSize: "10px",mb:3 }}>
-            {formValues.ExperienceDescription
-              ? formValues.ExperienceDescription
-              : `Developed and maintained responsive web applications using React and
+          {Object.keys(projects).map((projectKey, index) => {
+            const project = projects[projectKey];
+            return (
+              <div key={index}>
+                <div
+                  style={{ display: "flex", justifyContent: "space-between" }}
+                >
+                  <Typography
+                    sx={{
+                      fontSize: ".9em",
+                      fontWeight: "600",
+                      fontFamily: fontFamily,
+                      color:primaryColor?primaryColor:""
+                    }}
+                  >
+                    {project.name ? project.name : `FoodPanda Website Clone`}
+                  </Typography>
+                  <Typography
+                    sx={{
+                      fontSize: ".7em",
+                      fontWeight: "600",
+                      fontFamily: fontFamily,
+                    }}
+                  >
+                    {project.startDateOfProject
+                      ? project.startDateOfProject
+                      : `03`}
+                    /
+                    {project.startYearOfProject
+                      ? project.startYearOfProject
+                      : ` 2021`}{" "}
+                    -{" "}
+                    {project.endDateOfProject &&
+                    project.endDateOfProject === "Present" ? (
+                      `Present`
+                    ) : (
+                      <>
+                        {project.endDateOfProject
+                          ? project.endDateOfProject
+                          : `03`}
+                        /
+                        {project.endYearOfProject
+                          ? project.endYearOfProject
+                          : `2021`}
+                      </>
+                    )}
+                  </Typography>
+                </div>
+                {/* Details of working experience */}
+                <Typography
+                  sx={{ fontSize: "10px", mb: 3, fontFamily: fontFamily }}
+                >
+                  {project?.projectDescription
+                    ? project?.projectDescription
+                    : `Developed and maintained responsive web applications using React and
           Material-UI, Collaborated with designers and backend developers to
           enhance user Education, Implemented best practices in coding
           standards, testing, and optimization,Improved website performance,
           resulting in a 20% increase in user engagement.`}
-          </Typography>
+                </Typography>
+              </div>
+            );
+          })}
         </Box>
       )}
     </>

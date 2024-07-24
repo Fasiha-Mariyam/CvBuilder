@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import PersonalInfo from "../TemplateSections/PersonalInfo";
 import Summary from "../TemplateSections/Summary";
 import { jsPDF } from "jspdf";
@@ -11,9 +11,15 @@ import Experience from "../TemplateSections/Experience";
 import Projects from "../TemplateSections/Projects";
 
 const textStyle = { fontSize: "1em", fontWeight: "600" };
-export default function SecondStyleTemp({formValues}) {
+export default function SecondStyleTemp({
+  formValues,
+  fontFamily,
+  primaryColor,
+  secondaryColor,
+  fontSize,
+  backgroundImage
+}) {
   const templateRef = useRef(null);
-
   const downloadCV = () => {
     if (templateRef.current) {
       html2canvas(templateRef.current).then((canvas) => {
@@ -32,7 +38,7 @@ export default function SecondStyleTemp({formValues}) {
   return (
     <>
       <Box sx={{ display: "flex", justifyContent: "space-between", mb: 1 }}>
-      <Button
+        <Button
           sx={{
             background: "rgb(234 235 235)",
             textTransform: "none",
@@ -40,7 +46,8 @@ export default function SecondStyleTemp({formValues}) {
           disabled
         >
           Template 3
-        </Button><Button
+        </Button>
+        <Button
           sx={{
             color: "#498fcd",
             background: "rgb(234 235 235)",
@@ -53,19 +60,39 @@ export default function SecondStyleTemp({formValues}) {
           Download
         </Button>
       </Box>
-      <Box sx={{ border: "1px solid black", p: 1 }} ref={templateRef}>
+      <Box sx={{ border: "1px solid black", p: 1,
+        backgroundImage: `url(${backgroundImage})`,
+        backgroundSize: "cover", // Adjust the background size as needed
+        backgroundPosition: "center", // A
+       }} ref={templateRef}>
         <Grid container spacing={2}>
           {/* First Grid */}
           <Grid item xs={12} sm={5} md={5}>
             <Grid container direction="column" spacing={2}>
               <Grid item>
-                <PersonalInfo temp={"second"} formValues={formValues}/>
+                <PersonalInfo
+                  temp={"second"}
+                  formValues={formValues}
+                  fontFamily={fontFamily}
+                  primaryColor={primaryColor}
+                  secondaryColor={secondaryColor}
+                />
               </Grid>
               <Grid item>
-                <Skill formValues={formValues}/>
+                <Skill
+                  formValues={formValues}
+                  fontFamily={fontFamily}
+                  primaryColor={primaryColor}
+                  secondaryColor={secondaryColor}
+                />
               </Grid>
               <Grid item>
-                <Interest formValues={formValues}/>
+                <Interest
+                  formValues={formValues}
+                  fontFamily={fontFamily}
+                  primaryColor={primaryColor}
+                  secondaryColor={secondaryColor}
+                />
               </Grid>
             </Grid>
           </Grid>
@@ -77,10 +104,30 @@ export default function SecondStyleTemp({formValues}) {
           {/* Second Grid */}
           <Grid item xs={12} sm={6} md={6}>
             <Typography sx={textStyle}>Summary</Typography>
-            <Summary formValues={formValues}/>
-            <Education formValues={formValues}/>
-            <Experience formValues={formValues}/>
-            <Projects formValues={formValues}/>
+            <Summary
+              formValues={formValues}
+              fontFamily={fontFamily}
+              primaryColor={primaryColor}
+              secondaryColor={secondaryColor}
+            />
+            <Education
+              formValues={formValues}
+              fontFamily={fontFamily}
+              primaryColor={primaryColor}
+              secondaryColor={secondaryColor}
+            />
+            <Experience
+              formValues={formValues}
+              fontFamily={fontFamily}
+              primaryColor={primaryColor}
+              secondaryColor={secondaryColor}
+            />
+            <Projects
+              formValues={formValues}
+              fontFamily={fontFamily}
+              primaryColor={primaryColor}
+              secondaryColor={secondaryColor}
+            />
           </Grid>
         </Grid>
       </Box>
