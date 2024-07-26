@@ -40,8 +40,8 @@ export default function TemplateCard({
     <Card
       sx={{
         maxWidth: 345,
-        width: handleTemplateSelect && "500px",
-        height: handleTemplateSelect && "200px",
+        width: handleTemplateSelect && "200px",
+        height: handleTemplateSelect && "100px",
         boxShadow: hover
           ? "0px 4px 6px rgba(0, 0, 0, 0.1)"
           : "0px 4px 6px rgba(0, 0, 0, 0.5)",
@@ -52,7 +52,18 @@ export default function TemplateCard({
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      <CardMedia component="img" image={image} alt="Paella dish" height={190} />
+      {handleTemplateSelect ? (
+          <Button sx={{display: "flex", alignItems: "center", justifyContent: "center", width: "100%", height: "100%"}}>
+          {number}
+        </Button>
+      ) : (
+        <CardMedia
+          component="img"
+          image={image}
+          alt="Paella dish"
+          height={190}
+        />
+      )}
 
       {hover && (
         <Box
@@ -84,8 +95,6 @@ export default function TemplateCard({
           </Button>
         </Box>
       )}
-
-      
     </Card>
   );
 }

@@ -1,9 +1,9 @@
 /* eslint-disable react/prop-types */
-import { Box, Divider, Typography } from "@mui/material";
-import WorkspacePremiumIcon from "@mui/icons-material/WorkspacePremium";
+import { Box, Divider, Typography, LinearProgress } from "@mui/material";
+import InterpreterModeIcon from "@mui/icons-material/InterpreterMode";
 import React from "react";
 
-export default function Certificate({
+export default function TechnicalSkills({
   formValues,
   temp,
   fontFamily,
@@ -11,12 +11,34 @@ export default function Certificate({
   primaryColor,
   fontSize,
 }) {
-  const Certificates = [
-    { name: "Reading", institution: "Institution A" },
-    { name: "Learning", institution: "Institution B" },
-    { name: "Traveling", institution: "Institution C" },
-    { name: "Coding", institution: "Institution D" },
+  const TechnicalSkills = [
+    { name: "JavaScript", proficiency: "Advanced" },
+    { name: "React", proficiency: "Advanced" },
+    { name: "CSS", proficiency: "Intermediate" },
+    { name: "Node.js", proficiency: "Intermediate" },
+    { name: "Python", proficiency: "Beginner" },
+    { name: "SQL", proficiency: "Intermediate" },
+    { name: "Git", proficiency: "Advanced" },
+    { name: "Docker", proficiency: "Beginner" },
   ];
+
+  const getProficiencyValue = (proficiency) => {
+    switch (proficiency) {
+      case "Advanced":
+        return 70;
+      case "Intermediate":
+        return 50;
+      case "Expert":
+        return 85;
+      case "Specialist":
+        return 95;
+      case "Beginner":
+        return 30;
+      default:
+        return 0;
+    }
+  };
+
   const temp6style = {
     fontSize:
       fontSize == 2
@@ -32,6 +54,7 @@ export default function Certificate({
     fontFamily: fontFamily,
     gap: 1,
   };
+
   return (
     <>
       <Box>
@@ -59,7 +82,7 @@ export default function Certificate({
                       : "2em",
                   fontWeight: "600",
                   mt: temp === "eighth" ? 3 : -1,
-                  ml: temp == "fifth" || (temp === "eighth" && 2.5),
+                  ml: temp === "eighth" && 2.5,
                   fontFamily: fontFamily,
                   gap: temp === "eighth" && 1,
                   my: 1,
@@ -89,22 +112,27 @@ export default function Certificate({
                 }
           }
         >
-          {(temp === "sixth" || temp === "eighth") && <WorkspacePremiumIcon />}{" "}
-          {temp === "seventh" ? `Certificates` : `CERTIFICATES`}
+          {(temp === "sixth" || temp === "eighth") && <InterpreterModeIcon />}{" "}
+          {temp === "seventh" ? `TechnicalSkills` : `TECHNICAL SKILLS`}
         </Typography>
 
-        {temp !== "fourth" && temp !== "sixth" && (
+        { temp !== "sixth" && (
           <>
             {" "}
-            <Divider sx={{ mb: 1 ,background: temp === "fifth" && "black" }} />
-            {(formValues.Certificates
-              ? formValues.Certificates
-              : Certificates
-            ).map((certificate, index) => (
+            <Divider
+              sx={{
+                mb: 1,
+                background: (temp == "fourth" || temp == "fifth") && "black",
+              }}
+            />
+            {(formValues.TechnicalSkills
+              ? formValues.TechnicalSkills
+              : TechnicalSkills
+            ).map((TechnicalSkills, index) => (
               <Box
                 key={index}
                 sx={{
-                  display: temp == "fifth" ? "flex" : "inline-flex",
+                  display: temp == "fifth" ? "inline-flex" : "inline-flex",
                   alignItems: "center",
                   color:
                     temp == "fifth"
@@ -113,63 +141,13 @@ export default function Certificate({
                   // background: temp == "fifth" && "rgb(19 71 119)",
                   padding: ".5rem",
                   fontFamily: fontFamily,
+                  width: "calc(33.333% - 26px)",
                   mb: 0.5,
                   ml: temp === "eighth" && 2.5,
                   marginRight: "8px",
                 }}
               >
-                <Typography
-                  sx={{
-                    fontSize:
-                      fontSize == 2
-                        ? "15px"
-                        : fontSize == 0
-                        ? "8px"
-                        : fontSize == 1
-                        ? "10px"
-                        : "20px",
-                    fontFamily: fontFamily,
-                  }}
-                >
-                  {certificate.name}
-                  <Typography
-                    sx={{
-                      fontSize:
-                        fontSize == 2
-                          ? "10px"
-                          : fontSize == 0
-                          ? "6px"
-                          : fontSize == 1
-                          ? "7px"
-                          : "15px",
-                    }}
-                  >
-                    {certificate.institution}
-                  </Typography>
-                </Typography>
-              </Box>
-            ))}
-          </>
-        )}
-        {(temp === "fourth" || temp === "sixth") && (
-          <>
-            <Divider sx={{ mb: 1, background: temp === "fourth" && "black" }} />
-
-            {(formValues.Certificates
-              ? formValues.Certificates
-              : Certificates
-            ).map((certificate, index) => (
-              <ul key={index}>
-                <li
-                  style={{
-                    fontFamily: fontFamily,
-                    color: primaryColor
-                      ? primaryColor
-                      : temp === "sixth"
-                      ? "rgba(83, 97, 103, 1)"
-                      : "rgba(83, 97, 103, 1)",
-                  }}
-                >
+                <Box display={"flex"} flexDirection={"column"}>
                   <Typography
                     sx={{
                       fontSize:
@@ -178,25 +156,99 @@ export default function Certificate({
                           : fontSize == 0
                           ? "8px"
                           : fontSize == 1
-                          ? "9px"
+                          ? "10px"
                           : "20px",
                       fontFamily: fontFamily,
                     }}
                   >
-                    {certificate.name}
+                    {TechnicalSkills.name}
+                  </Typography>
+                  <Box>
                     <Typography
                       sx={{
                         fontSize:
                           fontSize == 2
-                            ? "12px"
+                            ? "10px"
                             : fontSize == 0
-                            ? "8px"
+                            ? "6px"
                             : fontSize == 1
-                            ? "9px"
+                            ? "7px"
                             : "15px",
                       }}
                     >
-                      {certificate.institution}
+                      {TechnicalSkills.proficiency}
+                    </Typography>
+                    <Box sx={{ width: "100%", mt: 0.5 }}>
+                      <LinearProgress
+                        variant="determinate"
+                        value={getProficiencyValue(TechnicalSkills.proficiency)}
+                        sx={{
+                          height: 8,
+                          borderRadius: 5,
+                          bgcolor: temp == "fifth" ? "grey" : "grey",
+                          "& .MuiLinearProgress-bar": {
+                            bgcolor:
+                              temp == "fifth" ? "rgb(19 71 119)" : "black",
+                          },
+                        }}
+                      />
+                    </Box>
+                  </Box>
+                </Box>
+              </Box>
+            ))}
+          </>
+        )}
+        {(temp === "sixth") && (
+          <>
+           <Divider
+              sx={{
+                mb: 1,
+                background: (temp == "fourth" || temp == "fifth") && "black",
+              }}
+            />
+            {(formValues.TechnicalSkills
+              ? formValues.TechnicalSkills
+              : TechnicalSkills
+            ).map((TechnicalSkills, index) => (
+              <ul key={index}>
+                <li
+                  style={{
+                    fontFamily: fontFamily,
+                    color: primaryColor
+                      ? primaryColor
+                      : temp === "sixth"
+                      ? "rgba(83, 97, 103, 1)"
+                          : "rgba(83, 97, 103, 1)"
+                  }}
+                >
+                  <Typography
+                    sx={{
+                      fontSize:
+                        fontSize == 2
+                          ? "12px"
+                          : fontSize == 0
+                          ? "8px"
+                          : fontSize == 1
+                          ? "9px"
+                          : "15px",
+                      fontFamily: fontFamily,
+                    }}
+                  >
+                    {TechnicalSkills.name}
+                    <Typography
+                      sx={{
+                        fontSize:
+                          fontSize == 2
+                            ? "8px"
+                            : fontSize == 0
+                            ? "5px"
+                            : fontSize == 1
+                            ? "6px"
+                            : "10px",
+                      }}
+                    >
+                      {TechnicalSkills.proficiency}
                     </Typography>
                   </Typography>
                 </li>

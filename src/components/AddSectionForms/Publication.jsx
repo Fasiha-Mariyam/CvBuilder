@@ -1,40 +1,38 @@
 /* eslint-disable react/prop-types */
-import { Button, TextField, Box, Typography, Autocomplete } from '@mui/material';
+import { Button, TextField, Box, Typography } from '@mui/material';
 import React, { useState, useEffect } from 'react';
 import CreateOutlinedIcon from '@mui/icons-material/CreateOutlined';
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
 
-const proficiencyOptions = ["Native", "Proficient", "Advanced", "Intermediate", "Beginner"];
-
-export default function Language({ addedCustomSections, number, addedSections }) {
-  const [languages, setLanguages] = useState([]);
+export default function Publication({ addedCustomSections, number, addedSections }) {
+  const [publications, setPublications] = useState([]);
   const [isFormVisible, setIsFormVisible] = useState(true);
-  const [languageName, setLanguageName] = useState('');
-  const [proficiency, setProficiency] = useState(null);
+  const [publicationTitle, setPublicationTitle] = useState('');
+  const [publicationDate, setPublicationDate] = useState('');
   const [formError, setFormError] = useState('');
   const [editIndex, setEditIndex] = useState(null);
 
 
   const handleAddClick = () => {
-    if (languageName && proficiency) {
+    if (publicationTitle && publicationDate) {
       if (editIndex !== null) {
-        // Update existing language
-        const updatedLanguages = [...languages];
-        updatedLanguages[editIndex] = { name: languageName, proficiency };
-        setLanguages(updatedLanguages);
+        // Update existing publication
+        const updatedPublications = [...publications];
+        updatedPublications[editIndex] = { title: publicationTitle, date: publicationDate };
+        setPublications(updatedPublications);
         setEditIndex(null); // Reset edit index
       } else {
-        // Add new language
-        const newLanguage = { name: languageName, proficiency };
-        setLanguages([...languages, newLanguage]);
+        // Add new publication
+        const newPublication = { title: publicationTitle, date: publicationDate };
+        setPublications([...publications, newPublication]);
 
         // Add number to addedCustomSections if not already present
         if (!addedSections.includes(number)) {
           addedCustomSections(number);
         }
       }
-      setLanguageName('');
-      setProficiency(null);
+      setPublicationTitle('');
+      setPublicationDate('');
       setFormError('');
       setIsFormVisible(false); // Hide form after adding or editing
     } else {
@@ -48,28 +46,28 @@ export default function Language({ addedCustomSections, number, addedSections })
   };
 
   const handleEditClick = (index) => {
-    setLanguageName(languages[index].name);
-    setProficiency(languages[index].proficiency);
+    setPublicationTitle(publications[index].title);
+    setPublicationDate(publications[index].date);
     setEditIndex(index);
     setIsFormVisible(true);
   };
 
   const handleDeleteClick = (index) => {
-    const updatedLanguages = languages.filter((_, i) => i !== index);
-    setLanguages(updatedLanguages);
+    const updatedPublications = publications.filter((_, i) => i !== index);
+    setPublications(updatedPublications);
   };
 
   return (
     <Box sx={{ padding: 2, border: '1px solid grey', borderRadius: 2, maxWidth: 400, mx: 'auto' }}>
       <Typography variant="h6" gutterBottom sx={{textAlign:"start"}}>
-        Languages
+        Publications
       </Typography>
-      {languages.map((language, index) => (
+      {publications.map((publication, index) => (
         <Box key={index} sx={{ mb: 1, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
           <Box>
-            <Typography variant="body1">{language.name}</Typography>
+            <Typography variant="body1">{publication.title}</Typography>
             <Typography variant="body2" color="textSecondary">
-              {language.proficiency}
+              {publication.date}
             </Typography>
           </Box>
           <Box>
@@ -85,33 +83,29 @@ export default function Language({ addedCustomSections, number, addedSections })
       {isFormVisible && (
         <Box sx={{ padding: 2, border: '1px solid grey', borderRadius: 2, mt: 2 }}>
           <Typography variant="h6" gutterBottom>
-            {editIndex !== null ? 'Edit Language' : 'Add New Language'}
+            {editIndex !== null ? 'Edit Publication' : 'Add New Publication'}
           </Typography>
           <TextField
-            label="Language Name"
+            label="Title"
             variant="outlined"
             fullWidth
             margin="normal"
-            value={languageName}
-            onChange={(e) => setLanguageName(e.target.value)}
+            value={publicationTitle}
+            onChange={(e) => setPublicationTitle(e.target.value)}
             error={!!formError}
             helperText={formError}
           />
-          <Autocomplete
-            options={proficiencyOptions}
-            value={proficiency}
-            onChange={(event, newValue) => setProficiency(newValue)}
-            renderInput={(params) => (
-              <TextField
-                {...params}
-                label="Proficiency"
-                variant="outlined"
-                margin="normal"
-                fullWidth
-                error={!!formError}
-                helperText={formError}
-              />
-            )}
+          <TextField
+            label="Publication Date"
+            variant="outlined"
+            fullWidth
+            margin="normal"
+            type="date"
+            InputLabelProps={{ shrink: true }}
+            value={publicationDate}
+            onChange={(e) => setPublicationDate(e.target.value)}
+            error={!!formError}
+            helperText={formError}
           />
           <Button
             onClick={handleAddClick}

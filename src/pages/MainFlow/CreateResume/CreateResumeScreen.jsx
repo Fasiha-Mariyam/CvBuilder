@@ -137,7 +137,7 @@ export default function CreateResumeScreen() {
             setSelectedTemplate={setSelectedTemplate}
             selectedTemplate={selectedTemplate}
             addedCustomSections={addSection}
-            addedSections = {addedCustomSections}
+            addedSections={addedCustomSections}
           />
         );
       //
@@ -190,6 +190,8 @@ export default function CreateResumeScreen() {
             secondaryColor={secondaryColor}
             backgroundImage={backgroundImage}
             fontSize={fontSize}
+            selectedTemplate={selectedTemplate}
+            addedCustomSections={addedCustomSections}
           />
         );
       case 3:
@@ -201,6 +203,8 @@ export default function CreateResumeScreen() {
             secondaryColor={secondaryColor}
             backgroundImage={backgroundImage}
             fontSize={fontSize}
+            selectedTemplate={selectedTemplate}
+            addedCustomSections={addedCustomSections}
           />
         );
       case 4:
@@ -212,6 +216,8 @@ export default function CreateResumeScreen() {
             secondaryColor={secondaryColor}
             backgroundImage={backgroundImage}
             fontSize={fontSize}
+            selectedTemplate={selectedTemplate}
+            addedCustomSections={addedCustomSections}
           />
         );
       case 5:
@@ -223,6 +229,8 @@ export default function CreateResumeScreen() {
             secondaryColor={secondaryColor}
             backgroundImage={backgroundImage}
             fontSize={fontSize}
+            selectedTemplate={selectedTemplate}
+            addedCustomSections={addedCustomSections}
           />
         );
       case 6:
@@ -234,6 +242,8 @@ export default function CreateResumeScreen() {
             secondaryColor={secondaryColor}
             backgroundImage={backgroundImage}
             fontSize={fontSize}
+            selectedTemplate={selectedTemplate}
+            addedCustomSections={addedCustomSections}
           />
         );
       case 7:
@@ -245,6 +255,8 @@ export default function CreateResumeScreen() {
             secondaryColor={secondaryColor}
             backgroundImage={backgroundImage}
             fontSize={fontSize}
+            selectedTemplate={selectedTemplate}
+            addedCustomSections={addedCustomSections}
           />
         );
       case 8:
@@ -256,6 +268,8 @@ export default function CreateResumeScreen() {
             secondaryColor={secondaryColor}
             backgroundImage={backgroundImage}
             fontSize={fontSize}
+            selectedTemplate={selectedTemplate}
+            addedCustomSections={addedCustomSections}
           />
         );
       case 9:
@@ -267,6 +281,21 @@ export default function CreateResumeScreen() {
             secondaryColor={secondaryColor}
             backgroundImage={backgroundImage}
             fontSize={fontSize}
+            selectedTemplate={selectedTemplate}
+            addedCustomSections={addedCustomSections}
+          />
+        );
+      case 10:
+        return (
+          <EighthStyledTemplate
+            formValues={formValues}
+            fontFamily={fontFamily}
+            primaryColor={primaryColor}
+            secondaryColor={secondaryColor}
+            backgroundImage={backgroundImage}
+            fontSize={fontSize}
+            selectedTemplate={selectedTemplate}
+            addedCustomSections={addedCustomSections}
           />
         );
       default:
@@ -278,18 +307,14 @@ export default function CreateResumeScreen() {
             secondaryColor={secondaryColor}
             backgroundImage={backgroundImage}
             fontSize={fontSize}
+            selectedTemplate={selectedTemplate}
+            addedCustomSections={addedCustomSections}
           />
         );
     }
   };
 
-
-
-
-console.log(addedCustomSections,"hohahoha");
-
-
-
+  console.log(addedCustomSections, "hohahoha");
 
   return (
     <>

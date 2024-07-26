@@ -1,9 +1,9 @@
 /* eslint-disable react/prop-types */
+import React from "react";
 import { Box, Divider, Typography, LinearProgress } from "@mui/material";
 import InterpreterModeIcon from "@mui/icons-material/InterpreterMode";
-import React from "react";
 
-export default function Language({
+export default function Volunteer({
   formValues,
   temp,
   fontFamily,
@@ -11,28 +11,21 @@ export default function Language({
   primaryColor,
   fontSize,
 }) {
-  const Languages = [
-    { name: "English", proficiency: "Native" },
-    { name: "Spanish", proficiency: "Proficient" },
-    { name: "French", proficiency: "Advanced" },
-    { name: "German", proficiency: "Beginner" },
+  const Volunteer = [
+    { organization: "Childern House", role: "Teacher" },
+    {
+      organization: "Spanish volunteer   Resources",
+      role: "https://example.com/spanish",
+    },
+    {
+      organization: "French volunteer   Resources",
+      role: "https://example.com/french",
+    },
+    {
+      organization: "German volunteer   Resources",
+      role: "https://example.com/german",
+    },
   ];
-  const getProficiencyValue = (proficiency) => {
-    switch (proficiency) {
-      case "Native":
-        return 100;
-      case "Proficient":
-        return 90;
-      case "Advanced":
-        return 70;
-      case "Intermediate":
-        return 50;
-      case "Beginner":
-        return 30;
-      default:
-        return 0;
-    }
-  };
 
   const temp6style = {
     fontSize:
@@ -59,30 +52,28 @@ export default function Language({
             temp === "sixth"
               ? temp6style
               : {
-                fontSize:
-                fontSize === 2
-                  ? temp === "fourth"
-                    ? "20px"
-                    : "1.2em"
-                  : fontSize === 0
-                  ? temp === "fourth"
-                    ? "10px"
-                    : ".9em"
-                  : fontSize === 1
-                  ? temp === "fourth"
-                    ? "15px"
-                    : "1em"
-                  : temp === "fourth"
-                  ? "25px"
-                  : "2em",
-              
+                  fontSize:
+                    fontSize == 2
+                      ? temp === "fourth"
+                        ? "20px"
+                        : "1.2em"
+                      : fontSize == 0
+                      ? temp === "fourth"
+                        ? "10px"
+                        : ".9em"
+                      : fontSize == 1
+                      ? temp === "fourth"
+                        ? "15px"
+                        : "1em"
+                      : temp === "fourth"
+                      ? "25px"
+                      : "2em",
                   fontWeight: "600",
                   mt: temp === "eighth" ? 3 : -1,
                   ml: temp == "fifth" || (temp === "eighth" && 2.5),
                   fontFamily: fontFamily,
                   gap: temp === "eighth" && 1,
                   my: 1,
-                  textAlign:temp == "fourth" && "center",
                   border: temp === "seventh" && "1px solid rgb(4 50 128)",
                   borderRadius: temp === "seventh" && "50px",
                   background: temp === "seventh" && "rgb(4 50 128)",
@@ -92,7 +83,7 @@ export default function Language({
                   color: secondaryColor
                     ? secondaryColor
                     : temp === "fourth"
-                    ? "white"
+                    ? "rgb(30 55 99)"
                     : temp === "fifth"
                     ? "rgb(19 71 119)"
                     : temp === "seventh"
@@ -110,7 +101,7 @@ export default function Language({
           }
         >
           {(temp === "sixth" || temp === "eighth") && <InterpreterModeIcon />}{" "}
-          {temp === "seventh" ? `Languages` : `LANGUAGES`}
+          {temp === "seventh" ? `Volunteer  Work    ` : `VOLUNTEER WORK`}
         </Typography>
 
         {temp !== "fourth" && temp !== "sixth" && (
@@ -122,8 +113,8 @@ export default function Language({
                 background: (temp == "fourth" || temp == "fifth") && "black",
               }}
             />
-            {(formValues.Languages ? formValues.Languages : Languages).map(
-              (Language, index) => (
+            {(formValues.Volunteer ? formValues.Volunteer : Volunteer).map(
+              (volunteer, index) => (
                 <Box
                   key={index}
                   sx={{
@@ -133,14 +124,12 @@ export default function Language({
                       temp == "fifth"
                         ? "rgba(83, 97, 103, 1)"
                         : "rgba(83, 97, 103, 1)",
-                    // background: temp == "fifth" && "rgb(19 71 119)",
                     padding: ".5rem",
                     fontFamily: fontFamily,
                     width: "calc(33.333% - 16px)",
                     mb: 0.5,
                     ml: temp === "eighth" && 2.5,
                     marginRight: "8px",
-                    // width: "100%",
                   }}
                 >
                   <Box display={"flex"} flexDirection={"column"}>
@@ -157,14 +146,14 @@ export default function Language({
                         fontFamily: fontFamily,
                       }}
                     >
-                      {Language.name}
+                      {volunteer.organization}
                     </Typography>
                     <Box>
                       <Typography
                         sx={{
                           fontSize:
                             fontSize == 2
-                              ? "10px"
+                              ? "12px"
                               : fontSize == 0
                               ? "6px"
                               : fontSize == 1
@@ -172,24 +161,8 @@ export default function Language({
                               : "15px",
                         }}
                       >
-                        {Language.proficiency}
+                        {volunteer.role}
                       </Typography>
-                      <Box sx={{ width: "100%", mt: 0.5 }}>
-                        <LinearProgress
-                          variant="determinate"
-                          value={getProficiencyValue(Language.proficiency)}
-                          sx={{
-                            height: 8,
-                            borderRadius: 5,
-                            bgcolor:
-                              temp == "fifth" ? "rgba(83, 97, 103, 1)" : "grey",
-                            "& .MuiLinearProgress-bar": {
-                              bgcolor:
-                                temp == "fifth" ? "rgb(19 71 119)" : "black",
-                            },
-                          }}
-                        />
-                      </Box>
                     </Box>
                   </Box>
                 </Box>
@@ -199,9 +172,14 @@ export default function Language({
         )}
         {(temp === "fourth" || temp === "sixth") && (
           <>
-              {temp!== "fourth" && <Divider/>}
-            {(formValues.Languages ? formValues.Languages : Languages).map(
-              (Language, index) => (
+           <Divider
+              sx={{
+                mb: 1,
+                background: (temp == "fourth" || temp == "fifth") && "black",
+              }}
+            />
+            {(formValues.Volunteer ? formValues.Volunteer : Volunteer).map(
+              (volunteer, index) => (
                 <ul key={index}>
                   <li
                     style={{
@@ -210,8 +188,7 @@ export default function Language({
                         ? primaryColor
                         : temp === "sixth"
                         ? "rgba(83, 97, 103, 1)"
-                        : "white",
-                    }}
+                        : "rgba(83, 97, 103, 1)",                    }}
                   >
                     <Typography
                       sx={{
@@ -226,12 +203,12 @@ export default function Language({
                         fontFamily: fontFamily,
                       }}
                     >
-                      {Language.name}
+                      {volunteer.organization}
                       <Typography
                         sx={{
                           fontSize:
                             fontSize == 2
-                              ? "8px"
+                              ? "10px"
                               : fontSize == 0
                               ? "5px"
                               : fontSize == 1
@@ -239,7 +216,7 @@ export default function Language({
                               : "10px",
                         }}
                       >
-                        {Language.proficiency}
+                        {volunteer.role}
                       </Typography>
                     </Typography>
                   </li>

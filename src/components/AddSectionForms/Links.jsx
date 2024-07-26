@@ -1,40 +1,37 @@
 /* eslint-disable react/prop-types */
-import { Button, TextField, Box, Typography, Autocomplete } from '@mui/material';
+import { Button, TextField, Box, Typography } from '@mui/material';
 import React, { useState, useEffect } from 'react';
 import CreateOutlinedIcon from '@mui/icons-material/CreateOutlined';
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
 
-const proficiencyOptions = ["Native", "Proficient", "Advanced", "Intermediate", "Beginner"];
-
-export default function Language({ addedCustomSections, number, addedSections }) {
-  const [languages, setLanguages] = useState([]);
+export default function Links({ addedCustomSections, number, addedSections }) {
+  const [links, setLinks] = useState([]);
   const [isFormVisible, setIsFormVisible] = useState(true);
-  const [languageName, setLanguageName] = useState('');
-  const [proficiency, setProficiency] = useState(null);
+  const [projectTitle, setProjectTitle] = useState('');
+  const [linkUrl, setLinkUrl] = useState('');
   const [formError, setFormError] = useState('');
   const [editIndex, setEditIndex] = useState(null);
 
-
   const handleAddClick = () => {
-    if (languageName && proficiency) {
+    if (projectTitle && linkUrl) {
       if (editIndex !== null) {
-        // Update existing language
-        const updatedLanguages = [...languages];
-        updatedLanguages[editIndex] = { name: languageName, proficiency };
-        setLanguages(updatedLanguages);
+        // Update existing link
+        const updatedLinks = [...links];
+        updatedLinks[editIndex] = { title: projectTitle, url: linkUrl };
+        setLinks(updatedLinks);
         setEditIndex(null); // Reset edit index
       } else {
-        // Add new language
-        const newLanguage = { name: languageName, proficiency };
-        setLanguages([...languages, newLanguage]);
+        // Add new link
+        const newLink = { title: projectTitle, url: linkUrl };
+        setLinks([...links, newLink]);
 
         // Add number to addedCustomSections if not already present
         if (!addedSections.includes(number)) {
           addedCustomSections(number);
         }
       }
-      setLanguageName('');
-      setProficiency(null);
+      setProjectTitle('');
+      setLinkUrl('');
       setFormError('');
       setIsFormVisible(false); // Hide form after adding or editing
     } else {
@@ -48,28 +45,28 @@ export default function Language({ addedCustomSections, number, addedSections })
   };
 
   const handleEditClick = (index) => {
-    setLanguageName(languages[index].name);
-    setProficiency(languages[index].proficiency);
+    setProjectTitle(links[index].title);
+    setLinkUrl(links[index].url);
     setEditIndex(index);
     setIsFormVisible(true);
   };
 
   const handleDeleteClick = (index) => {
-    const updatedLanguages = languages.filter((_, i) => i !== index);
-    setLanguages(updatedLanguages);
+    const updatedLinks = links.filter((_, i) => i !== index);
+    setLinks(updatedLinks);
   };
 
   return (
     <Box sx={{ padding: 2, border: '1px solid grey', borderRadius: 2, maxWidth: 400, mx: 'auto' }}>
       <Typography variant="h6" gutterBottom sx={{textAlign:"start"}}>
-        Languages
+        Links
       </Typography>
-      {languages.map((language, index) => (
+      {links.map((link, index) => (
         <Box key={index} sx={{ mb: 1, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
           <Box>
-            <Typography variant="body1">{language.name}</Typography>
+            <Typography variant="body1">{link.title}</Typography>
             <Typography variant="body2" color="textSecondary">
-              {language.proficiency}
+              <a href={link.url} target="_blank" rel="noopener noreferrer">{link.url}</a>
             </Typography>
           </Box>
           <Box>
@@ -85,33 +82,27 @@ export default function Language({ addedCustomSections, number, addedSections })
       {isFormVisible && (
         <Box sx={{ padding: 2, border: '1px solid grey', borderRadius: 2, mt: 2 }}>
           <Typography variant="h6" gutterBottom>
-            {editIndex !== null ? 'Edit Language' : 'Add New Language'}
+            {editIndex !== null ? 'Edit Link' : 'Add New Link'}
           </Typography>
           <TextField
-            label="Language Name"
+            label="Project Title"
             variant="outlined"
             fullWidth
             margin="normal"
-            value={languageName}
-            onChange={(e) => setLanguageName(e.target.value)}
+            value={projectTitle}
+            onChange={(e) => setProjectTitle(e.target.value)}
             error={!!formError}
             helperText={formError}
           />
-          <Autocomplete
-            options={proficiencyOptions}
-            value={proficiency}
-            onChange={(event, newValue) => setProficiency(newValue)}
-            renderInput={(params) => (
-              <TextField
-                {...params}
-                label="Proficiency"
-                variant="outlined"
-                margin="normal"
-                fullWidth
-                error={!!formError}
-                helperText={formError}
-              />
-            )}
+          <TextField
+            label="Link URL"
+            variant="outlined"
+            fullWidth
+            margin="normal"
+            value={linkUrl}
+            onChange={(e) => setLinkUrl(e.target.value)}
+            error={!!formError}
+            helperText={formError}
           />
           <Button
             onClick={handleAddClick}

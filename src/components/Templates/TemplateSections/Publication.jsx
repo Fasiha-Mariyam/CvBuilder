@@ -1,9 +1,9 @@
 /* eslint-disable react/prop-types */
-import { Box, Divider, Typography } from "@mui/material";
-import WorkspacePremiumIcon from "@mui/icons-material/WorkspacePremium";
 import React from "react";
+import { Box, Divider, Typography, LinearProgress } from "@mui/material";
+import InterpreterModeIcon from "@mui/icons-material/InterpreterMode";
 
-export default function Certificate({
+export default function Publication({
   formValues,
   temp,
   fontFamily,
@@ -11,12 +11,25 @@ export default function Certificate({
   primaryColor,
   fontSize,
 }) {
-  const Certificates = [
-    { name: "Reading", institution: "Institution A" },
-    { name: "Learning", institution: "Institution B" },
-    { name: "Traveling", institution: "Institution C" },
-    { name: "Coding", institution: "Institution D" },
+  const Publication = [
+    {
+      title: "Teaching at Children House",
+      date: "2023-06-01",
+    },
+    {
+      title: "Spanish Language ",
+      date: "2024-01-15",
+    },
+    {
+      title: "French Language Resources ",
+      date: "2023-11-30",
+    },
+    {
+      title: "German Language Resources",
+      date: "2023-09-20",
+    },
   ];
+
   const temp6style = {
     fontSize:
       fontSize == 2
@@ -32,6 +45,7 @@ export default function Certificate({
     fontFamily: fontFamily,
     gap: 1,
   };
+
   return (
     <>
       <Box>
@@ -89,18 +103,23 @@ export default function Certificate({
                 }
           }
         >
-          {(temp === "sixth" || temp === "eighth") && <WorkspacePremiumIcon />}{" "}
-          {temp === "seventh" ? `Certificates` : `CERTIFICATES`}
+          {(temp === "sixth" || temp === "eighth") && <InterpreterModeIcon />}{" "}
+          {temp === "seventh" ? `Publication` : `PUBLICATIONS `}
         </Typography>
 
         {temp !== "fourth" && temp !== "sixth" && (
           <>
             {" "}
-            <Divider sx={{ mb: 1 ,background: temp === "fifth" && "black" }} />
-            {(formValues.Certificates
-              ? formValues.Certificates
-              : Certificates
-            ).map((certificate, index) => (
+            <Divider
+              sx={{
+                mb: 1,
+                background: (temp == "fourth" || temp == "fifth") && "black",
+              }}
+            />
+            {(formValues.Publication
+              ? formValues.Publication
+              : Publication
+            ).map((publication, index) => (
               <Box
                 key={index}
                 sx={{
@@ -113,63 +132,13 @@ export default function Certificate({
                   // background: temp == "fifth" && "rgb(19 71 119)",
                   padding: ".5rem",
                   fontFamily: fontFamily,
+                  width: "calc(33.333% - 16px)",
                   mb: 0.5,
                   ml: temp === "eighth" && 2.5,
                   marginRight: "8px",
                 }}
               >
-                <Typography
-                  sx={{
-                    fontSize:
-                      fontSize == 2
-                        ? "15px"
-                        : fontSize == 0
-                        ? "8px"
-                        : fontSize == 1
-                        ? "10px"
-                        : "20px",
-                    fontFamily: fontFamily,
-                  }}
-                >
-                  {certificate.name}
-                  <Typography
-                    sx={{
-                      fontSize:
-                        fontSize == 2
-                          ? "10px"
-                          : fontSize == 0
-                          ? "6px"
-                          : fontSize == 1
-                          ? "7px"
-                          : "15px",
-                    }}
-                  >
-                    {certificate.institution}
-                  </Typography>
-                </Typography>
-              </Box>
-            ))}
-          </>
-        )}
-        {(temp === "fourth" || temp === "sixth") && (
-          <>
-            <Divider sx={{ mb: 1, background: temp === "fourth" && "black" }} />
-
-            {(formValues.Certificates
-              ? formValues.Certificates
-              : Certificates
-            ).map((certificate, index) => (
-              <ul key={index}>
-                <li
-                  style={{
-                    fontFamily: fontFamily,
-                    color: primaryColor
-                      ? primaryColor
-                      : temp === "sixth"
-                      ? "rgba(83, 97, 103, 1)"
-                      : "rgba(83, 97, 103, 1)",
-                  }}
-                >
+                <Box display={"flex"} flexDirection={"column"}>
                   <Typography
                     sx={{
                       fontSize:
@@ -178,25 +147,84 @@ export default function Certificate({
                           : fontSize == 0
                           ? "8px"
                           : fontSize == 1
-                          ? "9px"
+                          ? "10px"
                           : "20px",
                       fontFamily: fontFamily,
                     }}
                   >
-                    {certificate.name}
+                    {publication.title}
+                  </Typography>
+                  <Box>
                     <Typography
                       sx={{
                         fontSize:
                           fontSize == 2
                             ? "12px"
                             : fontSize == 0
-                            ? "8px"
+                            ? "6px"
                             : fontSize == 1
-                            ? "9px"
+                            ? "7px"
                             : "15px",
                       }}
                     >
-                      {certificate.institution}
+                      {publication.date}
+                    </Typography>
+                  </Box>
+                </Box>
+              </Box>
+            ))}
+          </>
+        )}
+        {(temp === "fourth" || temp === "sixth") && (
+          <>
+            <Divider
+              sx={{
+                mb: 1,
+                background: (temp == "fourth" || temp == "fifth") && "black",
+              }}
+            />
+            {(formValues.Publication
+              ? formValues.Publication
+              : Publication
+            ).map((publication, index) => (
+              <ul key={index}>
+                <li
+                  style={{
+                    fontFamily: fontFamily,
+                    color: primaryColor
+                      ? primaryColor
+                      : temp === "sixth"
+                      ? "rgba(83, 97, 103, 1)"
+                      : "rgba(83, 97, 103, 1)"
+                  }}
+                >
+                  <Typography
+                    sx={{
+                      fontSize:
+                        fontSize == 2
+                          ? "12px"
+                          : fontSize == 0
+                          ? "8px"
+                          : fontSize == 1
+                          ? "9px"
+                          : "15px",
+                      fontFamily: fontFamily,
+                    }}
+                  >
+                    {publication.title}
+                    <Typography
+                      sx={{
+                        fontSize:
+                          fontSize == 2
+                            ? "10px"
+                            : fontSize == 0
+                            ? "5px"
+                            : fontSize == 1
+                            ? "6px"
+                            : "10px",
+                      }}
+                    >
+                      {publication.date}
                     </Typography>
                   </Typography>
                 </li>

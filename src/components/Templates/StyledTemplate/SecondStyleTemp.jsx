@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React, { useRef, useState } from "react";
 import PersonalInfo from "../TemplateSections/PersonalInfo";
 import Summary from "../TemplateSections/Summary";
@@ -9,16 +10,39 @@ import Interest from "../TemplateSections/Interest";
 import Education from "../TemplateSections/Education";
 import Experience from "../TemplateSections/Experience";
 import Projects from "../TemplateSections/Projects";
+import Certificate from "../TemplateSections/Certificate";
+import Courses from "../TemplateSections/Courses";
+import Language from "../TemplateSections/Language";
+import References from "../TemplateSections/Reference";
+import Awards from "../TemplateSections/Awards";
+import Links from "../TemplateSections/Links";
+import Volunteer from "../TemplateSections/Volunteer";
+import TechnicalSkills from "../TemplateSections/TechnicalSkills";
+import Publication from "../TemplateSections/Publication";
+import Customize from "../TemplateSections/Customize";
 
-const textStyle = { fontSize: "1em", fontWeight: "600" };
 export default function SecondStyleTemp({
   formValues,
   fontFamily,
   primaryColor,
   secondaryColor,
   fontSize,
+  selectedTemplate,
+  addedCustomSections,
   backgroundImage,
 }) {
+  const textStyle = {
+    fontSize:
+      fontSize == 2
+        ? "1em"
+        : fontSize == 0
+        ? "0.8em"
+        : fontSize == 1
+        ? ".9em"
+        : "1.5em",
+    fontWeight: "600",
+    color: secondaryColor ? secondaryColor : "",
+  };
   const templateRef = useRef(null);
   const downloadCV = () => {
     if (templateRef.current) {
@@ -102,9 +126,100 @@ export default function SecondStyleTemp({
                   fontSize={fontSize}
                 />
               </Grid>
+              <Grid item>
+                {addedCustomSections.includes("certificate") ? (
+                  <Certificate
+                    temp={"second"}
+                    formValues={formValues}
+                    fontFamily={fontFamily}
+                    primaryColor={primaryColor}
+                    secondaryColor={secondaryColor}
+                    fontSize={fontSize}
+                  />
+                ) : (
+                  selectedTemplate === "certificate" && (
+                    <Certificate
+                      formValues={formValues}
+                      temp={"second"}
+                      fontFamily={fontFamily}
+                      primaryColor={primaryColor}
+                      secondaryColor={secondaryColor}
+                      fontSize={fontSize}
+                    />
+                  )
+                )}
+              </Grid>
+              <Grid item>
+                {addedCustomSections.includes("course") ? (
+                  <Courses
+                    formValues={formValues}
+                    temp={"second"}
+                    fontFamily={fontFamily}
+                    primaryColor={primaryColor}
+                    secondaryColor={secondaryColor}
+                    fontSize={fontSize}
+                  />
+                ) : (
+                  selectedTemplate === "course" && (
+                    <Courses
+                      formValues={formValues}
+                      fontFamily={fontFamily}
+                      temp={"second"}
+                      primaryColor={primaryColor}
+                      secondaryColor={secondaryColor}
+                      fontSize={fontSize}
+                    />
+                  )
+                )}
+              </Grid>
+              <Grid item>
+                {addedCustomSections.includes("Language") ? (
+                  <Language
+                    formValues={formValues}
+                    temp={"second"}
+                    fontFamily={fontFamily}
+                    primaryColor={primaryColor}
+                    secondaryColor={secondaryColor}
+                    fontSize={fontSize}
+                  />
+                ) : (
+                  selectedTemplate === "Language" && (
+                    <Language
+                      formValues={formValues}
+                      fontFamily={fontFamily}
+                      temp={"second"}
+                      primaryColor={primaryColor}
+                      secondaryColor={secondaryColor}
+                      fontSize={fontSize}
+                    />
+                  )
+                )}
+              </Grid>
+              <Grid item>
+                {addedCustomSections.includes("Awards and Honors") ? (
+                  <Awards
+                    formValues={formValues}
+                    fontFamily={fontFamily}
+                    primaryColor={primaryColor}
+                    temp={"second"}
+                    secondaryColor={secondaryColor}
+                    fontSize={fontSize}
+                  />
+                ) : (
+                  selectedTemplate === "Awards and Honors" && (
+                    <Awards
+                      formValues={formValues}
+                      fontFamily={fontFamily}
+                      primaryColor={primaryColor}
+                      temp={"second"}
+                      secondaryColor={secondaryColor}
+                      fontSize={fontSize}
+                    />
+                  )
+                )}
+              </Grid>
             </Grid>
           </Grid>
-
           <Grid item>
             <Divider orientation="vertical" />
           </Grid>
@@ -115,6 +230,7 @@ export default function SecondStyleTemp({
             <Summary
               formValues={formValues}
               fontFamily={fontFamily}
+              temp={"second"}
               primaryColor={primaryColor}
               secondaryColor={secondaryColor}
               fontSize={fontSize}
@@ -122,6 +238,7 @@ export default function SecondStyleTemp({
             <Education
               formValues={formValues}
               fontFamily={fontFamily}
+              temp={"second"}
               primaryColor={primaryColor}
               secondaryColor={secondaryColor}
               fontSize={fontSize}
@@ -129,6 +246,7 @@ export default function SecondStyleTemp({
             <Experience
               formValues={formValues}
               fontFamily={fontFamily}
+              temp={"second"}
               primaryColor={primaryColor}
               secondaryColor={secondaryColor}
               fontSize={fontSize}
@@ -138,8 +256,137 @@ export default function SecondStyleTemp({
               fontFamily={fontFamily}
               primaryColor={primaryColor}
               secondaryColor={secondaryColor}
+              temp={"second"}
               fontSize={fontSize}
             />
+
+            {addedCustomSections.includes("Links") ? (
+              <Links
+                formValues={formValues}
+                fontFamily={fontFamily}
+                primaryColor={primaryColor}
+                temp={"second"}
+                secondaryColor={secondaryColor}
+                fontSize={fontSize}
+              />
+            ) : (
+              selectedTemplate === "Links" && (
+                <Links
+                  formValues={formValues}
+                  fontFamily={fontFamily}
+                  primaryColor={primaryColor}
+                  temp={"second"}
+                  secondaryColor={secondaryColor}
+                  fontSize={fontSize}
+                />
+              )
+            )}
+            {addedCustomSections.includes("Volunteer Experience") ? (
+              <Volunteer
+                formValues={formValues}
+                fontFamily={fontFamily}
+                temp={"second"}
+                primaryColor={primaryColor}
+                secondaryColor={secondaryColor}
+                fontSize={fontSize}
+              />
+            ) : (
+              selectedTemplate === "Volunteer Experience" && (
+                <Volunteer
+                  formValues={formValues}
+                  fontFamily={fontFamily}
+                  primaryColor={primaryColor}
+                  secondaryColor={secondaryColor}
+                  temp={"second"}
+                  fontSize={fontSize}
+                />
+              )
+            )}
+            {addedCustomSections.includes("Technical Skills") ? (
+              <TechnicalSkills
+                formValues={formValues}
+                fontFamily={fontFamily}
+                primaryColor={primaryColor}
+                temp={"second"}
+                secondaryColor={secondaryColor}
+                fontSize={fontSize}
+              />
+            ) : (
+              selectedTemplate === "Technical Skills" && (
+                <TechnicalSkills
+                  formValues={formValues}
+                  fontFamily={fontFamily}
+                  temp={"second"}
+                  primaryColor={primaryColor}
+                  secondaryColor={secondaryColor}
+                  fontSize={fontSize}
+                />
+              )
+            )}
+            {addedCustomSections.includes("Publications") ? (
+              <Publication
+                formValues={formValues}
+                fontFamily={fontFamily}
+                primaryColor={primaryColor}
+                temp={"second"}
+                secondaryColor={secondaryColor}
+                fontSize={fontSize}
+              />
+            ) : (
+              selectedTemplate === "Publications" && (
+                <Publication
+                  formValues={formValues}
+                  fontFamily={fontFamily}
+                  temp={"second"}
+                  primaryColor={primaryColor}
+                  secondaryColor={secondaryColor}
+                  fontSize={fontSize}
+                />
+              )
+            )}
+            {addedCustomSections.includes("Customize") ? (
+              <Customize
+                formValues={formValues}
+                fontFamily={fontFamily}
+                temp={"second"}
+                primaryColor={primaryColor}
+                secondaryColor={secondaryColor}
+                fontSize={fontSize}
+              />
+            ) : (
+              selectedTemplate === "Customize" && (
+                <Customize
+                  formValues={formValues}
+                  fontFamily={fontFamily}
+                  primaryColor={primaryColor}
+                  secondaryColor={secondaryColor}
+                  temp={"second"}
+                  fontSize={fontSize}
+                />
+              )
+            )}
+
+            {addedCustomSections.includes("reference") ? (
+              <References
+                formValues={formValues}
+                fontFamily={fontFamily}
+                primaryColor={primaryColor}
+                secondaryColor={secondaryColor}
+                temp={"second"}
+                fontSize={fontSize}
+              />
+            ) : (
+              selectedTemplate === "reference" && (
+                <References
+                  formValues={formValues}
+                  fontFamily={fontFamily}
+                  primaryColor={primaryColor}
+                  secondaryColor={secondaryColor}
+                  temp={"second"}
+                  fontSize={fontSize}
+                />
+              )
+            )}
           </Grid>
         </Grid>
       </Box>

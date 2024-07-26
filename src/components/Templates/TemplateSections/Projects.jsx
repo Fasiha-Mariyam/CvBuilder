@@ -55,7 +55,7 @@ export default function Projects({
                   : "2em",
               fontWeight: "600",
               mt:
-                (temp == "fourth" || temp == "fifth" || temp == "eighth") && 2,
+                (temp == "fourth" || temp == "fifth" || temp == "eighth" || temp == "second") && 2,
               ml: temp === "eighth" && 2.5,
               border: temp === "seventh" && "1px solid rgb(4 50 128)",
               borderRadius: temp === "seventh" && "50px",

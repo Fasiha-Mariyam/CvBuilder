@@ -1,9 +1,9 @@
 /* eslint-disable react/prop-types */
 import { Box, Divider, Typography } from "@mui/material";
-import LocalLibraryIcon from "@mui/icons-material/LocalLibrary";
+import EmojiEventsIcon from "@mui/icons-material/EmojiEvents";
 import React from "react";
 
-export default function Courses({
+export default function Award({
   formValues,
   temp,
   fontFamily,
@@ -11,37 +11,11 @@ export default function Courses({
   primaryColor,
   fontSize,
 }) {
-  const Courses = [
-    {
-      title: "Intro to Python",
-      description:
-        "An introductory course on Python programming, covering basic concepts and syntax. Offered by DataCamp.",
-    },
-    {
-      title: "Advanced React",
-      description:
-        "An advanced course focusing on complex React patterns and state management. Offered by Udemy.",
-    },
-    {
-      title: "Machine Learning",
-      description:
-        "A comprehensive course on machine learning algorithms and applications. Offered by Coursera.",
-    },
-    {
-      title: "Data Visualization",
-      description:
-        "A course on techniques for visualizing data effectively using various tools. Offered by edX.",
-    },
+  const defaultAwards = [
+    { title: "Best Developer", date: "2021-12-01" },
+    { title: "Top Performer", date: "2020-11-01" },
+    { title: "Employee of the Month", date: "2019-10-01" },
   ];
-
-  const groupedCourses = [];
-  const coursesList = formValues.Courses ? formValues.Courses : Courses;
-
-  // Group courses into pairs
-  for (let i = 0; i < coursesList.length; i += 2) {
-    groupedCourses.push(coursesList.slice(i, i + 2));
-  }
-
   const temp6style = {
     fontSize:
       fontSize == 2
@@ -98,7 +72,7 @@ export default function Courses({
                   color: secondaryColor
                     ? secondaryColor
                     : temp === "fourth"
-                   ? "rgb(30 55 99)"
+                    ? "rgb(30 55 99)"
                     : temp === "fifth"
                     ? "rgb(19 71 119)"
                     : temp === "seventh"
@@ -115,8 +89,8 @@ export default function Courses({
                 }
           }
         >
-          {(temp === "sixth" || temp === "eighth") && <LocalLibraryIcon />}{" "}
-          {temp === "seventh" ? `Courses` : `COURSES`}
+          {(temp === "sixth" || temp === "eighth") && <EmojiEventsIcon />}{" "}
+          {temp === "seventh" ? `Awards` : `AWARDS`}
         </Typography>
 
         {temp !== "fourth" && temp !== "sixth" && (
@@ -128,27 +102,37 @@ export default function Courses({
                 background: (temp == "fourth" || temp == "fifth") && "black",
               }}
             />
-            {groupedCourses.map((coursePair, index) => (
-              <Box
-                key={index}
-                sx={{
-                  display: "flex",
-                  alignItems: "center",
-                  color:
-                    temp == "fifth"
-                      ? "rgba(83, 97, 103, 1)"
-                      : "rgba(83, 97, 103, 1)",
-                  // background: temp == "fifth" && "rgb(19 71 119)",
-                  padding: ".5rem",
-                  fontFamily: fontFamily,
-                  mb: 0.5,
-                  ml: temp === "eighth" && 2.5,
-                  marginRight: "8px",
-                }}
-              >
-                {coursePair.map((course, idx) => (
+            {(formValues.Awards ? formValues.Awards : defaultAwards).map(
+              (award, index) => (
+                <Box
+                  key={index}
+                  sx={{
+                    display: temp == "fifth" ? "inline-flex" : "inline-flex",
+                    alignItems: "center",
+                    color:
+                      temp == "fifth"
+                        ? "rgba(83, 97, 103, 1)"
+                        : "rgba(83, 97, 103, 1)",
+                    border: "1px solid rgba(217, 217, 217, 0.85)",
+                    borderRadius: temp == "fifth" ? "10px" : "17px",
+                    // background: temp == "fifth" && "rgb(19 71 119)",
+                    padding: ".5rem",
+                    fontFamily: fontFamily,
+                    mb: 0.5,
+                    ml: temp === "eighth" && 2.5,
+                    cursor: "pointer",
+                    fontSize:
+                      fontSize == 2
+                        ? "10px"
+                        : fontSize == 0
+                        ? "8px"
+                        : fontSize == 1
+                        ? "9px"
+                        : "15px",
+                    marginRight: "8px",
+                  }}
+                >
                   <Box
-                    key={idx}
                     sx={{
                       display: "flex",
                       justifyContent: "space-between",
@@ -159,6 +143,7 @@ export default function Courses({
                     <Box>
                       <Typography
                         sx={{
+                          fontWeight: "bold",
                           fontSize:
                             fontSize == 2
                               ? "16px"
@@ -170,7 +155,7 @@ export default function Courses({
                           fontFamily: fontFamily,
                         }}
                       >
-                        {course.title}
+                        {award.title}
                         <Typography
                           sx={{
                             fontSize:
@@ -183,25 +168,37 @@ export default function Courses({
                                 : "15px",
                           }}
                         >
-                          {course.description}
+                          {award.date}
                         </Typography>
                       </Typography>
                     </Box>
                   </Box>
-                ))}
-              </Box>
-            ))}
+                </Box>
+              )
+            )}
           </>
         )}
-
         {(temp === "fourth" || temp === "sixth") && (
           <>
-          <Divider sx={{ mb: 1 , background:temp === "fourth" && "black" }} />
-            {(formValues.Courses ? formValues.Courses : Courses).map(
-              (course, index) => (
+           <Divider
+              sx={{
+                mb: 1,
+                background: (temp == "fourth" || temp == "fifth") && "black",
+              }}
+            />
+            {(formValues.Awards ? formValues.Awards : defaultAwards).map(
+              (award, index) => (
                 <ul key={index}>
                   <li
                     style={{
+                      fontSize:
+                        fontSize == 2
+                          ? "12px"
+                          : fontSize == 0
+                          ? "8px"
+                          : fontSize == 1
+                          ? "10px"
+                          : "20px",
                       fontFamily: fontFamily,
                       color: primaryColor
                         ? primaryColor
@@ -210,36 +207,47 @@ export default function Courses({
                         : "rgba(83, 97, 103, 1)",
                     }}
                   >
-                    <Typography
+                    <Box
                       sx={{
-                        fontSize:
-                         
-                            fontSize == 2
-                            ? "15px"
-                            : fontSize == 0
-                            ? "8px"
-                            : fontSize == 1
-                            ? "9px"
-                            : "20px",
-                        fontFamily: fontFamily,
+                        display: "flex",
+                        justifyContent: "space-between",
+                        mx: 2,
+                        mr: 5,
                       }}
                     >
-                      {course.title}
-                      <Typography
-                        sx={{
-                          fontSize:
-                          fontSize == 2
-                          ? "12px"
-                          : fontSize == 0
-                          ? "8px"
-                          : fontSize == 1
-                          ? "9px"
-                          : "15px",
-                        }}
-                      >
-                        {course.description}
-                      </Typography>
-                    </Typography>
+                      <Box>
+                        <Typography
+                          sx={{
+                            fontWeight: "bold",
+                            fontSize:
+                              fontSize == 2
+                                ? "16px"
+                                : fontSize == 0
+                                ? "10px"
+                                : fontSize == 1
+                                ? "12px"
+                                : "20px",
+                            fontFamily: fontFamily,
+                          }}
+                        >
+                          {award.title}
+                          <Typography
+                            sx={{
+                              fontSize:
+                                fontSize == 2
+                                  ? "12px"
+                                  : fontSize == 0
+                                  ? "5px"
+                                  : fontSize == 1
+                                  ? "6px"
+                                  : "15px",
+                            }}
+                          >
+                            {award.date}
+                          </Typography>
+                        </Typography>
+                      </Box>
+                    </Box>
                   </li>
                 </ul>
               )

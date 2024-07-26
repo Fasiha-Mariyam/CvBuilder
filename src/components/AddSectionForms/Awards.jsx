@@ -1,40 +1,37 @@
 /* eslint-disable react/prop-types */
-import { Button, TextField, Box, Typography, Autocomplete } from '@mui/material';
+import { Button, TextField, Box, Typography } from '@mui/material';
 import React, { useState, useEffect } from 'react';
 import CreateOutlinedIcon from '@mui/icons-material/CreateOutlined';
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
 
-const proficiencyOptions = ["Native", "Proficient", "Advanced", "Intermediate", "Beginner"];
-
-export default function Language({ addedCustomSections, number, addedSections }) {
-  const [languages, setLanguages] = useState([]);
+export default function Awards({ addedCustomSections, number, addedSections }) {
+  const [awards, setAwards] = useState([]);
   const [isFormVisible, setIsFormVisible] = useState(true);
-  const [languageName, setLanguageName] = useState('');
-  const [proficiency, setProficiency] = useState(null);
+  const [awardTitle, setAwardTitle] = useState('');
+  const [awardDate, setAwardDate] = useState('');
   const [formError, setFormError] = useState('');
   const [editIndex, setEditIndex] = useState(null);
 
-
   const handleAddClick = () => {
-    if (languageName && proficiency) {
+    if (awardTitle && awardDate) {
       if (editIndex !== null) {
-        // Update existing language
-        const updatedLanguages = [...languages];
-        updatedLanguages[editIndex] = { name: languageName, proficiency };
-        setLanguages(updatedLanguages);
+        // Update existing award
+        const updatedAwards = [...awards];
+        updatedAwards[editIndex] = { title: awardTitle, date: awardDate };
+        setAwards(updatedAwards);
         setEditIndex(null); // Reset edit index
       } else {
-        // Add new language
-        const newLanguage = { name: languageName, proficiency };
-        setLanguages([...languages, newLanguage]);
+        // Add new award
+        const newAward = { title: awardTitle, date: awardDate };
+        setAwards([...awards, newAward]);
 
         // Add number to addedCustomSections if not already present
         if (!addedSections.includes(number)) {
           addedCustomSections(number);
         }
       }
-      setLanguageName('');
-      setProficiency(null);
+      setAwardTitle('');
+      setAwardDate('');
       setFormError('');
       setIsFormVisible(false); // Hide form after adding or editing
     } else {
@@ -48,28 +45,28 @@ export default function Language({ addedCustomSections, number, addedSections })
   };
 
   const handleEditClick = (index) => {
-    setLanguageName(languages[index].name);
-    setProficiency(languages[index].proficiency);
+    setAwardTitle(awards[index].title);
+    setAwardDate(awards[index].date);
     setEditIndex(index);
     setIsFormVisible(true);
   };
 
   const handleDeleteClick = (index) => {
-    const updatedLanguages = languages.filter((_, i) => i !== index);
-    setLanguages(updatedLanguages);
+    const updatedAwards = awards.filter((_, i) => i !== index);
+    setAwards(updatedAwards);
   };
 
   return (
     <Box sx={{ padding: 2, border: '1px solid grey', borderRadius: 2, maxWidth: 400, mx: 'auto' }}>
       <Typography variant="h6" gutterBottom sx={{textAlign:"start"}}>
-        Languages
+        Awards and Honors
       </Typography>
-      {languages.map((language, index) => (
+      {awards.map((award, index) => (
         <Box key={index} sx={{ mb: 1, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
           <Box>
-            <Typography variant="body1">{language.name}</Typography>
+            <Typography variant="body1">{award.title}</Typography>
             <Typography variant="body2" color="textSecondary">
-              {language.proficiency}
+              {award.date}
             </Typography>
           </Box>
           <Box>
@@ -85,33 +82,29 @@ export default function Language({ addedCustomSections, number, addedSections })
       {isFormVisible && (
         <Box sx={{ padding: 2, border: '1px solid grey', borderRadius: 2, mt: 2 }}>
           <Typography variant="h6" gutterBottom>
-            {editIndex !== null ? 'Edit Language' : 'Add New Language'}
+            {editIndex !== null ? 'Edit Award' : 'Add New Award'}
           </Typography>
           <TextField
-            label="Language Name"
+            label="Award Title"
             variant="outlined"
             fullWidth
             margin="normal"
-            value={languageName}
-            onChange={(e) => setLanguageName(e.target.value)}
+            value={awardTitle}
+            onChange={(e) => setAwardTitle(e.target.value)}
             error={!!formError}
             helperText={formError}
           />
-          <Autocomplete
-            options={proficiencyOptions}
-            value={proficiency}
-            onChange={(event, newValue) => setProficiency(newValue)}
-            renderInput={(params) => (
-              <TextField
-                {...params}
-                label="Proficiency"
-                variant="outlined"
-                margin="normal"
-                fullWidth
-                error={!!formError}
-                helperText={formError}
-              />
-            )}
+          <TextField
+            label="Date"
+            variant="outlined"
+            fullWidth
+            margin="normal"
+            type="date"
+            InputLabelProps={{ shrink: true }}
+            value={awardDate}
+            onChange={(e) => setAwardDate(e.target.value)}
+            error={!!formError}
+            helperText={formError}
           />
           <Button
             onClick={handleAddClick}

@@ -1,40 +1,37 @@
 /* eslint-disable react/prop-types */
-import { Button, TextField, Box, Typography, Autocomplete } from '@mui/material';
+import { Button, TextField, Box, Typography } from '@mui/material';
 import React, { useState, useEffect } from 'react';
 import CreateOutlinedIcon from '@mui/icons-material/CreateOutlined';
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
 
-const proficiencyOptions = ["Native", "Proficient", "Advanced", "Intermediate", "Beginner"];
-
-export default function Language({ addedCustomSections, number, addedSections }) {
-  const [languages, setLanguages] = useState([]);
+export default function Volunteer({ addedCustomSections, number, addedSections }) {
+  const [volunteers, setVolunteers] = useState([]);
   const [isFormVisible, setIsFormVisible] = useState(true);
-  const [languageName, setLanguageName] = useState('');
-  const [proficiency, setProficiency] = useState(null);
+  const [organizationName, setOrganizationName] = useState('');
+  const [roleTitle, setRoleTitle] = useState('');
   const [formError, setFormError] = useState('');
   const [editIndex, setEditIndex] = useState(null);
 
-
   const handleAddClick = () => {
-    if (languageName && proficiency) {
+    if (organizationName && roleTitle) {
       if (editIndex !== null) {
-        // Update existing language
-        const updatedLanguages = [...languages];
-        updatedLanguages[editIndex] = { name: languageName, proficiency };
-        setLanguages(updatedLanguages);
+        // Update existing volunteer experience
+        const updatedVolunteers = [...volunteers];
+        updatedVolunteers[editIndex] = { organization: organizationName, role: roleTitle };
+        setVolunteers(updatedVolunteers);
         setEditIndex(null); // Reset edit index
       } else {
-        // Add new language
-        const newLanguage = { name: languageName, proficiency };
-        setLanguages([...languages, newLanguage]);
+        // Add new volunteer experience
+        const newVolunteer = { organization: organizationName, role: roleTitle };
+        setVolunteers([...volunteers, newVolunteer]);
 
         // Add number to addedCustomSections if not already present
         if (!addedSections.includes(number)) {
           addedCustomSections(number);
         }
       }
-      setLanguageName('');
-      setProficiency(null);
+      setOrganizationName('');
+      setRoleTitle('');
       setFormError('');
       setIsFormVisible(false); // Hide form after adding or editing
     } else {
@@ -48,28 +45,28 @@ export default function Language({ addedCustomSections, number, addedSections })
   };
 
   const handleEditClick = (index) => {
-    setLanguageName(languages[index].name);
-    setProficiency(languages[index].proficiency);
+    setOrganizationName(volunteers[index].organization);
+    setRoleTitle(volunteers[index].role);
     setEditIndex(index);
     setIsFormVisible(true);
   };
 
   const handleDeleteClick = (index) => {
-    const updatedLanguages = languages.filter((_, i) => i !== index);
-    setLanguages(updatedLanguages);
+    const updatedVolunteers = volunteers.filter((_, i) => i !== index);
+    setVolunteers(updatedVolunteers);
   };
 
   return (
     <Box sx={{ padding: 2, border: '1px solid grey', borderRadius: 2, maxWidth: 400, mx: 'auto' }}>
       <Typography variant="h6" gutterBottom sx={{textAlign:"start"}}>
-        Languages
+        Volunteer Experience
       </Typography>
-      {languages.map((language, index) => (
+      {volunteers.map((volunteer, index) => (
         <Box key={index} sx={{ mb: 1, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
           <Box>
-            <Typography variant="body1">{language.name}</Typography>
+            <Typography variant="body1">{volunteer.organization}</Typography>
             <Typography variant="body2" color="textSecondary">
-              {language.proficiency}
+              {volunteer.role}
             </Typography>
           </Box>
           <Box>
@@ -85,33 +82,27 @@ export default function Language({ addedCustomSections, number, addedSections })
       {isFormVisible && (
         <Box sx={{ padding: 2, border: '1px solid grey', borderRadius: 2, mt: 2 }}>
           <Typography variant="h6" gutterBottom>
-            {editIndex !== null ? 'Edit Language' : 'Add New Language'}
+            {editIndex !== null ? 'Edit Volunteer Experience' : 'Add New Volunteer Experience'}
           </Typography>
           <TextField
-            label="Language Name"
+            label="Organization Name"
             variant="outlined"
             fullWidth
             margin="normal"
-            value={languageName}
-            onChange={(e) => setLanguageName(e.target.value)}
+            value={organizationName}
+            onChange={(e) => setOrganizationName(e.target.value)}
             error={!!formError}
             helperText={formError}
           />
-          <Autocomplete
-            options={proficiencyOptions}
-            value={proficiency}
-            onChange={(event, newValue) => setProficiency(newValue)}
-            renderInput={(params) => (
-              <TextField
-                {...params}
-                label="Proficiency"
-                variant="outlined"
-                margin="normal"
-                fullWidth
-                error={!!formError}
-                helperText={formError}
-              />
-            )}
+          <TextField
+            label="Role/Title"
+            variant="outlined"
+            fullWidth
+            margin="normal"
+            value={roleTitle}
+            onChange={(e) => setRoleTitle(e.target.value)}
+            error={!!formError}
+            helperText={formError}
           />
           <Button
             onClick={handleAddClick}

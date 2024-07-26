@@ -36,22 +36,22 @@ export default function Interest({
             temp === "sixth"
               ? temp6style
               : {
-                fontSize:
-                fontSize == 2
-                  ? temp === "fourth"
-                    ? "20px"
-                    : "1.2em"
-                  : fontSize == 0
-                  ? temp === "fourth"
-                    ? "10px"
-                    : ".9em"
-                  : fontSize == 1
-                  ? temp === "fourth"
-                    ? "15px"
-                    : "1em"
-                  : temp === "fourth"
-                  ? "25px"
-                  : "2em",
+                  fontSize:
+                    fontSize == 2
+                      ? temp === "fourth"
+                        ? "20px"
+                        : "1.2em"
+                      : fontSize == 0
+                      ? temp === "fourth"
+                        ? "10px"
+                        : ".9em"
+                      : fontSize == 1
+                      ? temp === "fourth"
+                        ? "15px"
+                        : "1em"
+                      : temp === "fourth"
+                      ? "25px"
+                      : "2em",
                   fontWeight: "600",
                   mt: temp === "eighth" ? 3 : -1,
                   ml: temp == "fifth" || (temp === "eighth" && 2.5),
@@ -90,7 +90,6 @@ export default function Interest({
 
         {temp !== "fourth" && temp !== "sixth" && (
           <>
-            {" "}
             <Divider sx={{ mb: 1 }} />
             {(formValues.Interests ? formValues.Interests : Interests).map(
               (Interest, index) => (
@@ -119,14 +118,19 @@ export default function Interest({
                     marginRight: "8px",
                   }}
                 >
-                  <Typography sx={{fontSize:
-                      fontSize == 2
-                        ? "12px"
-                        : fontSize == 0
-                        ? "8px"
-                        : fontSize == 1
-                        ? "9px"
-                        : "15px", fontFamily: fontFamily }}>
+                  <Typography
+                    sx={{
+                      fontSize:
+                        fontSize == 2
+                          ? "12px"
+                          : fontSize == 0
+                          ? "8px"
+                          : fontSize == 1
+                          ? "9px"
+                          : "15px",
+                      fontFamily: fontFamily,
+                    }}
+                  >
                     {Interest}
                   </Typography>
                 </Box>
@@ -136,6 +140,13 @@ export default function Interest({
         )}
         {(temp === "fourth" || temp === "sixth") && (
           <>
+            {temp !== "fourth" && (
+              <Divider
+                sx={{
+                  mb: 1,
+                }}
+              />
+            )}
             {(formValues.Interests ? formValues.Interests : Interests).map(
               (Interest, index) => (
                 <ul key={index}>
