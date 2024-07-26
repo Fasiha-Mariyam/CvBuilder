@@ -59,23 +59,30 @@ export default function FirstStyledTemplate({
           Download
         </Button>
       </Box>
-      <Box sx={{ border: "1px solid black", p: 1 ,
+      <Box
+        sx={{
+          border: "1px solid black",
+          p: 1,
           backgroundImage: `url(${backgroundImage})`,
           backgroundSize: "cover", // Adjust the background size as needed
           backgroundPosition: "center", // A
-      }} ref={templateRef}>
+        }}
+        ref={templateRef}
+      >
         <PersonalInfo
           temp={"first"}
           formValues={formValues}
           fontFamily={fontFamily}
           primaryColor={primaryColor}
           secondaryColor={secondaryColor}
+          fontSize={fontSize}
         />
         <Summary
           formValues={formValues}
           fontFamily={fontFamily}
           primaryColor={primaryColor}
           secondaryColor={secondaryColor}
+          fontSize={fontSize}
         />
         <Box sx={{ flexGrow: 1 }}>
           <Grid container spacing={3}>
@@ -86,18 +93,21 @@ export default function FirstStyledTemplate({
                   fontFamily={fontFamily}
                   primaryColor={primaryColor}
                   secondaryColor={secondaryColor}
+                  fontSize={fontSize}
                 />
                 <Experience
                   formValues={formValues}
                   fontFamily={fontFamily}
                   primaryColor={primaryColor}
                   secondaryColor={secondaryColor}
+                  fontSize={fontSize}
                 />
                 <Skill
                   formValues={formValues}
                   fontFamily={fontFamily}
                   primaryColor={primaryColor}
                   secondaryColor={secondaryColor}
+                  fontSize={fontSize}
                 />
               </Box>
             </Grid>
@@ -109,12 +119,14 @@ export default function FirstStyledTemplate({
                   fontFamily={fontFamily}
                   primaryColor={primaryColor}
                   secondaryColor={secondaryColor}
+                  fontSize={fontSize}
                 />
                 <Interest
                   formValues={formValues}
                   fontFamily={fontFamily}
                   primaryColor={primaryColor}
                   secondaryColor={secondaryColor}
+                  fontSize={fontSize}
                 />
               </Box>
             </Grid>

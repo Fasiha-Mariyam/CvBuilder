@@ -21,7 +21,14 @@ export default function ThirdStyleTemp({
 }) {
   const templateRef = useRef(null);
   const textStyle = {
-    fontSize: "1em",
+    fontSize:
+    fontSize == 2
+      ? "1em"
+      : fontSize == 0
+      ? ".8em"
+      : fontSize == 1
+      ? ".9em"
+      : "2em",
     fontWeight: "600",
     fontFamily: fontFamily,
   };
@@ -65,17 +72,23 @@ export default function ThirdStyleTemp({
           Download
         </Button>
       </Box>
-      <Box sx={{ border: "1px solid black", p: 1 ,
-        backgroundImage: `url(${backgroundImage})`,
-        backgroundSize: "cover", // Adjust the background size as needed
-        backgroundPosition: "center", // A
-      }} ref={templateRef}>
+      <Box
+        sx={{
+          border: "1px solid black",
+          p: 1,
+          backgroundImage: `url(${backgroundImage})`,
+          backgroundSize: "cover", // Adjust the background size as needed
+          backgroundPosition: "center", // A
+        }}
+        ref={templateRef}
+      >
         <PersonalInfo
           temp={"third"}
           formValues={formValues}
           fontFamily={fontFamily}
           primaryColor={primaryColor}
           secondaryColor={secondaryColor}
+          fontSize={fontSize}
         />
         <Grid container spacing={2}>
           {/* First Grid */}
@@ -90,6 +103,7 @@ export default function ThirdStyleTemp({
                   fontFamily={fontFamily}
                   primaryColor={primaryColor}
                   secondaryColor={secondaryColor}
+                  fontSize={fontSize}
                 />
               </Grid>
               <Grid item>
@@ -99,6 +113,7 @@ export default function ThirdStyleTemp({
                   fontFamily={fontFamily}
                   primaryColor={primaryColor}
                   secondaryColor={secondaryColor}
+                  fontSize={fontSize}
                 />
               </Grid>
               <Grid item>
@@ -107,6 +122,7 @@ export default function ThirdStyleTemp({
                   fontFamily={fontFamily}
                   primaryColor={primaryColor}
                   secondaryColor={secondaryColor}
+                  fontSize={fontSize}
                 />
               </Grid>
             </Grid>
@@ -124,18 +140,21 @@ export default function ThirdStyleTemp({
               fontFamily={fontFamily}
               primaryColor={primaryColor}
               secondaryColor={secondaryColor}
+              fontSize={fontSize}
             />
             <Experience
               formValues={formValues}
               fontFamily={fontFamily}
               primaryColor={primaryColor}
               secondaryColor={secondaryColor}
+              fontSize={fontSize}
             />
             <Projects
               formValues={formValues}
               fontFamily={fontFamily}
               primaryColor={primaryColor}
               secondaryColor={secondaryColor}
+              fontSize={fontSize}
             />
           </Grid>
         </Grid>

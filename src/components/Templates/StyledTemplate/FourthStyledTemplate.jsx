@@ -21,9 +21,16 @@ export default function FourthStyledTemplate({
 }) {
   const templateRef = useRef(null);
   const textStyle = {
-    fontSize: "1em",
+    fontSize:
+    fontSize == 2
+      ? "1em"
+      : fontSize == 0
+      ? ".8em"
+      : fontSize == 1
+      ? ".9em"
+      : "2em",
     fontWeight: "600",
-    color:secondaryColor?secondaryColor:"rgb(30 55 99)",
+    color: secondaryColor ? secondaryColor : "rgb(30 55 99)",
     fontFamily: fontFamily,
   };
   const downloadCV = () => {
@@ -66,11 +73,16 @@ export default function FourthStyledTemplate({
           Download
         </Button>
       </Box>
-      <Box sx={{ border: "1px solid black", p: 1,
-        backgroundImage: `url(${backgroundImage})`,
-        backgroundSize: "cover", // Adjust the background size as needed
-        backgroundPosition: "center", // A
-       }} ref={templateRef}>
+      <Box
+        sx={{
+          border: "1px solid black",
+          p: 1,
+          backgroundImage: `url(${backgroundImage})`,
+          backgroundSize: "cover", // Adjust the background size as needed
+          backgroundPosition: "center", // A
+        }}
+        ref={templateRef}
+      >
         <Grid container spacing={1}>
           {/* First Grid */}
           <Grid item xs={12} sm={5} md={4} sx={{ background: "rgb(30 55 99)" }}>
@@ -82,6 +94,7 @@ export default function FourthStyledTemplate({
                   fontFamily={fontFamily}
                   primaryColor={primaryColor}
                   secondaryColor={secondaryColor}
+                  fontSize={fontSize}
                 />
               </Grid>
               <Grid item>
@@ -91,6 +104,7 @@ export default function FourthStyledTemplate({
                   primaryColor={primaryColor}
                   secondaryColor={secondaryColor}
                   fontFamily={fontFamily}
+                  fontSize={fontSize}
                 />
               </Grid>
               <Grid item>
@@ -100,6 +114,7 @@ export default function FourthStyledTemplate({
                   fontFamily={fontFamily}
                   primaryColor={primaryColor}
                   secondaryColor={secondaryColor}
+                  fontSize={fontSize}
                 />
               </Grid>
             </Grid>
@@ -110,11 +125,18 @@ export default function FourthStyledTemplate({
             <div style={{ marginBottom: "30px" }}>
               <Typography
                 sx={{
-                  fontSize: "2.5em",
+                  fontSize:
+                  fontSize == 2
+                    ? "2.5em"
+                    : fontSize == 0
+                    ? "1.5em"
+                    : fontSize == 1
+                    ? "2em"
+                    : "3em",
                   fontWeight: "600",
                   fontFamily: fontFamily,
                   lineHeight: "1.1",
-                  color:secondaryColor?secondaryColor:""
+                  color: secondaryColor ? secondaryColor : "",
                 }}
               >
                 {formValues.firstName ? formValues.firstName : "Fasiha"}
@@ -122,11 +144,18 @@ export default function FourthStyledTemplate({
               </Typography>
               <Typography
                 sx={{
-                  fontSize: "1.2em",
+                  fontSize:
+                  fontSize == 2
+                    ? "1.2em"
+                    : fontSize == 0
+                    ? ".8em"
+                    : fontSize == 1
+                    ? ".9em"
+                    : "2em",
                   fontWeight: "500",
                   fontFamily: fontFamily,
                   lineHeight: "2",
-                  color:secondaryColor?secondaryColor:""
+                  color: secondaryColor ? secondaryColor : "",
                 }}
               >
                 {formValues.jobTitle
@@ -141,6 +170,7 @@ export default function FourthStyledTemplate({
               fontFamily={fontFamily}
               primaryColor={primaryColor}
               secondaryColor={secondaryColor}
+              fontSize={fontSize}
             />
             <Education
               formValues={formValues}
@@ -148,6 +178,7 @@ export default function FourthStyledTemplate({
               fontFamily={fontFamily}
               primaryColor={primaryColor}
               secondaryColor={secondaryColor}
+              fontSize={fontSize}
             />
             <Experience
               formValues={formValues}
@@ -155,6 +186,7 @@ export default function FourthStyledTemplate({
               fontFamily={fontFamily}
               primaryColor={primaryColor}
               secondaryColor={secondaryColor}
+              fontSize={fontSize}
             />
             <Projects
               formValues={formValues}
@@ -162,6 +194,7 @@ export default function FourthStyledTemplate({
               fontFamily={fontFamily}
               primaryColor={primaryColor}
               secondaryColor={secondaryColor}
+              fontSize={fontSize}
             />
           </Grid>
         </Grid>

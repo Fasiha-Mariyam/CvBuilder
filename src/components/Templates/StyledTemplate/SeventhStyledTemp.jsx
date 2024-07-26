@@ -17,7 +17,7 @@ export default function SeventhStyledTemplate({
   primaryColor,
   secondaryColor,
   fontSize,
-  backgroundImage
+  backgroundImage,
 }) {
   const templateRef = useRef(null);
 
@@ -63,11 +63,16 @@ export default function SeventhStyledTemplate({
       </Box>
       <Box sx={{ position: "relative" }}>
         {/* Grid content */}
-        <Box sx={{ border: "1px solid black", p: 1,
-          backgroundImage: `url(${backgroundImage})`,
-          backgroundSize: "cover", // Adjust the background size as needed
-          backgroundPosition: "center", // A
-         }} ref={templateRef}>
+        <Box
+          sx={{
+            border: "1px solid black",
+            p: 1,
+            backgroundImage: `url(${backgroundImage})`,
+            backgroundSize: "cover", // Adjust the background size as needed
+            backgroundPosition: "center", // A
+          }}
+          ref={templateRef}
+        >
           {/* Overlapping Box */}
           <Box
             sx={{
@@ -76,7 +81,7 @@ export default function SeventhStyledTemplate({
               left: 0,
               right: 0,
               backgroundColor: "rgb(4 50 128)",
-              color:secondaryColor?secondaryColor:"white",
+              color: secondaryColor ? secondaryColor : "white",
               zIndex: 10,
               display: "flex",
               height: "100px",
@@ -97,7 +102,14 @@ export default function SeventhStyledTemplate({
             <div>
               <Typography
                 sx={{
-                  fontSize: "2em",
+                  fontSize:
+                  fontSize == 2
+                    ? "2em"
+                    : fontSize == 0
+                    ? "1.5em"
+                    : fontSize == 1
+                    ? "1.7em"
+                    : "2.5em",
                   fontWeight: "600",
                   fontFamily: fontFamily,
                   lineHeight: "1.1",
@@ -108,7 +120,14 @@ export default function SeventhStyledTemplate({
               </Typography>
               <Typography
                 sx={{
-                  fontSize: "1em",
+                  fontSize:
+                  fontSize == 2
+                    ? "1em"
+                    : fontSize == 0
+                    ? ".8em"
+                    : fontSize == 1
+                    ? ".9em"
+                    : "1.5em",
                   fontWeight: "500",
                   lineHeight: "1.5",
                   fontFamily: fontFamily,
@@ -137,6 +156,7 @@ export default function SeventhStyledTemplate({
                     fontFamily={fontFamily}
                     primaryColor={primaryColor}
                     secondaryColor={secondaryColor}
+                    fontSize={fontSize}
                   />
                 </Grid>
                 <Grid item>
@@ -146,6 +166,7 @@ export default function SeventhStyledTemplate({
                     fontFamily={fontFamily}
                     primaryColor={primaryColor}
                     secondaryColor={secondaryColor}
+                    fontSize={fontSize}
                   />
                 </Grid>
                 <Grid item>
@@ -155,6 +176,7 @@ export default function SeventhStyledTemplate({
                     fontFamily={fontFamily}
                     primaryColor={primaryColor}
                     secondaryColor={secondaryColor}
+                    fontSize={fontSize}
                   />
                 </Grid>
               </Grid>
@@ -174,6 +196,7 @@ export default function SeventhStyledTemplate({
                   fontFamily={fontFamily}
                   primaryColor={primaryColor}
                   secondaryColor={secondaryColor}
+                  fontSize={fontSize}
                 />
                 <Experience
                   formValues={formValues}
@@ -181,6 +204,7 @@ export default function SeventhStyledTemplate({
                   fontFamily={fontFamily}
                   primaryColor={primaryColor}
                   secondaryColor={secondaryColor}
+                  fontSize={fontSize}
                 />
                 <Projects
                   formValues={formValues}
@@ -188,6 +212,7 @@ export default function SeventhStyledTemplate({
                   fontFamily={fontFamily}
                   primaryColor={primaryColor}
                   secondaryColor={secondaryColor}
+                  fontSize={fontSize}
                 />
                 <Interest
                   formValues={formValues}
@@ -195,6 +220,7 @@ export default function SeventhStyledTemplate({
                   fontFamily={fontFamily}
                   primaryColor={primaryColor}
                   secondaryColor={secondaryColor}
+                  fontSize={fontSize}
                 />
               </Grid>
             </Grid>

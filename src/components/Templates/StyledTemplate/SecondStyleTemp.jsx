@@ -17,7 +17,7 @@ export default function SecondStyleTemp({
   primaryColor,
   secondaryColor,
   fontSize,
-  backgroundImage
+  backgroundImage,
 }) {
   const templateRef = useRef(null);
   const downloadCV = () => {
@@ -60,11 +60,16 @@ export default function SecondStyleTemp({
           Download
         </Button>
       </Box>
-      <Box sx={{ border: "1px solid black", p: 1,
-        backgroundImage: `url(${backgroundImage})`,
-        backgroundSize: "cover", // Adjust the background size as needed
-        backgroundPosition: "center", // A
-       }} ref={templateRef}>
+      <Box
+        sx={{
+          border: "1px solid black",
+          p: 1,
+          backgroundImage: `url(${backgroundImage})`,
+          backgroundSize: "cover", // Adjust the background size as needed
+          backgroundPosition: "center", // A
+        }}
+        ref={templateRef}
+      >
         <Grid container spacing={2}>
           {/* First Grid */}
           <Grid item xs={12} sm={5} md={5}>
@@ -76,6 +81,7 @@ export default function SecondStyleTemp({
                   fontFamily={fontFamily}
                   primaryColor={primaryColor}
                   secondaryColor={secondaryColor}
+                  fontSize={fontSize}
                 />
               </Grid>
               <Grid item>
@@ -84,6 +90,7 @@ export default function SecondStyleTemp({
                   fontFamily={fontFamily}
                   primaryColor={primaryColor}
                   secondaryColor={secondaryColor}
+                  fontSize={fontSize}
                 />
               </Grid>
               <Grid item>
@@ -92,6 +99,7 @@ export default function SecondStyleTemp({
                   fontFamily={fontFamily}
                   primaryColor={primaryColor}
                   secondaryColor={secondaryColor}
+                  fontSize={fontSize}
                 />
               </Grid>
             </Grid>
@@ -109,24 +117,28 @@ export default function SecondStyleTemp({
               fontFamily={fontFamily}
               primaryColor={primaryColor}
               secondaryColor={secondaryColor}
+              fontSize={fontSize}
             />
             <Education
               formValues={formValues}
               fontFamily={fontFamily}
               primaryColor={primaryColor}
               secondaryColor={secondaryColor}
+              fontSize={fontSize}
             />
             <Experience
               formValues={formValues}
               fontFamily={fontFamily}
               primaryColor={primaryColor}
               secondaryColor={secondaryColor}
+              fontSize={fontSize}
             />
             <Projects
               formValues={formValues}
               fontFamily={fontFamily}
               primaryColor={primaryColor}
               secondaryColor={secondaryColor}
+              fontSize={fontSize}
             />
           </Grid>
         </Grid>

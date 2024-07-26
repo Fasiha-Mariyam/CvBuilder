@@ -9,11 +9,19 @@ export default function Summary({
   fontFamily,
   secondaryColor,
   primaryColor,
+  fontSize,
 }) {
   const temp6style = {
     display: "flex",
     gap: 1,
-    fontSize: "1.2em",
+    fontSize:
+      fontSize == 2
+        ? "1.2em"
+        : fontSize == 0
+        ? "0.8em"
+        : fontSize == 1
+        ? "1em"
+        : "2em",
     fontFamily: fontFamily,
     color: secondaryColor ? secondaryColor : "black",
     mt: 3,
@@ -25,7 +33,14 @@ export default function Summary({
     color: secondaryColor ? secondaryColor : "rgb(166 166 166)",
     fontFamily: fontFamily,
     mt: 2,
-    fontSize: "1.2em",
+    fontSize:
+      fontSize == 2
+        ? "1.2em"
+        : fontSize == 0
+        ? "0.8em"
+        : fontSize == 1
+        ? "1em"
+        : "2em",
     fontWeight: "600",
   };
   return (
@@ -46,7 +61,14 @@ export default function Summary({
               mt: 0.5,
               fontFamily: fontFamily,
               color: temp === "fourth" ? "black" : "grey",
-              fontSize: "12px",
+              fontSize:
+                fontSize == 2
+                  ? "12px"
+                  : fontSize == 0
+                  ? "8px"
+                  : fontSize == 1
+                  ? "10px"
+                  : "20px",
             }}
           >
             {formValues.Summary
@@ -70,7 +92,14 @@ export default function Summary({
           <Typography sx={temp6style}>
             <AccountCircleIcon
               sx={{
-                fontSize: "1.2em",
+                fontSize:
+                  fontSize == 2
+                    ? "1.2em"
+                    : fontSize == 0
+                    ? "0.8em"
+                    : fontSize == 1
+                    ? "1em"
+                    : "2em",
                 fontFamily: fontFamily,
                 color: secondaryColor ? secondaryColor : "black",
               }}
@@ -120,7 +149,14 @@ export default function Summary({
             sx={{
               lineHeight: "1",
               mt: 0.5,
-              fontSize: "12px",
+              fontSize:
+              fontSize == 2
+                ? "12px"
+                : fontSize == 0
+                ? "8px"
+                : fontSize == 1
+                ? "10px"
+                : "20px",
               fontFamily: fontFamily,
               color: "rgb(166 166 166)",
               mb: 3,

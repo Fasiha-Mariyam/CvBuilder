@@ -34,13 +34,14 @@ export default function PersonalInfo({
     lineHeight: "1.1",
   };
   const temp4Style = {
-    fontSize:   fontSize == 2
-    ? "0.8em"
-    : fontSize == 0
-    ? "0.5em"
-    : fontSize == 1
-    ? "0.6em"
-    : "1em",
+    fontSize:
+      fontSize == 2
+        ? "0.8em"
+        : fontSize == 0
+        ? "0.5em"
+        : fontSize == 1
+        ? "0.6em"
+        : "1em",
     fontWeight: "500",
     fontFamily: fontFamily,
     color: primaryColor ? primaryColor : "white",
@@ -48,13 +49,14 @@ export default function PersonalInfo({
     mb: 1,
   };
   const temp5Style = {
-    fontSize:   fontSize == 2
-    ? "0.8em"
-    : fontSize == 0
-    ? "0.5em"
-    : fontSize == 1
-    ? "0.6em"
-    : "1em",
+    fontSize:
+      fontSize == 2
+        ? "0.8em"
+        : fontSize == 0
+        ? "0.5em"
+        : fontSize == 1
+        ? "0.6em"
+        : "1em",
     fontWeight: "500",
     fontFamily: fontFamily,
     color: primaryColor ? primaryColor : "black",
@@ -62,13 +64,14 @@ export default function PersonalInfo({
     mb: 1,
   };
   const temp6textStyle = {
-    fontSize:  fontSize == 2
-    ? "0.8em"
-    : fontSize == 0
-    ? "0.5em"
-    : fontSize == 1
-    ? "0.6em"
-    : "1em", 
+    fontSize:
+      fontSize == 2
+        ? "0.8em"
+        : fontSize == 0
+        ? "0.5em"
+        : fontSize == 1
+        ? "0.6em"
+        : "1em",
     fontWeight: "500",
     fontFamily: fontFamily,
     color: primaryColor ? primaryColor : "black",
@@ -76,25 +79,27 @@ export default function PersonalInfo({
     mb: 1,
   };
   const Temp2Style = {
-    fontSize:   fontSize == 2
-    ? "0.8em"
-    : fontSize == 0
-    ? "0.5em"
-    : fontSize == 1
-    ? "0.6em"
-    : "1em",
+    fontSize:
+      fontSize == 2
+        ? "0.8em"
+        : fontSize == 0
+        ? "0.5em"
+        : fontSize == 1
+        ? "0.6em"
+        : "1em",
     fontWeight: "500",
     lineHeight: "2",
     fontFamily: fontFamily,
   }; // for div style
   const Temp3Style = {
-    fontSize:   fontSize == 2
-    ? "0.8em"
-    : fontSize == 0
-    ? "0.5em"
-    : fontSize == 1
-    ? "0.6em"
-    : "1em",
+    fontSize:
+      fontSize == 2
+        ? "0.8em"
+        : fontSize == 0
+        ? "0.5em"
+        : fontSize == 1
+        ? "0.6em"
+        : "1em",
     fontWeight: "500",
     lineHeight: "1.5",
     fontFamily: fontFamily,
@@ -126,13 +131,14 @@ export default function PersonalInfo({
     color: primaryColor ? primaryColor : "rgba(131, 131, 131, 1)",
     display: "flex",
     ml: 2,
-    fontSize:   fontSize == 2
-    ? "0.8em"
-    : fontSize == 0
-    ? "0.5em"
-    : fontSize == 1
-    ? "0.6em"
-    : "1em",
+    fontSize:
+      fontSize == 2
+        ? "0.8em"
+        : fontSize == 0
+        ? "0.5em"
+        : fontSize == 1
+        ? "0.6em"
+        : "1em",
     fontFamily: fontFamily,
     fontWeight: "500",
     alignItems: "center",
@@ -151,13 +157,14 @@ export default function PersonalInfo({
     p: 1,
   };
   const Temp8Text = {
-    fontSize:   fontSize == 2
-    ? "0.8em"
-    : fontSize == 0
-    ? "0.5em"
-    : fontSize == 1
-    ? "0.6em"
-    : "1em",
+    fontSize:
+      fontSize == 2
+        ? "0.8em"
+        : fontSize == 0
+        ? "0.5em"
+        : fontSize == 1
+        ? "0.6em"
+        : "1em",
     fontWeight: "500",
     mb: 1,
     fontFamily: fontFamily,
@@ -192,12 +199,16 @@ export default function PersonalInfo({
               <div style={temp === "third" ? Temp3DivStyle : {}}>
                 <Typography
                   sx={{
-                    fontSize: fontSize==2 ? temp == "sixth" ? "1.5em" : "2em"
-                    : fontSize == 0
-                    ? "1em"
-                    : fontSize == 1
-                    ? "1.5em"
-                    : "2.5em",
+                    fontSize:
+                      fontSize == 2
+                        ? temp == "sixth"
+                          ? "1.5em"
+                          : "2em"
+                        : fontSize == 0
+                        ? "1em"
+                        : fontSize == 1
+                        ? "1.5em"
+                        : "2.5em",
                     fontWeight: "600",
                     lineHeight: "1.1",
                     color: secondaryColor ? secondaryColor : "",
@@ -210,11 +221,14 @@ export default function PersonalInfo({
                 </Typography>
                 <Typography
                   sx={{
-                    fontSize:fontSize == 2 ? "1em":fontSize == 0
-                    ? "0.5em"
-                    : fontSize == 1
-                    ? "0.8em"
-                    : "1.5em",
+                    fontSize:
+                      fontSize == 2
+                        ? "1em"
+                        : fontSize == 0
+                        ? "0.5em"
+                        : fontSize == 1
+                        ? "0.8em"
+                        : "1.5em",
                     fontWeight: "600",
                     lineHeight: "1.5",
                     color: primaryColor ? primaryColor : "",
@@ -327,11 +341,14 @@ export default function PersonalInfo({
                     mb: 2,
                     color: secondaryColor ? secondaryColor : "white",
                     fontFamily: fontFamily,
-                    fontSize: fontSize==2?"20px":fontSize == 0
-                    ? "10px"
-                    : fontSize == 1
-                    ? "15px"
-                    : "25px",
+                    fontSize:
+                      fontSize == 2
+                        ? "20px"
+                        : fontSize == 0
+                        ? "10px"
+                        : fontSize == 1
+                        ? "15px"
+                        : "25px",
                   }}
                 >
                   CONTACT
@@ -341,6 +358,14 @@ export default function PersonalInfo({
                     sx={{
                       display: "flex",
                       alignItems: "center",
+                      fontSize:
+                        fontSize == 2
+                          ? "20px"
+                          : fontSize == 0
+                          ? "10px"
+                          : fontSize == 1
+                          ? "15px"
+                          : "25px",
                       gap: 1,
                       color: secondaryColor ? secondaryColor : "white",
                     }}
@@ -355,6 +380,14 @@ export default function PersonalInfo({
                       display: "flex",
                       alignItems: "center",
                       gap: 1,
+                      fontSize:
+                        fontSize == 2
+                          ? "20px"
+                          : fontSize == 0
+                          ? "10px"
+                          : fontSize == 1
+                          ? "15px"
+                          : "25px",
                       color: secondaryColor ? secondaryColor : "white",
                     }}
                   >
@@ -369,6 +402,14 @@ export default function PersonalInfo({
                     sx={{
                       display: "flex",
                       alignItems: "center",
+                      fontSize:
+                        fontSize == 2
+                          ? "20px"
+                          : fontSize == 0
+                          ? "10px"
+                          : fontSize == 1
+                          ? "15px"
+                          : "25px",
                       gap: 1,
                       color: secondaryColor ? secondaryColor : "white",
                     }}
@@ -382,6 +423,14 @@ export default function PersonalInfo({
                 <Box sx={{ mx: between1200to1500 ? 0 : 3 }}>
                   <Typography
                     sx={{
+                      fontSize:
+                        fontSize == 2
+                          ? "20px"
+                          : fontSize == 0
+                          ? "10px"
+                          : fontSize == 1
+                          ? "15px"
+                          : "25px",
                       display: "flex",
                       alignItems: "center",
                       gap: 1,
@@ -398,6 +447,14 @@ export default function PersonalInfo({
                   <Typography
                     sx={{
                       display: "flex",
+                      fontSize:
+                        fontSize == 2
+                          ? "20px"
+                          : fontSize == 0
+                          ? "10px"
+                          : fontSize == 1
+                          ? "15px"
+                          : "25px",
                       alignItems: "center",
                       gap: 1,
                       color: secondaryColor ? secondaryColor : "white",

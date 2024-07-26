@@ -17,7 +17,7 @@ export default function EighthStyledTemplate({
   primaryColor,
   secondaryColor,
   fontSize,
-  backgroundImage
+  backgroundImage,
 }) {
   const templateRef = useRef(null);
   const downloadCV = () => {
@@ -62,9 +62,14 @@ export default function EighthStyledTemplate({
         </Button>
       </Box>
       <Box
-        sx={{ border: "1px solid black", p: 1, fontFamily: "fantasy" ,backgroundImage: `url(${backgroundImage})`,
-        backgroundSize: "cover", // Adjust the background size as needed
-        backgroundPosition: "center", }}
+        sx={{
+          border: "1px solid black",
+          p: 1,
+          fontFamily: "fantasy",
+          backgroundImage: `url(${backgroundImage})`,
+          backgroundSize: "cover", // Adjust the background size as needed
+          backgroundPosition: "center",
+        }}
         ref={templateRef}
       >
         <div
@@ -72,7 +77,7 @@ export default function EighthStyledTemplate({
             marginBottom: "10px",
             display: "flex",
             gap: 10,
-            color:secondaryColor?secondaryColor:"black",
+            color: secondaryColor ? secondaryColor : "black",
             padding: "20px",
           }}
         >
@@ -87,7 +92,14 @@ export default function EighthStyledTemplate({
           <Box>
             <Typography
               sx={{
-                fontSize: "2.5em",
+                fontSize:
+                fontSize == 2
+                  ? "2.5em"
+                  : fontSize == 0
+                  ? "1.5em"
+                  : fontSize == 1
+                  ? "2em"
+                  : "3em",
                 fontWeight: "600",
                 lineHeight: "1.1",
                 fontFamily: fontFamily,
@@ -98,9 +110,16 @@ export default function EighthStyledTemplate({
             </Typography>
             <Typography
               sx={{
-                fontSize: "1.2em",
+                fontSize:
+                  fontSize == 2
+                    ? "1.2em"
+                    : fontSize == 0
+                    ? ".8em"
+                    : fontSize == 1
+                    ? ".9em"
+                    : "2em",
                 fontWeight: "500",
-                color:secondaryColor?secondaryColor:"rgb(0 35 43)",
+                color: secondaryColor ? secondaryColor : "rgb(0 35 43)",
                 lineHeight: "2",
                 fontFamily: fontFamily,
               }}
@@ -114,7 +133,14 @@ export default function EighthStyledTemplate({
                 lineHeight: "1",
                 mt: 0.5,
                 color: "black",
-                fontSize: "12px",
+                fontSize:
+                fontSize == 2
+                  ? "12px"
+                  : fontSize == 0
+                  ? "8px"
+                  : fontSize == 1
+                  ? "9px"
+                  : "15px",
                 fontFamily: fontFamily,
               }}
             >
@@ -137,6 +163,7 @@ export default function EighthStyledTemplate({
           fontFamily={fontFamily}
           primaryColor={primaryColor}
           secondaryColor={secondaryColor}
+          fontSize={fontSize}
         />
 
         <Skill
@@ -145,6 +172,7 @@ export default function EighthStyledTemplate({
           fontFamily={fontFamily}
           primaryColor={primaryColor}
           secondaryColor={secondaryColor}
+          fontSize={fontSize}
         />
 
         <Education
@@ -153,6 +181,7 @@ export default function EighthStyledTemplate({
           fontFamily={fontFamily}
           primaryColor={primaryColor}
           secondaryColor={secondaryColor}
+          fontSize={fontSize}
         />
         <Experience
           formValues={formValues}
@@ -160,6 +189,7 @@ export default function EighthStyledTemplate({
           fontFamily={fontFamily}
           primaryColor={primaryColor}
           secondaryColor={secondaryColor}
+          fontSize={fontSize}
         />
         <Projects
           formValues={formValues}
@@ -167,6 +197,7 @@ export default function EighthStyledTemplate({
           fontFamily={fontFamily}
           primaryColor={primaryColor}
           secondaryColor={secondaryColor}
+          fontSize={fontSize}
         />
 
         <Interest
@@ -175,6 +206,7 @@ export default function EighthStyledTemplate({
           fontFamily={fontFamily}
           primaryColor={primaryColor}
           secondaryColor={secondaryColor}
+          fontSize={fontSize}
         />
       </Box>
     </>

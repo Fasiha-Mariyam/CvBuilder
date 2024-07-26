@@ -9,10 +9,18 @@ export default function Skill({
   fontFamily,
   secondaryColor,
   primaryColor,
+  fontSize,
 }) {
   const skills = ["JavaScript", "React", "Node.js", "HTML", "CSS"];
   const temp6style = {
-    fontSize: "1.2em",
+    fontSize:
+      fontSize == 2
+        ? "1.2em"
+        : fontSize == 0
+        ? "0.8em"
+        : fontSize == 1
+        ? "1em"
+        : "2em",
     fontWeight: "600",
     display: "flex",
     color: secondaryColor ? secondaryColor : "black",
@@ -26,7 +34,22 @@ export default function Skill({
           {!temp && <Divider sx={{ my: 1 }} />}
           <Typography
             sx={{
-              fontSize: temp === "fourth" ? "20px" : "1em",
+              fontSize:
+                fontSize == 2
+                  ? temp === "fourth"
+                    ? "20px"
+                    : "1.2em"
+                  : fontSize == 0
+                  ? temp === "fourth"
+                    ? "10px"
+                    : ".9em"
+                  : fontSize == 1
+                  ? temp === "fourth"
+                    ? "15px"
+                    : "1em"
+                  : temp === "fourth"
+                  ? "25px"
+                  : "2em",
               fontWeight: "600",
               fontFamily: fontFamily,
               border: temp === "seventh" && "1px solid rgb(4 118 188)",
@@ -73,12 +96,26 @@ export default function Skill({
                       ml: temp === "eighth" && 2.5,
                       mb: 0.5,
                       cursor: "pointer",
-                      fontSize: "10px",
+                      fontSize:
+                      fontSize == 2
+                        ? "10px"
+                        : fontSize == 0
+                        ? "8px"
+                        : fontSize == 1
+                        ? "9px"
+                        : "15px",
                       marginRight: "8px",
                     }}
                   >
                     <Typography
-                      sx={{ fontSize: "12px", fontFamily: fontFamily ,  }}
+                      sx={{   fontSize:
+                        fontSize == 2
+                          ? "12px"
+                          : fontSize == 0
+                          ? "8px"
+                          : fontSize == 1
+                          ? "10px"
+                          : "20px", fontFamily: fontFamily }}
                     >
                       {skill}
                     </Typography>
@@ -94,7 +131,14 @@ export default function Skill({
                   <ul key={index} style={{ fontFamily: fontFamily }}>
                     <li
                       style={{
-                        fontSize: "12px",
+                        fontSize:
+                        fontSize == 2
+                          ? "12px"
+                          : fontSize == 0
+                          ? "8px"
+                          : fontSize == 1
+                          ? "10px"
+                          : "20px",
                         fontFamily: fontFamily,
                         color: primaryColor
                           ? primaryColor
@@ -133,13 +177,27 @@ export default function Skill({
                   padding: ".5rem",
                   mb: 0.5,
                   cursor: "pointer",
-                  fontSize: "10px",
+                  fontSize:
+                  fontSize == 2
+                    ? "10px"
+                    : fontSize == 0
+                    ? "8px"
+                    : fontSize == 1
+                    ? "9px"
+                    : "15px",
                   marginRight: "8px",
                 }}
               >
                 <Typography
                   sx={{
-                    fontSize: "12px",
+                    fontSize:
+                    fontSize == 2
+                      ? "12px"
+                      : fontSize == 0
+                      ? "8px"
+                      : fontSize == 1
+                      ? "10px"
+                      : "20px",
                     fontFamily: fontFamily,
                   }}
                 >

@@ -3,8 +3,14 @@ import { Box, Divider, Typography } from "@mui/material";
 import BusinessCenterIcon from "@mui/icons-material/BusinessCenter";
 import React from "react";
 
-export default function Experience({ formValues, temp, fontFamily ,  primaryColor,
-  secondaryColor, }) {
+export default function Experience({
+  formValues,
+  temp,
+  fontFamily,
+  primaryColor,
+  fontSize,
+  secondaryColor,
+}) {
   const experiences = {};
   Object.keys(formValues).forEach((key) => {
     const match = key.match(/^(experience\d+)_/);
@@ -24,7 +30,14 @@ export default function Experience({ formValues, temp, fontFamily ,  primaryColo
           {!temp && <Divider sx={{ my: 1 }} />}
           <Typography
             sx={{
-              fontSize: "1em",
+              fontSize:
+                fontSize == 2
+                  ? "1.2em"
+                  : fontSize == 0
+                  ? "0.8em"
+                  : fontSize == 1
+                  ? "1em"
+                  : "2em",
               fontWeight: "600",
               fontFamily: fontFamily,
               mt:
@@ -36,17 +49,17 @@ export default function Experience({ formValues, temp, fontFamily ,  primaryColo
               mb: temp === "seventh" && 2,
               ml: temp === "eighth" && 2.5,
               gap: temp === "eighth" && 1,
-              color:
-              secondaryColor?secondaryColor:
-                temp === "fourth"
-                  ? "rgb(30 55 99)"
-                  : temp === "fifth"
-                  ? "rgb(19 71 119)"
-                  : temp === "seventh"
-                  ? "white"
-                  : temp === "eighth"
-                  ? "rgb(0 35 43)"
-                  : "",
+              color: secondaryColor
+                ? secondaryColor
+                : temp === "fourth"
+                ? "rgb(30 55 99)"
+                : temp === "fifth"
+                ? "rgb(19 71 119)"
+                : temp === "seventh"
+                ? "white"
+                : temp === "eighth"
+                ? "rgb(0 35 43)"
+                : "",
               display:
                 temp === "seventh"
                   ? "inline-block"
@@ -88,10 +101,17 @@ export default function Experience({ formValues, temp, fontFamily ,  primaryColo
                       >
                         <Typography
                           sx={{
-                            fontSize: ".9em",
+                            fontSize:
+                              fontSize == 2
+                                ? "1em"
+                                : fontSize == 0
+                                ? "0.8em"
+                                : fontSize == 1
+                                ? ".9em"
+                                : "1.5em",
                             fontWeight: "600",
                             fontFamily: fontFamily,
-                            color:primaryColor?primaryColor:""
+                            color: primaryColor ? primaryColor : "",
                           }}
                         >
                           {experience?.title ? experience.title : `Developer`} ,
@@ -99,7 +119,14 @@ export default function Experience({ formValues, temp, fontFamily ,  primaryColo
                         </Typography>
                         <Typography
                           sx={{
-                            fontSize: ".7em",
+                            fontSize:
+                              fontSize == 2
+                                ? ".7em"
+                                : fontSize == 0
+                                ? "0.5em"
+                                : fontSize == 1
+                                ? ".6em"
+                                : "1em",
                             fontWeight: "600",
                             fontFamily: fontFamily,
                           }}
@@ -131,12 +158,19 @@ export default function Experience({ formValues, temp, fontFamily ,  primaryColo
                       {/* Company name and location */}
                       <Typography
                         sx={{
-                          fontSize: "12px",
+                          fontSize:
+                            fontSize == 2
+                              ? "12px"
+                              : fontSize == 0
+                              ? "9px"
+                              : fontSize == 1
+                              ? "10px"
+                              : "15px",
                           fontWeight: "500",
                           display: "flex",
                           fontFamily: fontFamily,
                           alignItems: "center",
-                          color:primaryColor?primaryColor:"",
+                          color: primaryColor ? primaryColor : "",
                           gap: 1,
                         }}
                       >
@@ -148,7 +182,7 @@ export default function Experience({ formValues, temp, fontFamily ,  primaryColo
                             width: "5px",
                             background: "black",
                             height: "5px",
-                            color:primaryColor?primaryColor:"",
+                            color: primaryColor ? primaryColor : "",
                             borderRadius: "50px",
                           }}
                         />
@@ -158,7 +192,17 @@ export default function Experience({ formValues, temp, fontFamily ,  primaryColo
                       </Typography>
                       {/* Details of working experience */}
                       <Typography
-                        sx={{ fontSize: "10px", fontFamily: fontFamily }}
+                        sx={{
+                          fontSize:
+                            fontSize == 2
+                              ? "10px"
+                              : fontSize == 0
+                              ? "8px"
+                              : fontSize == 1
+                              ? "9px"
+                              : "15px",
+                          fontFamily: fontFamily,
+                        }}
                       >
                         {experience?.ExperienceDescription
                           ? experience?.ExperienceDescription
@@ -182,10 +226,17 @@ export default function Experience({ formValues, temp, fontFamily ,  primaryColo
                     <div style={{ display: "flex", flexDirection: "column" }}>
                       <Typography
                         sx={{
-                          fontSize: ".9em",
+                          fontSize:
+                            fontSize == 2
+                              ? "1em"
+                              : fontSize == 0
+                              ? "0.8em"
+                              : fontSize == 1
+                              ? ".9em"
+                              : "1.5em",
                           fontFamily: fontFamily,
                           fontWeight: "500",
-                          color: primaryColor?primaryColor:"rgb(30 55 99)",
+                          color: primaryColor ? primaryColor : "rgb(30 55 99)",
                         }}
                       >
                         {experience.title ? experience.title : `Developer`},
@@ -197,7 +248,14 @@ export default function Experience({ formValues, temp, fontFamily ,  primaryColo
                       </Typography>
                       <Typography
                         sx={{
-                          fontSize: ".7em",
+                          fontSize:
+                            fontSize == 2
+                              ? ".7em"
+                              : fontSize == 0
+                              ? "0.5em"
+                              : fontSize == 1
+                              ? ".6em"
+                              : "1em",
                           fontWeight: "500",
                           color: "black",
                           fontFamily: fontFamily,
@@ -228,7 +286,18 @@ export default function Experience({ formValues, temp, fontFamily ,  primaryColo
                       </Typography>
                     </div>
                     {/* Details of working experience */}
-                    <Typography sx={{ fontSize: "10px" }}>
+                    <Typography
+                      sx={{
+                        fontSize:
+                          fontSize == 2
+                            ? "10px"
+                            : fontSize == 0
+                            ? "8px"
+                            : fontSize == 1
+                            ? "9px"
+                            : "15px",
+                      }}
+                    >
                       {experience.ExperienceDescription
                         ? experience.ExperienceDescription
                         : `Developed and maintained responsive web applications using React and
@@ -251,17 +320,33 @@ export default function Experience({ formValues, temp, fontFamily ,  primaryColo
                     <div style={{ display: "flex", flexDirection: "column" }}>
                       <Typography
                         sx={{
-                          fontSize: ".9em",
+                          fontSize:
+                            fontSize == 2
+                              ? "1em"
+                              : fontSize == 0
+                              ? "0.8em"
+                              : fontSize == 1
+                              ? ".9em"
+                              : "1.5em",
                           fontFamily: fontFamily,
                           ml: temp === "eighth" && 2.5,
                           fontWeight: "500",
-                          color:primaryColor?primaryColor: temp == "seventh" ? "black" : "rgb(19 71 119)",
+                          color: primaryColor
+                            ? primaryColor
+                            : temp == "seventh"
+                            ? "black"
+                            : "rgb(19 71 119)",
                         }}
                       >
                         {experience.title ? experience.title : `Developer`},
                         {experience.Type ? experience.Type : `Contract`}
                       </Typography>
-                      <Typography sx={{ ml: temp === "eighth" && 2.5,color:primaryColor?primaryColor:"" }}>
+                      <Typography
+                        sx={{
+                          ml: temp === "eighth" && 2.5,
+                          color: primaryColor ? primaryColor : "",
+                        }}
+                      >
                         {experience.companyName
                           ? experience.companyName
                           : `Tezeract`}
@@ -280,7 +365,14 @@ export default function Experience({ formValues, temp, fontFamily ,  primaryColo
                       >
                         <Typography
                           sx={{
-                            fontSize: ".7em",
+                            fontSize:
+                              fontSize == 2
+                                ? ".7em"
+                                : fontSize == 0
+                                ? "0.5em"
+                                : fontSize == 1
+                                ? ".6em"
+                                : "1em",
                             fontWeight: "500",
                             fontFamily: fontFamily,
                           }}
@@ -310,7 +402,14 @@ export default function Experience({ formValues, temp, fontFamily ,  primaryColo
                         </Typography>
                         <Typography
                           sx={{
-                            fontSize: ".7em",
+                            fontSize:
+                              fontSize == 2
+                                ? ".7em"
+                                : fontSize == 0
+                                ? "0.5em"
+                                : fontSize == 1
+                                ? ".6em"
+                                : "1em",
                             fontWeight: "500",
                             fontFamily: fontFamily,
                           }}
@@ -324,7 +423,14 @@ export default function Experience({ formValues, temp, fontFamily ,  primaryColo
                     {/* Details of working experience */}
                     <Typography
                       sx={{
-                        fontSize: "10px",
+                        fontSize:
+                          fontSize == 2
+                            ? "10px"
+                            : fontSize == 0
+                            ? "8px"
+                            : fontSize == 1
+                            ? "9px"
+                            : "15px",
                         mb: 2,
                         fontFamily: fontFamily,
                         ml: temp === "eighth" && 2.5,
@@ -349,11 +455,18 @@ export default function Experience({ formValues, temp, fontFamily ,  primaryColo
         <Box sx={{ mb: 3 }}>
           <Typography
             sx={{
-              fontSize: "1.2em",
+              fontSize:
+                fontSize == 2
+                  ? "1.2em"
+                  : fontSize == 0
+                  ? "0.8em"
+                  : fontSize == 1
+                  ? "1em"
+                  : "2em",
               fontWeight: "600",
               fontFamily: fontFamily,
               display: "flex",
-              color:secondaryColor?secondaryColor:"",
+              color: secondaryColor ? secondaryColor : "",
               gap: 1,
             }}
           >
@@ -371,10 +484,17 @@ export default function Experience({ formValues, temp, fontFamily ,  primaryColo
                 >
                   <Typography
                     sx={{
-                      fontSize: ".9em",
+                      fontSize:
+                        fontSize == 2
+                          ? "1em"
+                          : fontSize == 0
+                          ? "0.8em"
+                          : fontSize == 1
+                          ? ".9em"
+                          : "1.5em",
                       fontWeight: "600",
                       fontFamily: fontFamily,
-                      color:primaryColor?primaryColor:""
+                      color: primaryColor ? primaryColor : "",
                     }}
                   >
                     {experience.title ? experience.title : `Developer`} ,
@@ -382,7 +502,14 @@ export default function Experience({ formValues, temp, fontFamily ,  primaryColo
                   </Typography>
                   <Typography
                     sx={{
-                      fontSize: ".7em",
+                      fontSize:
+                        fontSize == 2
+                          ? ".7em"
+                          : fontSize == 0
+                          ? "0.5em"
+                          : fontSize == 1
+                          ? ".6em"
+                          : "1em",
                       fontWeight: "600",
                       fontFamily: fontFamily,
                     }}
@@ -414,13 +541,19 @@ export default function Experience({ formValues, temp, fontFamily ,  primaryColo
                 {/* Company name and location */}
                 <Typography
                   sx={{
-                    fontSize: "12px",
+                    fontSize:
+                      fontSize == 2
+                        ? "12px"
+                        : fontSize == 0
+                        ? "8px"
+                        : fontSize == 1
+                        ? "10px"
+                        : "20px",
                     fontWeight: "500",
                     fontFamily: fontFamily,
                     display: "flex",
                     alignItems: "center",
-                    color
-                    :primaryColor?primaryColor:"",
+                    color: primaryColor ? primaryColor : "",
                     gap: 1,
                   }}
                 >
@@ -431,13 +564,25 @@ export default function Experience({ formValues, temp, fontFamily ,  primaryColo
                       background: "black",
                       height: "5px",
                       borderRadius: "50px",
-                      color:primaryColor?primaryColor:""
+                      color: primaryColor ? primaryColor : "",
                     }}
                   />
                   {experience.location ? experience.location : `Gulshan`}
                 </Typography>
                 {/* Details of working experience */}
-                <Typography sx={{ fontSize: "10px", fontFamily: fontFamily }}>
+                <Typography
+                  sx={{
+                    fontSize:
+                      fontSize == 2
+                        ? "10px"
+                        : fontSize == 0
+                        ? "8px"
+                        : fontSize == 1
+                        ? "9px"
+                        : "15px",
+                    fontFamily: fontFamily,
+                  }}
+                >
                   {experience.ExperienceDescription
                     ? experience.ExperienceDescription
                     : `Developed and maintained responsive web applications using React and

@@ -3,7 +3,14 @@ import { Box, Divider, Typography } from "@mui/material";
 import SchoolIcon from "@mui/icons-material/School";
 import React from "react";
 
-export default function Education({ formValues, temp, fontFamily , secondaryColor , primaryColor }) {
+export default function Education({
+  formValues,
+  temp,
+  fontFamily,
+  secondaryColor,
+  primaryColor,
+  fontSize,
+}) {
   const education = {};
   const Temp6Style = {
     color: "white",
@@ -23,14 +30,21 @@ export default function Education({ formValues, temp, fontFamily , secondaryColo
       education[prefix][key.replace(`${prefix}_`, "")] = formValues[key];
     }
   });
-  console.log("edu",education);
+  console.log("edu", education);
   return (
     <>
       {temp !== "sixth" && (
         <Box>
           <Typography
             sx={{
-              fontSize: "1em",
+              fontSize:
+                fontSize == 2
+                  ? "1.2em"
+                  : fontSize == 0
+                  ? "0.8em"
+                  : fontSize == 1
+                  ? "1em"
+                  : "2em",
               fontWeight: "600",
               mt:
                 (temp == "fourth" || temp == "fifth" || temp === "eighth") && 2,
@@ -42,17 +56,17 @@ export default function Education({ formValues, temp, fontFamily , secondaryColo
               fontFamily: fontFamily,
               px: temp === "seventh" && 5,
               mb: temp === "seventh" && 2,
-              color:
-              secondaryColor?secondaryColor:
-                temp === "fourth"
-                  ? "rgb(30 55 99)"
-                  : temp === "fifth"
-                  ? "rgb(19 71 119)"
-                  : temp === "seventh"
-                  ? "white"
-                  : temp === "eighth"
-                  ? "rgb(0 35 43)"
-                  : "",
+              color: secondaryColor
+                ? secondaryColor
+                : temp === "fourth"
+                ? "rgb(30 55 99)"
+                : temp === "fifth"
+                ? "rgb(19 71 119)"
+                : temp === "seventh"
+                ? "white"
+                : temp === "eighth"
+                ? "rgb(0 35 43)"
+                : "",
               display:
                 temp === "seventh"
                   ? "inline-block"
@@ -91,9 +105,16 @@ export default function Education({ formValues, temp, fontFamily , secondaryColo
                       >
                         <Typography
                           sx={{
-                            fontSize: ".9em",
+                            fontSize:
+                              fontSize == 2
+                                ? "1em"
+                                : fontSize == 0
+                                ? "0.7em"
+                                : fontSize == 1
+                                ? "0.8em"
+                                : "1.5em",
                             fontWeight: "600",
-                            color:primaryColor? primaryColor: "",
+                            color: primaryColor ? primaryColor : "",
                             fontFamily: fontFamily,
                           }}
                         >
@@ -102,15 +123,20 @@ export default function Education({ formValues, temp, fontFamily , secondaryColo
                         </Typography>
                         <Typography
                           sx={{
-                            fontSize: ".7em",
+                            fontSize:
+                              fontSize == 2
+                                ? "0.7em"
+                                : fontSize == 0
+                                ? "0.5em"
+                                : fontSize == 1
+                                ? "0.6em"
+                                : "1em",
                             fontWeight: "600",
                             fontFamily: fontFamily,
-                            color:primaryColor? primaryColor: ""
+                            color: primaryColor ? primaryColor : "",
                           }}
                         >
-                          {edu.startDateOfSchool
-                            ? edu.startDateOfSchool
-                            : `03`}
+                          {edu.startDateOfSchool ? edu.startDateOfSchool : `03`}
                           /
                           {edu.startYearOfSchool
                             ? edu.startYearOfSchool
@@ -121,9 +147,7 @@ export default function Education({ formValues, temp, fontFamily , secondaryColo
                             `Present`
                           ) : (
                             <>
-                              {edu.endDateOfSchool
-                                ? edu.endDateOfSchool
-                                : `03`}
+                              {edu.endDateOfSchool ? edu.endDateOfSchool : `03`}
                               /
                               {edu.endYearOfSchool
                                 ? edu.endYearOfSchool
@@ -135,18 +159,23 @@ export default function Education({ formValues, temp, fontFamily , secondaryColo
                       {/* school name and Grade */}
                       <Typography
                         sx={{
-                          fontSize: "12px",
+                          fontSize:
+                            fontSize == 2
+                              ? "12px"
+                              : fontSize == 0
+                              ? "8px"
+                              : fontSize == 1
+                              ? "10px"
+                              : "20px",
                           fontWeight: "500",
                           display: "flex",
                           fontFamily: fontFamily,
                           alignItems: "center",
-                          color:primaryColor?primaryColor:"",
+                          color: primaryColor ? primaryColor : "",
                           gap: 1,
                         }}
                       >
-                        {edu.Institute
-                          ? edu.Institute
-                          : `Dawood Uni`}
+                        {edu.Institute ? edu.Institute : `Dawood Uni`}
                         <div
                           style={{
                             width: "5px",
@@ -160,7 +189,14 @@ export default function Education({ formValues, temp, fontFamily , secondaryColo
                       {/* Details of working Education */}
                       <Typography
                         sx={{
-                          fontSize: "10px",
+                          fontSize:
+                            fontSize == 2
+                              ? "10px"
+                              : fontSize == 0
+                              ? "6px"
+                              : fontSize == 1
+                              ? "8px"
+                              : "15px",
                           mb: 2,
                           fontFamily: fontFamily,
                           ml: temp === "eighth" && 2.5,
@@ -188,32 +224,41 @@ export default function Education({ formValues, temp, fontFamily , secondaryColo
                     <div style={{ display: "flex", flexDirection: "column" }}>
                       <Typography
                         sx={{
-                          fontSize: ".9em",
+                          fontSize:
+                            fontSize == 2
+                              ? "1em"
+                              : fontSize == 0
+                              ? "0.8em"
+                              : fontSize == 1
+                              ? "0.9em"
+                              : "2em",
                           fontFamily: fontFamily,
                           fontWeight: "500",
 
-                          color:primaryColor? primaryColor:  "rgb(30 55 99)",
+                          color: primaryColor ? primaryColor : "rgb(30 55 99)",
                         }}
                       >
                         {edu.Degree ? edu.Degree : `BS`},
                         {edu.Field ? edu.Field : `CS`},
-                        {edu.Institute
-                          ? edu.Institute
-                          : `Dawood Uni`}
-                        ,{edu.Grade ? edu.Grade : `A+`}
+                        {edu.Institute ? edu.Institute : `Dawood Uni`},
+                        {edu.Grade ? edu.Grade : `A+`}
                       </Typography>
                       <Typography
                         sx={{
-                          fontSize: ".7em",
+                          fontSize:
+                            fontSize == 2
+                              ? ".7em"
+                              : fontSize == 0
+                              ? "0.5em"
+                              : fontSize == 1
+                              ? ".6em"
+                              : "1em",
                           fontWeight: "500",
                           color: "black",
                           fontFamily: fontFamily,
                         }}
                       >
-                        {edu.startDateOfSchool
-                          ? edu.startDateOfSchool
-                          : `03`}
-                        /
+                        {edu.startDateOfSchool ? edu.startDateOfSchool : `03`}/
                         {edu.startYearOfSchool
                           ? edu.startYearOfSchool
                           : ` 2021`}{" "}
@@ -223,13 +268,8 @@ export default function Education({ formValues, temp, fontFamily , secondaryColo
                           `Present`
                         ) : (
                           <>
-                            {edu.endDateOfSchool
-                              ? edu.endDateOfSchool
-                              : `03`}
-                            /
-                            {edu.endYearOfSchool
-                              ? edu.endYearOfSchool
-                              : `2021`}
+                            {edu.endDateOfSchool ? edu.endDateOfSchool : `03`}/
+                            {edu.endYearOfSchool ? edu.endYearOfSchool : `2021`}
                           </>
                         )}
                       </Typography>
@@ -237,7 +277,14 @@ export default function Education({ formValues, temp, fontFamily , secondaryColo
                     {/* Details of working Education */}
                     <Typography
                       sx={{
-                        fontSize: "10px",
+                        fontSize:
+                          fontSize == 2
+                            ? "10px"
+                            : fontSize == 0
+                            ? "7px"
+                            : fontSize == 1
+                            ? "8px"
+                            : "15px",
                         mb: 2,
                         fontFamily: fontFamily,
                         ml: temp === "eighth" && 2.5,
@@ -265,23 +312,34 @@ export default function Education({ formValues, temp, fontFamily , secondaryColo
                     <div style={{ display: "flex", flexDirection: "column" }}>
                       <Typography
                         sx={{
-                          fontSize: ".9em",
+                          fontSize:
+                            fontSize == 2
+                              ? "1em"
+                              : fontSize == 0
+                              ? "0.8em"
+                              : fontSize == 1
+                              ? ".9em"
+                              : "1.5em",
                           fontWeight: "500",
                           ml: temp === "eighth" && 2.5,
                           fontFamily: fontFamily,
-                          color: primaryColor? primaryColor:
-                            temp === "seventh" ? "black " : "rgb(19 71 119)",
+                          color: primaryColor
+                            ? primaryColor
+                            : temp === "seventh"
+                            ? "black "
+                            : "rgb(19 71 119)",
                         }}
                       >
                         {edu.Degree ? edu.Degree : `BS`} in
-                        {edu.Field
-                          ? edu.Field
-                          : ` Computer Science`}
+                        {edu.Field ? edu.Field : ` Computer Science`}
                       </Typography>
-                      <Typography sx={{ ml: temp === "eighth" && 2.5 ,color: primaryColor? primaryColor:""  }}>
-                        {edu.Institute
-                          ? edu.Institute
-                          : `Dawood University`}
+                      <Typography
+                        sx={{
+                          ml: temp === "eighth" && 2.5,
+                          color: primaryColor ? primaryColor : "",
+                        }}
+                      >
+                        {edu.Institute ? edu.Institute : `Dawood University`}
                       </Typography>
                       <Box
                         sx={{
@@ -291,21 +349,29 @@ export default function Education({ formValues, temp, fontFamily , secondaryColo
                           fontFamily: fontFamily,
                           ml: temp === "eighth" && 2.5,
                           fontStyle: "italic",
-                          color:primaryColor? primaryColor:
-                            temp === "seventh" ? "black " : "rgb(19 71 119)",
+                          color: primaryColor
+                            ? primaryColor
+                            : temp === "seventh"
+                            ? "black "
+                            : "rgb(19 71 119)",
                           mb: 1,
                         }}
                       >
                         <Typography
                           sx={{
-                            fontSize: ".7em",
+                            fontSize:
+                              fontSize == 2
+                                ? ".7em"
+                                : fontSize == 0
+                                ? "0.5em"
+                                : fontSize == 1
+                                ? ".6em"
+                                : "1em",
                             fontWeight: "500",
                             fontFamily: fontFamily,
                           }}
                         >
-                          {edu.startDateOfSchool
-                            ? edu.startDateOfSchool
-                            : `03`}
+                          {edu.startDateOfSchool ? edu.startDateOfSchool : `03`}
                           /
                           {edu.startYearOfSchool
                             ? edu.startYearOfSchool
@@ -316,9 +382,7 @@ export default function Education({ formValues, temp, fontFamily , secondaryColo
                             `Present`
                           ) : (
                             <>
-                              {edu.endDateOfSchool
-                                ? edu.endDateOfSchool
-                                : `03`}
+                              {edu.endDateOfSchool ? edu.endDateOfSchool : `03`}
                               /
                               {edu.endYearOfSchool
                                 ? edu.endYearOfSchool
@@ -328,10 +392,17 @@ export default function Education({ formValues, temp, fontFamily , secondaryColo
                         </Typography>
                         <Typography
                           sx={{
-                            fontSize: ".7em",
+                            fontSize:
+                              fontSize == 2
+                                ? ".7em"
+                                : fontSize == 0
+                                ? "0.5em"
+                                : fontSize == 1
+                                ? ".6em"
+                                : "1em",
                             fontWeight: "500",
                             fontFamily: fontFamily,
-                            color:primaryColor?primaryColor:""
+                            color: primaryColor ? primaryColor : "",
                           }}
                         >
                           {edu.Grade ? edu.Grade : `A+`}
@@ -341,7 +412,14 @@ export default function Education({ formValues, temp, fontFamily , secondaryColo
                     {/* Details of working Education */}
                     <Typography
                       sx={{
-                        fontSize: "10px",
+                        fontSize:
+                          fontSize == 2
+                            ? "10px"
+                            : fontSize == 0
+                            ? "7px"
+                            : fontSize == 1
+                            ? "8px"
+                            : "15px",
                         mb: 2,
                         fontFamily: fontFamily,
                         ml: temp === "eighth" && 2.5,
@@ -367,11 +445,18 @@ export default function Education({ formValues, temp, fontFamily , secondaryColo
         <Box sx={Temp6Style}>
           <Typography
             sx={{
-              fontSize: "1.2em",
+              fontSize:
+                fontSize == 2
+                  ? "1.2em"
+                  : fontSize == 0
+                  ? "0.8em"
+                  : fontSize == 1
+                  ? "1em"
+                  : "1.5em",
               fontWeight: "600",
               fontFamily: fontFamily,
               textAlign: "center",
-              color:secondaryColor?secondaryColor:""
+              color: secondaryColor ? secondaryColor : "",
             }}
           >
             {`EDUCATION`}
@@ -389,19 +474,29 @@ export default function Education({ formValues, temp, fontFamily , secondaryColo
                 <div style={{ display: "flex", flexDirection: "column" }}>
                   <Typography
                     sx={{
-                      fontSize: ".9em",
+                      fontSize:
+                        fontSize == 2
+                          ? "1em"
+                          : fontSize == 0
+                          ? "0.8em"
+                          : fontSize == 1
+                          ? "0.9em"
+                          : "1.5em",
                       fontWeight: "500",
                       fontFamily: fontFamily,
-                      color:primaryColor? primaryColor: "rgb(190 186 186)",
+                      color: primaryColor ? primaryColor : "rgb(190 186 186)",
                     }}
                   >
                     {edu.Degree ? edu.Degree : `BS`} in
                     {edu.Field ? edu.Field : ` Computer Science`}
                   </Typography>
-                  <Typography sx={{ fontFamily: fontFamily ,color:primaryColor? primaryColor: ""}}>
-                    {edu.Institute
-                      ? edu.Institute
-                      : `Dawood University`}
+                  <Typography
+                    sx={{
+                      fontFamily: fontFamily,
+                      color: primaryColor ? primaryColor : "",
+                    }}
+                  >
+                    {edu.Institute ? edu.Institute : `Dawood University`}
                   </Typography>
                   <Box
                     sx={{
@@ -410,42 +505,46 @@ export default function Education({ formValues, temp, fontFamily , secondaryColo
                       alignItems: "center",
                       fontFamily: fontFamily,
                       fontStyle: "italic",
-                      color: primaryColor? primaryColor: "rgb(190 186 186)",
+                      color: primaryColor ? primaryColor : "rgb(190 186 186)",
                     }}
                   >
                     <Typography
                       sx={{
-                        fontSize: ".7em",
+                        fontSize:
+                          fontSize == 2
+                            ? ".7em"
+                            : fontSize == 0
+                            ? "0.5em"
+                            : fontSize == 1
+                            ? ".6em"
+                            : "1em",
                         fontWeight: "500",
                         fontFamily: fontFamily,
                       }}
                     >
-                      {edu.startDateOfSchool
-                        ? edu.startDateOfSchool
-                        : `03`}
-                      /
-                      {edu.startYearOfSchool
-                        ? edu.startYearOfSchool
-                        : ` 2021`}{" "}
+                      {edu.startDateOfSchool ? edu.startDateOfSchool : `03`}/
+                      {edu.startYearOfSchool ? edu.startYearOfSchool : ` 2021`}{" "}
                       -{" "}
                       {edu.endDateOfSchool &&
                       edu.endDateOfSchool === "Present" ? (
                         `Present`
                       ) : (
                         <>
-                          {edu.endDateOfSchool
-                            ? edu.endDateOfSchool
-                            : `03`}
-                          /
-                          {edu.endYearOfSchool
-                            ? edu.endYearOfSchool
-                            : `2021`}
+                          {edu.endDateOfSchool ? edu.endDateOfSchool : `03`}/
+                          {edu.endYearOfSchool ? edu.endYearOfSchool : `2021`}
                         </>
                       )}
                     </Typography>
                     <Typography
                       sx={{
-                        fontSize: ".7em",
+                        fontSize:
+                          fontSize == 2
+                            ? ".7em"
+                            : fontSize == 0
+                            ? "0.5em"
+                            : fontSize == 1
+                            ? ".6em"
+                            : "1em",
                         fontWeight: "500",
                         fontFamily: fontFamily,
                       }}
@@ -456,7 +555,19 @@ export default function Education({ formValues, temp, fontFamily , secondaryColo
                 </div>
 
                 {/* Details of working Education */}
-                <Typography sx={{ fontSize: "10px", fontFamily: fontFamily }}>
+                <Typography
+                  sx={{
+                    fontSize:
+                      fontSize == 2
+                        ? "10px"
+                        : fontSize == 0
+                        ? "8px"
+                        : fontSize == 1
+                        ? "9px"
+                        : "15px",
+                    fontFamily: fontFamily,
+                  }}
+                >
                   {edu.DescriptionOfSchool
                     ? edu.DescriptionOfSchool
                     : `Developed and maintained responsive web applications using React and

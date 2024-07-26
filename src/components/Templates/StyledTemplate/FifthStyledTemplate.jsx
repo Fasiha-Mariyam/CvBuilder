@@ -60,9 +60,16 @@ export default function FifthStyledTemplate({
           Download
         </Button>
       </Box>
-      <Box sx={{ border: "1px solid black", p: 1,backgroundImage: `url(${backgroundImage})`,
+      <Box
+        sx={{
+          border: "1px solid black",
+          p: 1,
+          backgroundImage: `url(${backgroundImage})`,
           backgroundSize: "cover", // Adjust the background size as needed
-          backgroundPosition: "center",  }} ref={templateRef}>
+          backgroundPosition: "center",
+        }}
+        ref={templateRef}
+      >
         <Grid container spacing={1}>
           {/* First Grid */}
           <Grid item xs={12} sm={5} md={4}>
@@ -74,6 +81,7 @@ export default function FifthStyledTemplate({
                   fontFamily={fontFamily}
                   primaryColor={primaryColor}
                   secondaryColor={secondaryColor}
+                  fontSize={fontSize}
                 />
               </Grid>
               <Grid item>
@@ -83,6 +91,7 @@ export default function FifthStyledTemplate({
                   fontFamily={fontFamily}
                   primaryColor={primaryColor}
                   secondaryColor={secondaryColor}
+                  fontSize={fontSize}
                 />
               </Grid>
               <Grid item>
@@ -92,6 +101,7 @@ export default function FifthStyledTemplate({
                   fontFamily={fontFamily}
                   primaryColor={primaryColor}
                   secondaryColor={secondaryColor}
+                  fontSize={fontSize}
                 />
               </Grid>
             </Grid>
@@ -103,13 +113,20 @@ export default function FifthStyledTemplate({
               style={{
                 marginBottom: "10px",
                 background: "rgb(19 71 119)",
-                color:secondaryColor?secondaryColor:"white",
+                color: secondaryColor ? secondaryColor : "white",
                 padding: "20px",
               }}
             >
               <Typography
                 sx={{
-                  fontSize: "2.5em",
+                  fontSize:
+                  fontSize == 2
+                    ? "2.5em"
+                    : fontSize == 0
+                    ? "1.5em"
+                    : fontSize == 1
+                    ? "2em"
+                    : "3em",
                   fontWeight: "600",
                   lineHeight: "1.1",
                   fontFamily: fontFamily,
@@ -120,10 +137,17 @@ export default function FifthStyledTemplate({
               </Typography>
               <Typography
                 sx={{
-                  fontSize: "1.2em",
+                  fontSize:
+                  fontSize == 2
+                    ? "1.2em"
+                    : fontSize == 0
+                    ? ".8em"
+                    : fontSize == 1
+                    ? ".9em"
+                    : "2em",
                   fontWeight: "500",
                   lineHeight: "2",
-                  color:secondaryColor?secondaryColor:"white",
+                  color: secondaryColor ? secondaryColor : "white",
                   fontFamily: fontFamily,
                 }}
               >
@@ -160,6 +184,7 @@ export default function FifthStyledTemplate({
               fontFamily={fontFamily}
               primaryColor={primaryColor}
               secondaryColor={secondaryColor}
+              fontSize={fontSize}
             />
             <Experience
               formValues={formValues}
@@ -167,6 +192,7 @@ export default function FifthStyledTemplate({
               fontFamily={fontFamily}
               primaryColor={primaryColor}
               secondaryColor={secondaryColor}
+              fontSize={fontSize}
             />
             <Projects
               formValues={formValues}
@@ -174,6 +200,7 @@ export default function FifthStyledTemplate({
               fontFamily={fontFamily}
               primaryColor={primaryColor}
               secondaryColor={secondaryColor}
+              fontSize={fontSize}
             />
           </Grid>
         </Grid>

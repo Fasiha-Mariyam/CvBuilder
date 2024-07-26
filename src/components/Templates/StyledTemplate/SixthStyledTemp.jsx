@@ -17,7 +17,7 @@ export default function SixthStyledTemplate({
   primaryColor,
   secondaryColor,
   fontSize,
-  backgroundImage
+  backgroundImage,
 }) {
   const templateRef = useRef(null);
   const downloadCV = () => {
@@ -62,9 +62,16 @@ export default function SixthStyledTemplate({
           Download
         </Button>
       </Box>
-      <Box sx={{ border: "1px solid black", p: 1,backgroundImage: `url(${backgroundImage})`,
+      <Box
+        sx={{
+          border: "1px solid black",
+          p: 1,
+          backgroundImage: `url(${backgroundImage})`,
           backgroundSize: "cover", // Adjust the background size as needed
-          backgroundPosition: "center",  }} ref={templateRef}>
+          backgroundPosition: "center",
+        }}
+        ref={templateRef}
+      >
         <Grid container spacing={1}>
           {/* First Grid */}
           <Grid
@@ -82,6 +89,7 @@ export default function SixthStyledTemplate({
                   fontFamily={fontFamily}
                   primaryColor={primaryColor}
                   secondaryColor={secondaryColor}
+                  fontSize={fontSize}
                 />
               </Grid>
               <Grid item>
@@ -91,6 +99,7 @@ export default function SixthStyledTemplate({
                   fontFamily={fontFamily}
                   primaryColor={primaryColor}
                   secondaryColor={secondaryColor}
+                  fontSize={fontSize}
                 />
               </Grid>
               {/* <Grid item>
@@ -107,6 +116,7 @@ export default function SixthStyledTemplate({
               fontFamily={fontFamily}
               primaryColor={primaryColor}
               secondaryColor={secondaryColor}
+              fontSize={fontSize}
             />
             <Experience
               formValues={formValues}
@@ -114,6 +124,7 @@ export default function SixthStyledTemplate({
               fontFamily={fontFamily}
               primaryColor={primaryColor}
               secondaryColor={secondaryColor}
+              fontSize={fontSize}
             />
             <Projects
               formValues={formValues}
@@ -121,6 +132,7 @@ export default function SixthStyledTemplate({
               fontFamily={fontFamily}
               primaryColor={primaryColor}
               secondaryColor={secondaryColor}
+              fontSize={fontSize}
             />
             <Skill
               formValues={formValues}
@@ -128,6 +140,7 @@ export default function SixthStyledTemplate({
               fontFamily={fontFamily}
               primaryColor={primaryColor}
               secondaryColor={secondaryColor}
+              fontSize={fontSize}
             />
             <Interest
               formValues={formValues}
@@ -135,6 +148,7 @@ export default function SixthStyledTemplate({
               fontFamily={fontFamily}
               primaryColor={primaryColor}
               secondaryColor={secondaryColor}
+              fontSize={fontSize}
             />
           </Grid>
         </Grid>

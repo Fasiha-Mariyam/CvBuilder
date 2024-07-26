@@ -2,6 +2,8 @@ import * as React from "react";
 import CollapsibleEducation from "../Collapsible/CollapsibleEducation";
 import { Button, Typography, useMediaQuery } from "@mui/material";
 import { Box } from "@mui/system";
+import { deleteEducation } from "../../redux/slices/form";
+import { dispatch } from "../../redux/store";
 
 export default function Education({ handleInputChange, formValues }) {
   const below600 = useMediaQuery("(max-width:600px)");
@@ -20,7 +22,10 @@ export default function Education({ handleInputChange, formValues }) {
     setOpenEducation(
       newEducations.length > 0 ? newEducations[newEducations.length - 1] : 1
     );
+
+    dispatch(deleteEducation(index + 1));
   };
+
   // const handleDeleteEducation = (index) => {
   //   // Remove the education entry from state
   //   const newEducations = education.filter((_, i) => i !== index);
@@ -28,10 +33,10 @@ export default function Education({ handleInputChange, formValues }) {
   //   setOpenEducation(
   //     newEducations.length > 0 ? newEducations[newEducations.length - 1] : 1
   //   );
-  
+
   //   // Remove the education entry from local storage
   //   const currentFormValues = { ...formValues };
-  
+
   //   // Find and remove all keys related to the deleted index
   //   Object.keys(currentFormValues).forEach((key) => {
   //     if (key.startsWith(`education${index + 1}_`)) {
@@ -39,7 +44,7 @@ export default function Education({ handleInputChange, formValues }) {
   //       localStorage.removeItem(key);
   //     }
   //   });
-  
+
   //   // Save updated formValues to local storage
   //   Object.entries(currentFormValues).forEach(([key, value]) => {
   //     localStorage.setItem(key, JSON.stringify(value));

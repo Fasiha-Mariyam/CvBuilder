@@ -9,9 +9,17 @@ export default function Projects({
   fontFamily,
   primaryColor,
   secondaryColor,
+  fontSize,
 }) {
   const temp6style = {
-    fontSize: "1.2em",
+    fontSize:
+      fontSize == 2
+        ? "1.2em"
+        : fontSize == 0
+        ? "0.8em"
+        : fontSize == 1
+        ? "1em"
+        : "2em",
     fontWeight: "600",
     fontFamily: fontFamily,
     color: secondaryColor ? secondaryColor : "",
@@ -37,7 +45,14 @@ export default function Projects({
           {!temp && <Divider sx={{ my: 1 }} />}
           <Typography
             sx={{
-              fontSize: "1em",
+              fontSize:
+                fontSize == 2
+                  ? "1.2em"
+                  : fontSize == 0
+                  ? "0.8em"
+                  : fontSize == 1
+                  ? "1em"
+                  : "2em",
               fontWeight: "600",
               mt:
                 (temp == "fourth" || temp == "fifth" || temp == "eighth") && 2,
@@ -95,10 +110,17 @@ export default function Projects({
                     >
                       <Typography
                         sx={{
-                          fontSize: ".9em",
+                          fontSize:
+                            fontSize == 2
+                              ? "1em"
+                              : fontSize == 0
+                              ? "0.8em"
+                              : fontSize == 1
+                              ? ".9em"
+                              : "1.5em",
                           fontWeight: "600",
                           fontFamily: fontFamily,
-                          color:primaryColor?primaryColor:""
+                          color: primaryColor ? primaryColor : "",
                         }}
                       >
                         {project.name
@@ -107,10 +129,16 @@ export default function Projects({
                       </Typography>
                       <Typography
                         sx={{
-                          fontSize: ".7em",
+                          fontSize:
+                            fontSize == 2
+                              ? ".7em"
+                              : fontSize == 0
+                              ? "0.5em"
+                              : fontSize == 1
+                              ? ".6em"
+                              : "1em",
                           fontWeight: "600",
-                          fontFamily: fontFamily,                         
-
+                          fontFamily: fontFamily,
                         }}
                       >
                         {project.startDateOfProject
@@ -139,7 +167,14 @@ export default function Projects({
                     </div>
                     <Typography
                       sx={{
-                        fontSize: "10px",
+                        fontSize:
+                          fontSize == 2
+                            ? "10px"
+                            : fontSize == 0
+                            ? "6px"
+                            : fontSize == 1
+                            ? "8px"
+                            : "15px",
                         mb: 2,
                         fontFamily: fontFamily,
                         ml: temp === "eighth" && 2.5,
@@ -167,10 +202,17 @@ export default function Projects({
                     <div style={{ display: "flex", flexDirection: "column" }}>
                       <Typography
                         sx={{
-                          fontSize: ".9em",
+                          fontSize:
+                            fontSize == 2
+                              ? "1em"
+                              : fontSize == 0
+                              ? "0.7em"
+                              : fontSize == 1
+                              ? "0.8em"
+                              : "1.5em",
                           fontFamily: fontFamily,
                           fontWeight: "500",
-                          color:primaryColor?primaryColor: "rgb(30 55 99)",
+                          color: primaryColor ? primaryColor : "rgb(30 55 99)",
                         }}
                       >
                         {project.name
@@ -179,7 +221,14 @@ export default function Projects({
                       </Typography>
                       <Typography
                         sx={{
-                          fontSize: ".7em",
+                          fontSize:
+                            fontSize == 2
+                              ? ".7em"
+                              : fontSize == 0
+                              ? "0.5em"
+                              : fontSize == 1
+                              ? ".6em"
+                              : "1em",
                           fontWeight: "500",
                           color: "black",
                           fontFamily: fontFamily,
@@ -212,7 +261,14 @@ export default function Projects({
                     {/* Details of working experience */}
                     <Typography
                       sx={{
-                        fontSize: "10px",
+                        fontSize:
+                          fontSize == 2
+                            ? "10px"
+                            : fontSize == 0
+                            ? "7px"
+                            : fontSize == 1
+                            ? "8px"
+                            : "15px",
                         mb: 2,
                         fontFamily: fontFamily,
                         ml: temp === "eighth" && 2.5,
@@ -240,11 +296,18 @@ export default function Projects({
                     <div style={{ display: "flex", flexDirection: "column" }}>
                       <Typography
                         sx={{
-                          fontSize: ".9em",
+                          fontSize:
+                            fontSize == 2
+                              ? "1em"
+                              : fontSize == 0
+                              ? "0.7em"
+                              : fontSize == 1
+                              ? "0.8em"
+                              : "1.5em",
                           fontWeight: "500",
                           fontFamily: fontFamily,
                           ml: temp === "eighth" && 2.5,
-                          color:primaryColor?primaryColor: "rgb(19 71 119)",
+                          color: primaryColor ? primaryColor : "rgb(19 71 119)",
                         }}
                       >
                         {project.name
@@ -264,7 +327,14 @@ export default function Projects({
                       >
                         <Typography
                           sx={{
-                            fontSize: ".7em",
+                            fontSize:
+                              fontSize == 2
+                                ? ".7em"
+                                : fontSize == 0
+                                ? "0.5em"
+                                : fontSize == 1
+                                ? ".6em"
+                                : "1em",
                             fontWeight: "500",
                             fontFamily: fontFamily,
                           }}
@@ -297,7 +367,14 @@ export default function Projects({
                     {/* Details of working experience */}
                     <Typography
                       sx={{
-                        fontSize: "10px",
+                        fontSize:
+                          fontSize == 2
+                            ? "10px"
+                            : fontSize == 0
+                            ? "7px"
+                            : fontSize == 1
+                            ? "8px"
+                            : "15px",
                         mb: 2,
                         fontFamily: fontFamily,
                         ml: temp === "eighth" && 2.5,
@@ -338,17 +415,31 @@ export default function Projects({
                 >
                   <Typography
                     sx={{
-                      fontSize: ".9em",
+                      fontSize:
+                        fontSize == 2
+                          ? "1em"
+                          : fontSize == 0
+                          ? "0.7em"
+                          : fontSize == 1
+                          ? "0.8em"
+                          : "1.5em",
                       fontWeight: "600",
                       fontFamily: fontFamily,
-                      color:primaryColor?primaryColor:""
+                      color: primaryColor ? primaryColor : "",
                     }}
                   >
                     {project.name ? project.name : `FoodPanda Website Clone`}
                   </Typography>
                   <Typography
                     sx={{
-                      fontSize: ".7em",
+                      fontSize:
+                        fontSize == 2
+                          ? ".7em"
+                          : fontSize == 0
+                          ? "0.5em"
+                          : fontSize == 1
+                          ? ".6em"
+                          : "1em",
                       fontWeight: "600",
                       fontFamily: fontFamily,
                     }}
@@ -379,7 +470,18 @@ export default function Projects({
                 </div>
                 {/* Details of working experience */}
                 <Typography
-                  sx={{ fontSize: "10px", mb: 3, fontFamily: fontFamily }}
+                  sx={{
+                    fontSize:
+                      fontSize == 2
+                        ? "10px"
+                        : fontSize == 0
+                        ? "6px"
+                        : fontSize == 1
+                        ? "8px"
+                        : "15px",
+                    mb: 3,
+                    fontFamily: fontFamily,
+                  }}
                 >
                   {project?.projectDescription
                     ? project?.projectDescription

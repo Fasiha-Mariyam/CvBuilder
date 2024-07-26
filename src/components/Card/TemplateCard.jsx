@@ -7,7 +7,13 @@ import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import { Typography } from "@mui/material";
 
-export default function TemplateCard({ image, title, number , handleClose }) {
+export default function TemplateCard({
+  image,
+  number,
+  handleClose,
+  handleTemplateSelect,
+  addedCustomSections,
+}) {
   const navigate = useNavigate();
   const [hover, setHover] = React.useState(false);
 
@@ -20,9 +26,13 @@ export default function TemplateCard({ image, title, number , handleClose }) {
   };
 
   const handleClick = () => {
-    navigate("/createResume", { state: number });
-    if(handleClose){
-      handleClose()
+    if (handleTemplateSelect) {
+      handleTemplateSelect(number);
+    } else {
+      navigate("/createResume", { state: number });
+      if (handleClose) {
+        handleClose();
+      }
     }
   };
 
@@ -30,16 +40,19 @@ export default function TemplateCard({ image, title, number , handleClose }) {
     <Card
       sx={{
         maxWidth: 345,
-        maxHeight:"200px",
-        boxShadow: hover ? 10 : 5,
+        width: handleTemplateSelect && "500px",
+        height: handleTemplateSelect && "200px",
+        boxShadow: hover
+          ? "0px 4px 6px rgba(0, 0, 0, 0.1)"
+          : "0px 4px 6px rgba(0, 0, 0, 0.5)",
         position: "relative",
+        // boxShadow: "",
         transition: "box-shadow 0.3s",
       }}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      <CardMedia component="img" image={image} alt="Paella dish"  height={190}/>
-    
+      <CardMedia component="img" image={image} alt="Paella dish" height={190} />
 
       {hover && (
         <Box
@@ -71,6 +84,8 @@ export default function TemplateCard({ image, title, number , handleClose }) {
           </Button>
         </Box>
       )}
+
+      
     </Card>
   );
 }

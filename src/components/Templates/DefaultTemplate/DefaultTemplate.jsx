@@ -10,6 +10,10 @@ import Interest from "../TemplateSections/Interest";
 import Projects from "../TemplateSections/Projects";
 import { jsPDF } from "jspdf";
 import html2canvas from "html2canvas";
+import Certificate from "../TemplateSections/Certificate";
+import Courses from "../TemplateSections/Courses";
+import Language from "../TemplateSections/Language";
+import References from "../TemplateSections/Reference";
 
 export default function DefaultTemplate({
   formValues,
@@ -18,6 +22,8 @@ export default function DefaultTemplate({
   secondaryColor,
   fontSize,
   backgroundImage,
+  selectedTemplate,
+  addedCustomSections,
 }) {
   const templateRef = useRef(null);
   const downloadCV = () => {
@@ -67,7 +73,7 @@ export default function DefaultTemplate({
           p: 1,
           backgroundImage: `url(${backgroundImage})`,
           backgroundSize: "cover", // Adjust the background size as needed
-          backgroundPosition: "center", 
+          backgroundPosition: "center",
         }}
         ref={templateRef}
       >
@@ -121,6 +127,84 @@ export default function DefaultTemplate({
           secondaryColor={secondaryColor}
           fontSize={fontSize}
         />
+
+        {addedCustomSections.includes("certificate") ? (
+          <Certificate
+            formValues={formValues}
+            fontFamily={fontFamily}
+            primaryColor={primaryColor}
+            secondaryColor={secondaryColor}
+            fontSize={fontSize}
+          />
+        ) : (
+          selectedTemplate === "certificate" && (
+            <Certificate
+              formValues={formValues}
+              fontFamily={fontFamily}
+              primaryColor={primaryColor}
+              secondaryColor={secondaryColor}
+              fontSize={fontSize}
+            />
+          )
+        )}
+        {addedCustomSections.includes("course") ? (
+          <Courses
+            formValues={formValues}
+            fontFamily={fontFamily}
+            primaryColor={primaryColor}
+            secondaryColor={secondaryColor}
+            fontSize={fontSize}
+          />
+        ) : (
+          selectedTemplate === "course" && (
+            <Courses
+              formValues={formValues}
+              fontFamily={fontFamily}
+              primaryColor={primaryColor}
+              secondaryColor={secondaryColor}
+              fontSize={fontSize}
+            />
+          )
+        )}
+        {addedCustomSections.includes("Language") ? (
+          <Language
+            formValues={formValues}
+            fontFamily={fontFamily}
+            primaryColor={primaryColor}
+            secondaryColor={secondaryColor}
+            fontSize={fontSize}
+          />
+        ) : (
+          selectedTemplate === "Language" && (
+            <Language
+              formValues={formValues}
+              fontFamily={fontFamily}
+              primaryColor={primaryColor}
+              secondaryColor={secondaryColor}
+              fontSize={fontSize}
+            />
+          )
+        )}
+
+        {addedCustomSections.includes("reference") ? (
+          <References
+            formValues={formValues}
+            fontFamily={fontFamily}
+            primaryColor={primaryColor}
+            secondaryColor={secondaryColor}
+            fontSize={fontSize}
+          />
+        ) : (
+          selectedTemplate === "reference" && (
+            <References
+              formValues={formValues}
+              fontFamily={fontFamily}
+              primaryColor={primaryColor}
+              secondaryColor={secondaryColor}
+              fontSize={fontSize}
+            />
+          )
+        )}
       </Box>
     </>
   );

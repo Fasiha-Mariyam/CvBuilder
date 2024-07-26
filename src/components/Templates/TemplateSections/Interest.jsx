@@ -3,13 +3,27 @@ import { Box, Divider, Typography } from "@mui/material";
 import InterestsIcon from "@mui/icons-material/Interests";
 import React from "react";
 
-export default function Interest({ formValues, temp, fontFamily , secondaryColor , primaryColor }) {
+export default function Interest({
+  formValues,
+  temp,
+  fontFamily,
+  secondaryColor,
+  primaryColor,
+  fontSize,
+}) {
   const Interests = ["Reading", "Learning", "Traveling", "Coding"];
   const temp6style = {
-    fontSize: "1.2em",
+    fontSize:
+      fontSize == 2
+        ? "1.2em"
+        : fontSize == 0
+        ? "0.8em"
+        : fontSize == 1
+        ? "1em"
+        : "2em",
     fontWeight: "600",
     display: "flex",
-    color:secondaryColor?secondaryColor:"",
+    color: secondaryColor ? secondaryColor : "",
     fontFamily: fontFamily,
     gap: 1,
   };
@@ -22,7 +36,22 @@ export default function Interest({ formValues, temp, fontFamily , secondaryColor
             temp === "sixth"
               ? temp6style
               : {
-                  fontSize: temp === "fourth" ? "20px" : "1em",
+                fontSize:
+                fontSize == 2
+                  ? temp === "fourth"
+                    ? "20px"
+                    : "1.2em"
+                  : fontSize == 0
+                  ? temp === "fourth"
+                    ? "10px"
+                    : ".9em"
+                  : fontSize == 1
+                  ? temp === "fourth"
+                    ? "15px"
+                    : "1em"
+                  : temp === "fourth"
+                  ? "25px"
+                  : "2em",
                   fontWeight: "600",
                   mt: temp === "eighth" ? 3 : -1,
                   ml: temp == "fifth" || (temp === "eighth" && 2.5),
@@ -35,17 +64,17 @@ export default function Interest({ formValues, temp, fontFamily , secondaryColor
                   px: temp === "seventh" && 5,
                   mb: temp === "seventh" && 2,
                   textAlign: temp === "fourth" && "center",
-                  color:
-                  secondaryColor?secondaryColor:
-                    temp === "fourth"
-                      ? "white"
-                      : temp === "fifth"
-                      ? "rgb(19 71 119)"
-                      : temp === "seventh"
-                      ? "white"
-                      : temp === "eighth"
-                      ? "rgb(0 35 43)"
-                      : "",
+                  color: secondaryColor
+                    ? secondaryColor
+                    : temp === "fourth"
+                    ? "white"
+                    : temp === "fifth"
+                    ? "rgb(19 71 119)"
+                    : temp === "seventh"
+                    ? "white"
+                    : temp === "eighth"
+                    ? "rgb(0 35 43)"
+                    : "",
                   display:
                     temp === "seventh"
                       ? "inline-block"
@@ -79,11 +108,25 @@ export default function Interest({ formValues, temp, fontFamily , secondaryColor
                     mb: 0.5,
                     ml: temp === "eighth" && 2.5,
                     cursor: "pointer",
-                    fontSize: "10px",
+                    fontSize:
+                      fontSize == 2
+                        ? "10px"
+                        : fontSize == 0
+                        ? "8px"
+                        : fontSize == 1
+                        ? "9px"
+                        : "15px",
                     marginRight: "8px",
                   }}
                 >
-                  <Typography sx={{ fontSize: "12px", fontFamily: fontFamily , }}>
+                  <Typography sx={{fontSize:
+                      fontSize == 2
+                        ? "12px"
+                        : fontSize == 0
+                        ? "8px"
+                        : fontSize == 1
+                        ? "9px"
+                        : "15px", fontFamily: fontFamily }}>
                     {Interest}
                   </Typography>
                 </Box>
@@ -98,10 +141,20 @@ export default function Interest({ formValues, temp, fontFamily , secondaryColor
                 <ul key={index}>
                   <li
                     style={{
-                      fontSize: "12px",
-                      fontFamily:fontFamily,
-                      color:
-                      primaryColor?primaryColor: temp === "sixth" ? "rgba(83, 97, 103, 1)" : "white",
+                      fontSize:
+                        fontSize == 2
+                          ? "12px"
+                          : fontSize == 0
+                          ? "8px"
+                          : fontSize == 1
+                          ? "10px"
+                          : "20px",
+                      fontFamily: fontFamily,
+                      color: primaryColor
+                        ? primaryColor
+                        : temp === "sixth"
+                        ? "rgba(83, 97, 103, 1)"
+                        : "white",
                     }}
                   >
                     {Interest}

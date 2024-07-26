@@ -22,6 +22,8 @@ import SeventhStyledTemplate from "../../../components/Templates/StyledTemplate/
 import EighthStyledTemplate from "../../../components/Templates/StyledTemplate/EighthStyledTemp";
 import BasicModal from "../../../components/Modal/SwitchTemplateModal";
 import SelectFont from "../../../components/Forms/FontSelect";
+import { dispatch } from "../../../redux/store";
+import { getformData } from "../../../redux/slices/form";
 
 export default function CreateResumeScreen() {
   const below400 = useMediaQuery("(max-width:400px)");
@@ -29,15 +31,19 @@ export default function CreateResumeScreen() {
     const savedValues = localStorage.getItem("formValues");
     return savedValues ? JSON.parse(savedValues) : {};
   });
+  const [selectedTemplate, setSelectedTemplate] = useState(null);
+  const [addedCustomSections, setAddedCustomSections] = useState([]);
   const [primaryColor, setPrimaryColor] = React.useState("");
   const [secondaryColor, setSecondaryColor] = React.useState("");
   const [backgroundImage, setBackgroundImage] = React.useState("");
   const [fontSize, setFontSize] = React.useState(2);
 
+  const addSection = (number) => {
+    setAddedCustomSections((prevSections) => [...prevSections, number]);
+  };
   const handleFontSizeChange = (newValue) => {
     setFontSize(newValue);
   };
-
   const handleBackgroundImageChange = (image) => setBackgroundImage(image);
   const handleColorChange = (primary) => {
     setPrimaryColor(primary);
@@ -48,6 +54,7 @@ export default function CreateResumeScreen() {
 
   useEffect(() => {
     localStorage.setItem("formValues", JSON.stringify(formValues));
+    dispatch(getformData(formValues));
   }, [formValues]);
 
   const handleInputChange = (event) => {
@@ -57,7 +64,7 @@ export default function CreateResumeScreen() {
       [name]: value,
     }));
   };
-  console.log(fontSize, "sizeeeee");
+
   const [currentSection, setCurrentSection] = useState("Personal Details");
   const location = useLocation();
   const [fontFamily, setFontFamily] = useState("select");
@@ -124,6 +131,16 @@ export default function CreateResumeScreen() {
             formValues={formValues}
           />
         );
+      case "Add Section":
+        return (
+          <CustomizeForm
+            setSelectedTemplate={setSelectedTemplate}
+            selectedTemplate={selectedTemplate}
+            addedCustomSections={addSection}
+            addedSections = {addedCustomSections}
+          />
+        );
+      //
       case "Font":
         return (
           <SelectFont
@@ -141,7 +158,7 @@ export default function CreateResumeScreen() {
         );
       default:
         return (
-          <PersonalInfo
+          <CustomizeForm
             handleInputChange={handleInputChange}
             formValues={formValues}
           />
@@ -160,6 +177,8 @@ export default function CreateResumeScreen() {
             secondaryColor={secondaryColor}
             backgroundImage={backgroundImage}
             fontSize={fontSize}
+            selectedTemplate={selectedTemplate}
+            addedCustomSections={addedCustomSections}
           />
         );
       case 2:
@@ -170,6 +189,7 @@ export default function CreateResumeScreen() {
             primaryColor={primaryColor}
             secondaryColor={secondaryColor}
             backgroundImage={backgroundImage}
+            fontSize={fontSize}
           />
         );
       case 3:
@@ -180,6 +200,7 @@ export default function CreateResumeScreen() {
             primaryColor={primaryColor}
             secondaryColor={secondaryColor}
             backgroundImage={backgroundImage}
+            fontSize={fontSize}
           />
         );
       case 4:
@@ -190,6 +211,7 @@ export default function CreateResumeScreen() {
             primaryColor={primaryColor}
             secondaryColor={secondaryColor}
             backgroundImage={backgroundImage}
+            fontSize={fontSize}
           />
         );
       case 5:
@@ -200,6 +222,7 @@ export default function CreateResumeScreen() {
             primaryColor={primaryColor}
             secondaryColor={secondaryColor}
             backgroundImage={backgroundImage}
+            fontSize={fontSize}
           />
         );
       case 6:
@@ -210,6 +233,7 @@ export default function CreateResumeScreen() {
             primaryColor={primaryColor}
             secondaryColor={secondaryColor}
             backgroundImage={backgroundImage}
+            fontSize={fontSize}
           />
         );
       case 7:
@@ -220,6 +244,7 @@ export default function CreateResumeScreen() {
             primaryColor={primaryColor}
             secondaryColor={secondaryColor}
             backgroundImage={backgroundImage}
+            fontSize={fontSize}
           />
         );
       case 8:
@@ -230,6 +255,7 @@ export default function CreateResumeScreen() {
             primaryColor={primaryColor}
             secondaryColor={secondaryColor}
             backgroundImage={backgroundImage}
+            fontSize={fontSize}
           />
         );
       case 9:
@@ -240,6 +266,7 @@ export default function CreateResumeScreen() {
             primaryColor={primaryColor}
             secondaryColor={secondaryColor}
             backgroundImage={backgroundImage}
+            fontSize={fontSize}
           />
         );
       default:
@@ -250,10 +277,19 @@ export default function CreateResumeScreen() {
             primaryColor={primaryColor}
             secondaryColor={secondaryColor}
             backgroundImage={backgroundImage}
+            fontSize={fontSize}
           />
         );
     }
   };
+
+
+
+
+console.log(addedCustomSections,"hohahoha");
+
+
+
 
   return (
     <>
