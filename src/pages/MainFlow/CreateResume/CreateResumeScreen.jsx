@@ -22,14 +22,14 @@ import SeventhStyledTemplate from "../../../components/Templates/StyledTemplate/
 import EighthStyledTemplate from "../../../components/Templates/StyledTemplate/EighthStyledTemp";
 import BasicModal from "../../../components/Modal/SwitchTemplateModal";
 import SelectFont from "../../../components/Forms/FontSelect";
-import { dispatch } from "../../../redux/store";
+import { dispatch, useSelector } from "../../../redux/store";
 import { getformData } from "../../../redux/slices/form";
 
 export default function CreateResumeScreen() {
   const below400 = useMediaQuery("(max-width:400px)");
+  const values = useSelector((state) => state.form.formData);
   const [formValues, setFormValues] = useState(() => {
-    const savedValues = localStorage.getItem("formValues");
-    return savedValues ? JSON.parse(savedValues) : {};
+    values ? values : {};
   });
   const [selectedTemplate, setSelectedTemplate] = useState(null);
   const [addedCustomSections, setAddedCustomSections] = useState([]);
@@ -37,7 +37,7 @@ export default function CreateResumeScreen() {
   const [secondaryColor, setSecondaryColor] = React.useState("");
   const [backgroundImage, setBackgroundImage] = React.useState("");
   const [fontSize, setFontSize] = React.useState(2);
-
+  console.log(values, "formformform");
   const addSection = (number) => {
     setAddedCustomSections((prevSections) => [...prevSections, number]);
   };
@@ -53,7 +53,6 @@ export default function CreateResumeScreen() {
   };
 
   useEffect(() => {
-    localStorage.setItem("formValues", JSON.stringify(formValues));
     dispatch(getformData(formValues));
   }, [formValues]);
 
@@ -138,6 +137,7 @@ export default function CreateResumeScreen() {
             selectedTemplate={selectedTemplate}
             addedCustomSections={addSection}
             addedSections={addedCustomSections}
+            handleInputChange={handleInputChange}
           />
         );
       //

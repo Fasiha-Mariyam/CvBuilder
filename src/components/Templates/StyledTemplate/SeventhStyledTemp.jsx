@@ -127,8 +127,8 @@ export default function SeventhStyledTemplate({
                   lineHeight: "1.1",
                 }}
               >
-                {formValues.firstName ? formValues.firstName : "Fasiha"}
-                {formValues.lastName ? formValues.lastName : " Mariyam"}
+                {formValues?.firstName ? formValues?.firstName : "Fasiha"}
+                {formValues?.lastName ? formValues?.lastName : " Mariyam"}
               </Typography>
               <Typography
                 sx={{
@@ -145,8 +145,8 @@ export default function SeventhStyledTemplate({
                   fontFamily: fontFamily,
                 }}
               >
-                {formValues.jobTitle
-                  ? formValues.jobTitle
+                {formValues?.jobTitle
+                  ? formValues?.jobTitle
                   : `Frontend Developer`}
               </Typography>
             </div>

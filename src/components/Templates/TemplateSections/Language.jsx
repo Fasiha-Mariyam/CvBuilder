@@ -2,6 +2,7 @@
 import { Box, Divider, Typography, LinearProgress } from "@mui/material";
 import InterpreterModeIcon from "@mui/icons-material/InterpreterMode";
 import React from "react";
+import { useSelector } from "../../../redux/store";
 
 export default function Language({
   formValues,
@@ -11,12 +12,9 @@ export default function Language({
   primaryColor,
   fontSize,
 }) {
-  const Languages = [
-    { name: "English", proficiency: "Native" },
-    { name: "Spanish", proficiency: "Proficient" },
-    { name: "French", proficiency: "Advanced" },
-    { name: "German", proficiency: "Beginner" },
-  ];
+  
+  const Languages = useSelector ((state) => state.form.formData?.languages);
+
   const getProficiencyValue = (proficiency) => {
     switch (proficiency) {
       case "Native":
@@ -122,7 +120,8 @@ export default function Language({
                 background: (temp == "fourth" || temp == "fifth") && "black",
               }}
             />
-            {(formValues.Languages ? formValues.Languages : Languages).map(
+            {(formValues?.Languages || Languages || []).length > 0 &&
+              (formValues?.Languages || Languages || []).map(
               (Language, index) => (
                 <Box
                   key={index}

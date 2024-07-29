@@ -26,45 +26,25 @@ export default function Education({ handleInputChange, formValues }) {
     dispatch(deleteEducation(index + 1));
   };
 
-  // const handleDeleteEducation = (index) => {
-  //   // Remove the education entry from state
-  //   const newEducations = education.filter((_, i) => i !== index);
-  //   setEducation(newEducations.map((_, i) => i + 1));
-  //   setOpenEducation(
-  //     newEducations.length > 0 ? newEducations[newEducations.length - 1] : 1
-  //   );
-
-  //   // Remove the education entry from local storage
-  //   const currentFormValues = { ...formValues };
-
-  //   // Find and remove all keys related to the deleted index
-  //   Object.keys(currentFormValues).forEach((key) => {
-  //     if (key.startsWith(`education${index + 1}_`)) {
-  //       delete currentFormValues[key];
-  //       localStorage.removeItem(key);
-  //     }
-  //   });
-
-  //   // Save updated formValues to local storage
-  //   Object.entries(currentFormValues).forEach(([key, value]) => {
-  //     localStorage.setItem(key, JSON.stringify(value));
-  //   });
-  // };
   const handleToggleEducation = (index) => {
     setOpenEducation(openEducation === index ? null : index);
   };
   let edu = {};
-  Object.keys(formValues).forEach((key) => {
-    let match = key.match(/^(education\d+)_/);
-    if (match) {
-      const prefix = match[1];
-      if (!edu[prefix]) {
-        edu[prefix] = {};
+  if (formValues) {
+    Object.keys(formValues).forEach((key) => {
+      let match = key.match(/^(education\d+)_/);
+      if (match) {
+        const prefix = match[1];
+        if (!edu[prefix]) {
+          edu[prefix] = {};
+        }
+        edu[prefix][key.replace(`${prefix}_`, "")] = formValues[key];
       }
-      edu[prefix][key.replace(`${prefix}_`, "")] = formValues[key];
-    }
-  });
-
+    });
+  } else {
+    // Handle the case where formValues is undefined or null
+    console.warn('formValues is undefined or null');
+  }
   return (
     <div>
       <Typography

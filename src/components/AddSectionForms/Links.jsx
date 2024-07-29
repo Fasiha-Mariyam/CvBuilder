@@ -1,10 +1,13 @@
 /* eslint-disable react/prop-types */
 import { Button, TextField, Box, Typography } from '@mui/material';
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import CreateOutlinedIcon from '@mui/icons-material/CreateOutlined';
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
+import { useSelector } from 'react-redux';
 
-export default function Links({ addedCustomSections, number, addedSections }) {
+export default function Links({ addedCustomSections, number, addedSections, handleInputChange }) {
+  const Link = useSelector((state) => state.form.formData?.links);
+
   const [links, setLinks] = useState([]);
   const [isFormVisible, setIsFormVisible] = useState(true);
   const [projectTitle, setProjectTitle] = useState('');
@@ -12,24 +15,30 @@ export default function Links({ addedCustomSections, number, addedSections }) {
   const [formError, setFormError] = useState('');
   const [editIndex, setEditIndex] = useState(null);
 
+  useEffect(() => {
+    setLinks(Link || []);
+  }, [Link]);
+
   const handleAddClick = () => {
     if (projectTitle && linkUrl) {
+      let updatedLinks;
       if (editIndex !== null) {
         // Update existing link
-        const updatedLinks = [...links];
+        updatedLinks = [...links];
         updatedLinks[editIndex] = { title: projectTitle, url: linkUrl };
-        setLinks(updatedLinks);
         setEditIndex(null); // Reset edit index
       } else {
         // Add new link
         const newLink = { title: projectTitle, url: linkUrl };
-        setLinks([...links, newLink]);
+        updatedLinks = [...links, newLink];
 
         // Add number to addedCustomSections if not already present
         if (!addedSections.includes(number)) {
           addedCustomSections(number);
         }
       }
+      setLinks(updatedLinks);
+      handleInputChange({ target: { name: 'links', value: updatedLinks } });
       setProjectTitle('');
       setLinkUrl('');
       setFormError('');
@@ -54,6 +63,7 @@ export default function Links({ addedCustomSections, number, addedSections }) {
   const handleDeleteClick = (index) => {
     const updatedLinks = links.filter((_, i) => i !== index);
     setLinks(updatedLinks);
+    handleInputChange({ target: { name: 'links', value: updatedLinks } });
   };
 
   return (

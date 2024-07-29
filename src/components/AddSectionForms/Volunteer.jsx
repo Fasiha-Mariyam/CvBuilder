@@ -1,10 +1,12 @@
 /* eslint-disable react/prop-types */
 import { Button, TextField, Box, Typography } from '@mui/material';
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import CreateOutlinedIcon from '@mui/icons-material/CreateOutlined';
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
+import { useSelector } from 'react-redux';
 
-export default function Volunteer({ addedCustomSections, number, addedSections }) {
+export default function Volunteer({ addedCustomSections, number, addedSections, handleInputChange }) {
+  const Volunteer = useSelector((state) => state.form.formData?.volunteers);
   const [volunteers, setVolunteers] = useState([]);
   const [isFormVisible, setIsFormVisible] = useState(true);
   const [organizationName, setOrganizationName] = useState('');
@@ -12,24 +14,31 @@ export default function Volunteer({ addedCustomSections, number, addedSections }
   const [formError, setFormError] = useState('');
   const [editIndex, setEditIndex] = useState(null);
 
+  useEffect(() => {
+    setVolunteers(Volunteer || []);
+  }, [Volunteer]);
+
   const handleAddClick = () => {
     if (organizationName && roleTitle) {
+      let updatedVolunteers;
       if (editIndex !== null) {
         // Update existing volunteer experience
-        const updatedVolunteers = [...volunteers];
+        updatedVolunteers = [...volunteers];
         updatedVolunteers[editIndex] = { organization: organizationName, role: roleTitle };
-        setVolunteers(updatedVolunteers);
         setEditIndex(null); // Reset edit index
       } else {
         // Add new volunteer experience
         const newVolunteer = { organization: organizationName, role: roleTitle };
-        setVolunteers([...volunteers, newVolunteer]);
-
-        // Add number to addedCustomSections if not already present
-        if (!addedSections.includes(number)) {
-          addedCustomSections(number);
-        }
+        updatedVolunteers = [...volunteers, newVolunteer];
       }
+      setVolunteers(updatedVolunteers);
+      handleInputChange({ target: { name: 'volunteers', value: updatedVolunteers } });
+
+      // Add number to addedCustomSections if not already present and volunteers are not empty
+      if (!addedSections.includes(number) && updatedVolunteers.length > 0) {
+        addedCustomSections(number);
+      }
+
       setOrganizationName('');
       setRoleTitle('');
       setFormError('');
@@ -54,13 +63,22 @@ export default function Volunteer({ addedCustomSections, number, addedSections }
   const handleDeleteClick = (index) => {
     const updatedVolunteers = volunteers.filter((_, i) => i !== index);
     setVolunteers(updatedVolunteers);
+    handleInputChange({ target: { name: 'volunteers', value: updatedVolunteers } });
+
+    // Remove number from addedCustomSections if volunteers become empty
+    if (updatedVolunteers.length === 0 && addedSections.includes(number)) {
+      const updatedSections = addedSections.filter((section) => section !== number);
+      addedCustomSections(updatedSections);
+    }
   };
 
   return (
     <Box sx={{ padding: 2, border: '1px solid grey', borderRadius: 2, maxWidth: 400, mx: 'auto' }}>
-      <Typography variant="h6" gutterBottom sx={{textAlign:"start"}}>
-        Volunteer Experience
-      </Typography>
+      {volunteers.length > 0 && (
+        <Typography variant="h6" gutterBottom sx={{ textAlign: 'start' }}>
+          Volunteer Experience
+        </Typography>
+      )}
       {volunteers.map((volunteer, index) => (
         <Box key={index} sx={{ mb: 1, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
           <Box>

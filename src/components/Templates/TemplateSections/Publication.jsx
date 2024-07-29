@@ -2,6 +2,7 @@
 import React from "react";
 import { Box, Divider, Typography, LinearProgress } from "@mui/material";
 import InterpreterModeIcon from "@mui/icons-material/InterpreterMode";
+import { useSelector } from "react-redux";
 
 export default function Publication({
   formValues,
@@ -11,24 +12,7 @@ export default function Publication({
   primaryColor,
   fontSize,
 }) {
-  const Publication = [
-    {
-      title: "Teaching at Children House",
-      date: "2023-06-01",
-    },
-    {
-      title: "Spanish Language ",
-      date: "2024-01-15",
-    },
-    {
-      title: "French Language Resources ",
-      date: "2023-11-30",
-    },
-    {
-      title: "German Language Resources",
-      date: "2023-09-20",
-    },
-  ];
+  const Publication = useSelector((state) => state.form.formData?.publications);
 
   const temp6style = {
     fontSize:
@@ -116,63 +100,59 @@ export default function Publication({
                 background: (temp == "fourth" || temp == "fifth") && "black",
               }}
             />
-            {(formValues.Publication
-              ? formValues.Publication
-              : Publication
-            ).map((publication, index) => (
-              <Box
-                key={index}
-                sx={{
-                  display: temp == "fifth" ? "flex" : "inline-flex",
-                  alignItems: "center",
-                  color:
-                    temp == "fifth"
-                      ? "rgba(83, 97, 103, 1)"
-                      : "rgba(83, 97, 103, 1)",
-                  // background: temp == "fifth" && "rgb(19 71 119)",
-                  padding: ".5rem",
-                  fontFamily: fontFamily,
-                  width: "calc(33.333% - 16px)",
-                  mb: 0.5,
-                  ml: temp === "eighth" && 2.5,
-                  marginRight: "8px",
-                }}
-              >
-                <Box display={"flex"} flexDirection={"column"}>
-                  <Typography
+            {(formValues?.Publication || Publication || []).length > 0 &&
+              (formValues?.Publication || Publication || []).map(
+                (publication, index) => (
+                  <Box
+                    key={index}
                     sx={{
-                      fontSize:
-                        fontSize == 2
-                          ? "15px"
-                          : fontSize == 0
-                          ? "8px"
-                          : fontSize == 1
-                          ? "10px"
-                          : "20px",
+                      display: temp === "fifth" ? "flex" : "inline-flex",
+                      alignItems: "center",
+                      color: "rgba(83, 97, 103, 1)",
+                      padding: ".5rem",
                       fontFamily: fontFamily,
+                      width: "calc(33.333% - 16px)",
+                      mb: 0.5,
+                      ml: temp === "eighth" ? 2.5 : 0,
+                      marginRight: "8px",
                     }}
                   >
-                    {publication.title}
-                  </Typography>
-                  <Box>
-                    <Typography
-                      sx={{
-                        fontSize:
-                          fontSize == 2
-                            ? "12px"
-                            : fontSize == 0
-                            ? "6px"
-                            : fontSize == 1
-                            ? "7px"
-                            : "15px",
-                      }}
-                    >
-                      {publication.date}
-                    </Typography>
+                    <Box display={"flex"} flexDirection={"column"}>
+                      <Typography
+                        sx={{
+                          fontSize:
+                            fontSize === 2
+                              ? "15px"
+                              : fontSize === 0
+                              ? "8px"
+                              : fontSize === 1
+                              ? "10px"
+                              : "20px",
+                          fontFamily: fontFamily,
+                        }}
+                      >
+                        {publication.title}
+                      </Typography>
+                      <Box>
+                        <Typography
+                          sx={{
+                            fontSize:
+                              fontSize === 2
+                                ? "12px"
+                                : fontSize === 0
+                                ? "6px"
+                                : fontSize === 1
+                                ? "7px"
+                                : "15px",
+                          }}
+                        >
+                          {publication.date}
+                        </Typography>
+                      </Box>
+                    </Box>
                   </Box>
-                </Box>
-              </Box>
-            ))}
+                )
+              )}
           </>
         )}
         {(temp === "fourth" || temp === "sixth") && (
@@ -183,53 +163,53 @@ export default function Publication({
                 background: (temp == "fourth" || temp == "fifth") && "black",
               }}
             />
-            {(formValues.Publication
-              ? formValues.Publication
-              : Publication
-            ).map((publication, index) => (
-              <ul key={index}>
-                <li
-                  style={{
-                    fontFamily: fontFamily,
-                    color: primaryColor
-                      ? primaryColor
-                      : temp === "sixth"
-                      ? "rgba(83, 97, 103, 1)"
-                      : "rgba(83, 97, 103, 1)"
-                  }}
-                >
-                  <Typography
-                    sx={{
-                      fontSize:
-                        fontSize == 2
-                          ? "12px"
-                          : fontSize == 0
-                          ? "8px"
-                          : fontSize == 1
-                          ? "9px"
-                          : "15px",
-                      fontFamily: fontFamily,
-                    }}
-                  >
-                    {publication.title}
-                    <Typography
-                      sx={{
-                        fontSize:
-                          fontSize == 2
-                            ? "10px"
-                            : fontSize == 0
-                            ? "5px"
-                            : fontSize == 1
-                            ? "6px"
-                            : "10px",
+            {(formValues?.Publication || Publication || []).length > 0 &&
+              (formValues?.Publication || Publication || []).map(
+                (publication, index) => (
+                  <ul key={index}>
+                    <li
+                      style={{
+                        fontFamily: fontFamily,
+                        color: primaryColor
+                          ? primaryColor
+                          : temp === "sixth"
+                          ? "rgba(83, 97, 103, 1)"
+                          : "rgba(83, 97, 103, 1)",
                       }}
                     >
-                      {publication.date}
-                    </Typography>
-                  </Typography>
-                </li>
-              </ul>
-            ))}
+                      <Typography
+                        sx={{
+                          fontSize:
+                            fontSize == 2
+                              ? "12px"
+                              : fontSize == 0
+                              ? "8px"
+                              : fontSize == 1
+                              ? "9px"
+                              : "15px",
+                          fontFamily: fontFamily,
+                        }}
+                      >
+                        {publication.title}
+                        <Typography
+                          sx={{
+                            fontSize:
+                              fontSize == 2
+                                ? "10px"
+                                : fontSize == 0
+                                ? "5px"
+                                : fontSize == 1
+                                ? "6px"
+                                : "10px",
+                          }}
+                        >
+                          {publication.date}
+                        </Typography>
+                      </Typography>
+                    </li>
+                  </ul>
+                )
+              )}
           </>
         )}
       </Box>

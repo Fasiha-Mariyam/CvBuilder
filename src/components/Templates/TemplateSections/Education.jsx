@@ -20,6 +20,8 @@ export default function Education({
     borderTopRightRadius: "50%",
     p: 5,
   };
+// Ensure formValues is not undefined or null
+if (formValues) {
   Object.keys(formValues).forEach((key) => {
     let match = key.match(/^(education\d+)_/);
     if (match) {
@@ -30,7 +32,11 @@ export default function Education({
       education[prefix][key.replace(`${prefix}_`, "")] = formValues[key];
     }
   });
-  console.log("edu", education);
+} else {
+  // Handle the case where formValues is undefined or null
+  console.warn('formValues is undefined or null');
+}
+
   return (
     <>
       {temp !== "sixth" && (

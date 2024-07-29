@@ -1,35 +1,43 @@
 /* eslint-disable react/prop-types */
 import { Button, TextField, Box, Typography } from '@mui/material';
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import CreateOutlinedIcon from '@mui/icons-material/CreateOutlined';
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
+import { useSelector } from 'react-redux';
 
-export default function Courses({ addedCustomSections, number, addedSections }) {
-  const [courses, setCourses] = useState([]);
+export default function Courses({ addedCustomSections, number, addedSections, handleInputChange }) {
+  const Courses = useSelector((state) => state.form.formData?.courses);
+  const [courses, setCourses] = useState(Courses || []);
   const [isFormVisible, setIsFormVisible] = useState(true);
   const [courseName, setCourseName] = useState('');
   const [courseDescription, setCourseDescription] = useState('');
   const [formError, setFormError] = useState('');
   const [editIndex, setEditIndex] = useState(null);
 
+  useEffect(() => {
+    setCourses(Courses || []);
+  }, [Courses]);
+
   const handleAddClick = () => {
     if (courseName && courseDescription) {
+      let updatedCourses;
       if (editIndex !== null) {
         // Update existing course
-        const updatedCourses = [...courses];
-        updatedCourses[editIndex] = { name: courseName, description: courseDescription };
-        setCourses(updatedCourses);
+        updatedCourses = [...courses];
+        updatedCourses[editIndex] = { title: courseName, description: courseDescription };
         setEditIndex(null); // Reset edit index
       } else {
         // Add new course
-        const newCourse = { name: courseName, description: courseDescription };
-        setCourses([...courses, newCourse]);
+        const newCourse = { title: courseName, description: courseDescription };
+        updatedCourses = [...courses, newCourse];
 
         // Add number to addedCustomSections if not already present
         if (!addedSections.includes(number)) {
           addedCustomSections(number);
         }
       }
+      setCourses(updatedCourses);
+      handleInputChange({ target: { name: 'courses', value: updatedCourses } });
       setCourseName('');
       setCourseDescription('');
       setFormError('');
@@ -45,7 +53,7 @@ export default function Courses({ addedCustomSections, number, addedSections }) 
   };
 
   const handleEditClick = (index) => {
-    setCourseName(courses[index].name);
+    setCourseName(courses[index].title);
     setCourseDescription(courses[index].description);
     setEditIndex(index);
     setIsFormVisible(true);
@@ -54,17 +62,18 @@ export default function Courses({ addedCustomSections, number, addedSections }) 
   const handleDeleteClick = (index) => {
     const updatedCourses = courses.filter((_, i) => i !== index);
     setCourses(updatedCourses);
+    handleInputChange({ target: { name: 'courses', value: updatedCourses } });
   };
 
   return (
     <Box sx={{ padding: 2, border: '1px solid grey', borderRadius: 2, maxWidth: 400, mx: 'auto' }}>
-      <Typography variant="h6" gutterBottom sx={{textAlign:"start"}}>
+      <Typography variant="h6" gutterBottom sx={{ textAlign: 'start' }}>
         Courses
       </Typography>
       {courses.map((course, index) => (
         <Box key={index} sx={{ mb: 1, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
           <Box>
-            <Typography variant="body1">{course.name}</Typography>
+            <Typography variant="body1">{course.title}</Typography>
             <Typography variant="body2" color="textSecondary">
               {course.description}
             </Typography>

@@ -2,6 +2,7 @@
 import React from "react";
 import { Box, Divider, Typography } from "@mui/material";
 import InterpreterModeIcon from "@mui/icons-material/InterpreterMode";
+import { useSelector } from "react-redux";
 
 export default function Customize({
   formValues,
@@ -11,43 +12,7 @@ export default function Customize({
   primaryColor,
   fontSize,
 }) {
-  const CustomizeData = [
-    {
-      name: "Affiliation",
-      fields: [
-        {
-          title: "JNSKA Membership",
-          description:
-            "Active member of the Junior National Science Knowledge Association (JNSKA), ",
-          date: "2024-05-20",
-        },
-        {
-          title: "Tech Club",
-          description:
-            "Engaged member of the university Tech Club, responsible for organizing workshops",
-          date: "2024-03-15",
-        },
-      ],
-    },
-    {
-      name: "Expertise",
-      fields: [
-        {
-          title: "Research on AI",
-          description:
-            "Authored a comprehensive research paper on artificial intelligence,",
-          date: "2024-01-10",
-        },
-        {
-          title: "Tech Trends Article",
-          description:
-            "Published an insightful article on the latest trends in technology in a renowned tech magazine,",
-          date: "2023-12-05",
-        },
-      ],
-    },
-  ];
-
+  const CustomizeData = useSelector((state) => state.form.formData?.sections);
   const temp6style = {
     fontSize:
       fontSize === 2
@@ -68,7 +33,8 @@ export default function Customize({
     <>
       <Box>
         {!temp && <Divider sx={{ my: 1 }} />}
-        {CustomizeData.map((section, sectionIndex) => (
+        {(formValues?.sections || CustomizeData || []).length > 0 &&
+              (formValues?.sections || CustomizeData || []).map((section, sectionIndex) => (
           <Box key={sectionIndex}>
             <Typography
               sx={

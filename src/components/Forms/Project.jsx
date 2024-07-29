@@ -8,16 +8,21 @@ export default function Project({handleInputChange , formValues}) {
   const [Project, setProject] = React.useState([1]);
   const [openProject, setOpenProject] = React.useState(1);
   const projects = {};
-  Object.keys(formValues).forEach((key) => {
-    let match = key.match(/^(project\d+)_/);
-    if (match) {
-      const prefix = match[1];
-      if (!projects[prefix]) {
-        projects[prefix] = {};
+  if (formValues) {
+    Object.keys(formValues).forEach((key) => {
+      let match = key.match(/^(project\d+)_/);
+      if (match) {
+        const prefix = match[1];
+        if (!projects[prefix]) {
+          projects[prefix] = {};
+        }
+        projects[prefix][key.replace(`${prefix}_`, "")] = formValues[key];
       }
-      projects[prefix][key.replace(`${prefix}_`, "")] = formValues[key];
-    }
-  });
+    });
+  } else {
+    // Handle the case where formValues is undefined or null
+    console.warn('formValues is undefined or null');
+  }
 
   const handleAddProject = () => {
     const newProject = Project.length + 1;

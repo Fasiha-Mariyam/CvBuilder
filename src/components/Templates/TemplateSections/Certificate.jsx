@@ -2,6 +2,7 @@
 import { Box, Divider, Typography } from "@mui/material";
 import WorkspacePremiumIcon from "@mui/icons-material/WorkspacePremium";
 import React from "react";
+import { useSelector } from "../../../redux/store";
 
 export default function Certificate({
   formValues,
@@ -11,12 +12,7 @@ export default function Certificate({
   primaryColor,
   fontSize,
 }) {
-  const Certificates = [
-    { name: "Reading", institution: "Institution A" },
-    { name: "Learning", institution: "Institution B" },
-    { name: "Traveling", institution: "Institution C" },
-    { name: "Coding", institution: "Institution D" },
-  ];
+  const Certificates = useSelector((state)=>state.form.formData?.certificates)
   const temp6style = {
     fontSize:
       fontSize == 2
@@ -97,10 +93,8 @@ export default function Certificate({
           <>
             {" "}
             <Divider sx={{ mb: 1 ,background: temp === "fifth" && "black" }} />
-            {(formValues.Certificates
-              ? formValues.Certificates
-              : Certificates
-            ).map((certificate, index) => (
+            {(formValues?.Certificates || Certificates || []).length > 0 &&
+              (formValues?.Certificates || Certificates || []).map((certificate, index) => (
               <Box
                 key={index}
                 sx={{

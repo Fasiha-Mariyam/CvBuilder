@@ -216,8 +216,8 @@ export default function PersonalInfo({
                     textAlign: temp == "sixth" && "center",
                   }}
                 >
-                  {formValues.firstName ? formValues.firstName : "Fasiha"}
-                  {formValues.lastName ? formValues.lastName : " Mariyam"}
+                  {formValues?.firstName ? formValues?.firstName : "Fasiha"}
+                  {formValues?.lastName ? formValues?.lastName : " Mariyam"}
                 </Typography>
                 <Typography
                   sx={{
@@ -236,8 +236,8 @@ export default function PersonalInfo({
                     textAlign: temp == "sixth" && "center",
                   }}
                 >
-                  {formValues.jobTitle
-                    ? formValues.jobTitle
+                  {formValues?.jobTitle
+                    ? formValues?.jobTitle
                     : `Frontend Developer`}
                 </Typography>
               </div>
@@ -271,7 +271,7 @@ export default function PersonalInfo({
                           : textStyle
                       }
                     >
-                      {formValues.email ? formValues.email : ` n@gmail.com`}
+                      {formValues?.email ? formValues?.email : ` n@gmail.com`}
                     </Typography>
                     <Typography
                       sx={
@@ -282,8 +282,8 @@ export default function PersonalInfo({
                           : textStyle
                       }
                     >
-                      {formValues.phoneNumber
-                        ? formValues.phoneNumber
+                      {formValues?.phoneNumber
+                        ? formValues?.phoneNumber
                         : `021-36983322`}
                     </Typography>
                     <Typography
@@ -295,8 +295,8 @@ export default function PersonalInfo({
                           : textStyle
                       }
                     >
-                      {formValues.Address
-                        ? formValues.Address
+                      {formValues?.Address
+                        ? formValues?.Address
                         : ` Sana Heights`}
                     </Typography>
                   </Box>
@@ -310,8 +310,8 @@ export default function PersonalInfo({
                           : textStyle
                       }
                     >
-                      {formValues.LinkedIn
-                        ? formValues.LinkedIn
+                      {formValues?.LinkedIn
+                        ? formValues?.LinkedIn
                         : `https://www.linkedin.com/feed/ `}
                     </Typography>
                     <Typography
@@ -323,8 +323,8 @@ export default function PersonalInfo({
                           : textStyle
                       }
                     >
-                      {formValues.GitHub
-                        ? formValues.GitHub
+                      {formValues?.GitHub
+                        ? formValues?.GitHub
                         : ` https://github.com/`}
                     </Typography>
                   </Box>
@@ -373,7 +373,7 @@ export default function PersonalInfo({
                     <EmailIcon /> Email:
                   </Typography>
                   <Typography sx={temp4Style}>
-                    {formValues.email ? formValues.email : ` n@gmail.com`}
+                    {formValues?.email ? formValues?.email : ` n@gmail.com`}
                   </Typography>
                   <Typography
                     sx={{
@@ -394,8 +394,8 @@ export default function PersonalInfo({
                     <LocalPhoneIcon /> Phone Number:
                   </Typography>
                   <Typography sx={temp4Style}>
-                    {formValues.phoneNumber
-                      ? formValues.phoneNumber
+                    {formValues?.phoneNumber
+                      ? formValues?.phoneNumber
                       : `021-36983322`}
                   </Typography>
                   <Typography
@@ -417,7 +417,9 @@ export default function PersonalInfo({
                     <HomeIcon /> Address:
                   </Typography>
                   <Typography sx={temp4Style}>
-                    {formValues.Address ? formValues.Address : ` Sana Heights`}
+                    {formValues?.Address
+                      ? formValues?.Address
+                      : ` Sana Heights`}
                   </Typography>
                 </Box>
                 <Box sx={{ mx: between1200to1500 ? 0 : 3 }}>
@@ -440,8 +442,8 @@ export default function PersonalInfo({
                     <LinkedInIcon /> LinkedIn:
                   </Typography>
                   <Typography sx={temp4Style}>
-                    {formValues.LinkedIn
-                      ? formValues.LinkedIn
+                    {formValues?.LinkedIn
+                      ? formValues?.LinkedIn
                       : `https://www.linkedin.com/feed/ `}
                   </Typography>
                   <Typography
@@ -463,8 +465,8 @@ export default function PersonalInfo({
                     <GitHubIcon /> GitHub:
                   </Typography>
                   <Typography sx={temp4Style}>
-                    {formValues.GitHub
-                      ? formValues.GitHub
+                    {formValues?.GitHub
+                      ? formValues?.GitHub
                       : ` https://github.com/`}
                   </Typography>
                 </Box>
@@ -485,7 +487,7 @@ export default function PersonalInfo({
                     />
                   </Typography>
                   <Typography sx={temp5Style}>
-                    {formValues.email ? formValues.email : ` n@gmail.com`}
+                    {formValues?.email ? formValues?.email : ` n@gmail.com`}
                   </Typography>
                   <Typography
                     sx={{ display: "flex", alignItems: "center", gap: 1 }}
@@ -497,8 +499,8 @@ export default function PersonalInfo({
                     />
                   </Typography>
                   <Typography sx={temp5Style}>
-                    {formValues.phoneNumber
-                      ? formValues.phoneNumber
+                    {formValues?.phoneNumber
+                      ? formValues?.phoneNumber
                       : `021-36983322`}
                   </Typography>
                   <Typography
@@ -511,7 +513,9 @@ export default function PersonalInfo({
                     />
                   </Typography>
                   <Typography sx={temp5Style}>
-                    {formValues.Address ? formValues.Address : ` Sana Heights`}
+                    {formValues?.Address
+                      ? formValues?.Address
+                      : ` Sana Heights`}
                   </Typography>
                 </Box>
                 <Box sx={{ mx: between1200to1500 ? 0 : 3 }}>
@@ -525,8 +529,8 @@ export default function PersonalInfo({
                     />
                   </Typography>
                   <Typography sx={temp5Style}>
-                    {formValues.LinkedIn
-                      ? formValues.LinkedIn
+                    {formValues?.LinkedIn
+                      ? formValues?.LinkedIn
                       : `https://www.linkedin.com/feed/ `}
                   </Typography>
                   <Typography
@@ -539,8 +543,8 @@ export default function PersonalInfo({
                     />
                   </Typography>
                   <Typography sx={temp5Style}>
-                    {formValues.GitHub
-                      ? formValues.GitHub
+                    {formValues?.GitHub
+                      ? formValues?.GitHub
                       : ` https://github.com/`}
                   </Typography>
                 </Box>
@@ -562,7 +566,7 @@ export default function PersonalInfo({
                     <EmailIcon
                       sx={{ color: primaryColor ? primaryColor : "black" }}
                     />
-                    {formValues.email ? formValues.email : ` n@gmail.com`}
+                    {formValues?.email ? formValues?.email : ` n@gmail.com`}
                   </Typography>
 
                   <Typography
@@ -576,8 +580,8 @@ export default function PersonalInfo({
                     <LocalPhoneIcon
                       sx={{ color: primaryColor ? primaryColor : "black" }}
                     />
-                    {formValues.phoneNumber
-                      ? formValues.phoneNumber
+                    {formValues?.phoneNumber
+                      ? formValues?.phoneNumber
                       : `021-36983322`}
                   </Typography>
 
@@ -593,7 +597,9 @@ export default function PersonalInfo({
                     <HomeIcon
                       sx={{ color: primaryColor ? primaryColor : "black" }}
                     />{" "}
-                    {formValues.Address ? formValues.Address : ` Sana Heights`}
+                    {formValues?.Address
+                      ? formValues?.Address
+                      : ` Sana Heights`}
                   </Typography>
                 </Box>
                 <Box sx={{ mx: between1200to1500 ? 0 : 3 }}>
@@ -610,8 +616,8 @@ export default function PersonalInfo({
                     <LinkedInIcon
                       sx={{ color: primaryColor ? primaryColor : "black" }}
                     />
-                    {formValues.LinkedIn
-                      ? formValues.LinkedIn
+                    {formValues?.LinkedIn
+                      ? formValues?.LinkedIn
                       : `https://www.linkedin.com`}
                   </Typography>
 
@@ -627,8 +633,8 @@ export default function PersonalInfo({
                     <GitHubIcon
                       sx={{ color: primaryColor ? primaryColor : "black" }}
                     />{" "}
-                    {formValues.GitHub
-                      ? formValues.GitHub
+                    {formValues?.GitHub
+                      ? formValues?.GitHub
                       : ` https://github.com/`}
                   </Typography>
                 </Box>
@@ -645,21 +651,21 @@ export default function PersonalInfo({
                 <EmailIcon
                   sx={{ color: primaryColor ? primaryColor : "rgb(4 118 188)" }}
                 />
-                {formValues.email ? formValues.email : ` n@gmail.com`}
+                {formValues?.email ? formValues?.email : ` n@gmail.com`}
               </Typography>
               <Typography sx={Temp7Style}>
                 <LocalPhoneIcon
                   sx={{ color: primaryColor ? primaryColor : "rgb(4 118 188)" }}
                 />
-                {formValues.phoneNumber
-                  ? formValues.phoneNumber
+                {formValues?.phoneNumber
+                  ? formValues?.phoneNumber
                   : `021-36983322`}
               </Typography>
               <Typography sx={Temp7Style}>
                 <PersonPinCircleIcon
                   sx={{ color: primaryColor ? primaryColor : "rgb(4 118 188)" }}
                 />
-                {formValues.Address ? formValues.Address : ` Sana Heights`}
+                {formValues?.Address ? formValues?.Address : ` Sana Heights`}
               </Typography>
             </Box>
             <Box>
@@ -667,15 +673,17 @@ export default function PersonalInfo({
                 <LinkedInIcon
                   sx={{ color: primaryColor ? primaryColor : "rgb(4 118 188)" }}
                 />
-                {formValues.LinkedIn
-                  ? formValues.LinkedIn
+                {formValues?.LinkedIn
+                  ? formValues?.LinkedIn
                   : `https://www.linkedin.com/feed/ `}
               </Typography>
               <Typography sx={Temp7Style}>
                 <GitHubIcon
                   sx={{ color: primaryColor ? primaryColor : "rgb(4 118 188)" }}
                 />
-                {formValues.GitHub ? formValues.GitHub : ` https://github.com/`}
+                {formValues?.GitHub
+                  ? formValues?.GitHub
+                  : ` https://github.com/`}
               </Typography>
             </Box>
           </div>
@@ -687,29 +695,31 @@ export default function PersonalInfo({
             <Box>
               <Typography sx={Temp8Text}>
                 <EmailIcon />
-                {formValues.email ? formValues.email : ` n@gmail.com`}
+                {formValues?.email ? formValues?.email : ` n@gmail.com`}
               </Typography>
               <Typography sx={Temp8Text}>
                 <LocalPhoneIcon />
-                {formValues.phoneNumber
-                  ? formValues.phoneNumber
+                {formValues?.phoneNumber
+                  ? formValues?.phoneNumber
                   : `021-36983322`}
               </Typography>
               <Typography sx={Temp8Text}>
                 <PersonPinCircleIcon />
-                {formValues.Address ? formValues.Address : ` Sana Heights`}
+                {formValues?.Address ? formValues?.Address : ` Sana Heights`}
               </Typography>
             </Box>
             <Box>
               <Typography sx={Temp8Text}>
                 <LinkedInIcon />
-                {formValues.LinkedIn
-                  ? formValues.LinkedIn
+                {formValues?.LinkedIn
+                  ? formValues?.LinkedIn
                   : `https://www.linkedin.com/feed/ `}
               </Typography>
               <Typography sx={Temp8Text}>
                 <GitHubIcon />
-                {formValues.GitHub ? formValues.GitHub : ` https://github.com/`}
+                {formValues?.GitHub
+                  ? formValues?.GitHub
+                  : ` https://github.com/`}
               </Typography>
             </Box>
           </Box>

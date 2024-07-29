@@ -1,38 +1,47 @@
 /* eslint-disable react/prop-types */
 import { Button, TextField, Box, Typography, IconButton } from '@mui/material';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import CreateOutlinedIcon from '@mui/icons-material/CreateOutlined';
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
-import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { useSelector } from 'react-redux';
 
-export default function CustomSection() {
+export default function CustomSection({ handleInputChange }) {
+  const CustomizeSections = useSelector((state) => state.form.formData?.sections);
   const [sections, setSections] = useState([]);
   const [isFormVisible, setIsFormVisible] = useState(true);
   const [sectionName, setSectionName] = useState('');
-  const [fields, setFields] = useState([{ title: '', description: '', date: null }]);
+  const [fields, setFields] = useState([{ title: '', description: '', date: '' }]);
   const [formError, setFormError] = useState('');
   const [editIndex, setEditIndex] = useState(null);
- console.log(sections,"custom");
+
+  useEffect(() => {
+    setSections(CustomizeSections || []);
+  }, [CustomizeSections]);
+
+  const updateSections = (newSections) => {
+    setSections(newSections);
+    handleInputChange({ target: { name: 'sections', value: newSections } });
+  };
+
   const handleAddSectionClick = () => {
     if (sectionName && fields.every(field => field.title && field.description && field.date)) {
       const newSection = {
         name: sectionName,
         fields: fields
       };
-
+      
       if (editIndex !== null) {
         const updatedSections = [...sections];
         updatedSections[editIndex] = newSection;
-        setSections(updatedSections);
+        updateSections(updatedSections);
         setEditIndex(null);
       } else {
-        setSections([...sections, newSection]);
+        updateSections([...sections, newSection]);
       }
 
       setSectionName('');
-      setFields([{ title: '', description: '', date: null }]);
+      setFields([{ title: '', description: '', date: '' }]);
       setFormError('');
       setIsFormVisible(false);
     } else {
@@ -41,17 +50,19 @@ export default function CustomSection() {
   };
 
   const handleAddFieldClick = () => {
-    setFields([...fields, { title: '', description: '', date: null }]);
+    setFields([...fields, { title: '', description: '', date: '' }]);
   };
 
   const handleFieldChange = (index, field, value) => {
     const updatedFields = fields.map((f, i) => (i === index ? { ...f, [field]: value } : f));
     setFields(updatedFields);
+    updateSections(sections.map((section, i) => (i === editIndex ? { ...section, fields: updatedFields } : section)));
   };
 
   const handleDeleteFieldClick = (index) => {
     const updatedFields = fields.filter((_, i) => i !== index);
     setFields(updatedFields);
+    updateSections(sections.map((section, i) => (i === editIndex ? { ...section, fields: updatedFields } : section)));
   };
 
   const handleAddMoreClick = () => {
@@ -69,7 +80,7 @@ export default function CustomSection() {
 
   const handleDeleteClick = (index) => {
     const updatedSections = sections.filter((_, i) => i !== index);
-    setSections(updatedSections);
+    updateSections(updatedSections);
   };
 
   return (
@@ -84,7 +95,7 @@ export default function CustomSection() {
             <Box key={idx} sx={{ mb: 1, pl: 2 }}>
               <Typography variant="body1">Title: {field.title}</Typography>
               <Typography variant="body2" color="textSecondary">Description: {field.description}</Typography>
-              <Typography variant="body2" color="textSecondary">Date: {field.date?.format('MM/DD/YYYY')}</Typography>
+              <Typography variant="body2" color="textSecondary">Date: {field.date}</Typography>
             </Box>
           ))}
           <Box>
@@ -136,25 +147,18 @@ export default function CustomSection() {
                 error={!!formError}
                 helperText={formError}
               />
-              <LocalizationProvider dateAdapter={AdapterDayjs}>
-                <DatePicker
-                  label="Date"
-                  fullWidth
-                  value={field.date}
-                  onChange={(date) => handleFieldChange(index, 'date', date)}
-                  renderInput={(params) => (
-                    <TextField
-                      {...params}
-                      fullWidth
-                      margin="normal"
-                      error={!!formError}
-                      helperText={formError}
-                    />
-                  )}
-                />
-              </LocalizationProvider>
+              <TextField
+                label="Date"
+                variant="outlined"
+                fullWidth
+                margin="normal"
+                type="date"
+                value={field.date}
+                onChange={(e) => handleFieldChange(index, 'date', e.target.value)}
+                InputLabelProps={{ shrink: true }}
+              />
               <br />
-              <IconButton onClick={() => handleDeleteFieldClick(index)} color="error" >
+              <IconButton onClick={() => handleDeleteFieldClick(index)} color="error">
                 <DeleteOutlinedIcon />
               </IconButton>
             </Box>

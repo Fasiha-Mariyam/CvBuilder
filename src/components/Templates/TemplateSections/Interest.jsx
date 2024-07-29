@@ -91,7 +91,7 @@ export default function Interest({
         {temp !== "fourth" && temp !== "sixth" && (
           <>
             <Divider sx={{ mb: 1 }} />
-            {(formValues.Interests ? formValues.Interests : Interests).map(
+            {(formValues?.Interests ? formValues?.Interests : Interests).map(
               (Interest, index) => (
                 <Box
                   key={index}
@@ -147,7 +147,7 @@ export default function Interest({
                 }}
               />
             )}
-            {(formValues.Interests ? formValues.Interests : Interests).map(
+            {(formValues?.Interests ? formValues?.Interests : Interests).map(
               (Interest, index) => (
                 <ul key={index}>
                   <li

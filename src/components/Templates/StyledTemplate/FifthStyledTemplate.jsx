@@ -144,8 +144,8 @@ export default function FifthStyledTemplate({
                   fontFamily: fontFamily,
                 }}
               >
-                {formValues.firstName ? formValues.firstName : "Fasiha"}
-                {formValues.lastName ? formValues.lastName : " Mariyam"}
+                {formValues?.firstName ? formValues?.firstName : "Fasiha"}
+                {formValues?.lastName ? formValues?.lastName : " Mariyam"}
               </Typography>
               <Typography
                 sx={{
@@ -163,8 +163,8 @@ export default function FifthStyledTemplate({
                   fontFamily: fontFamily,
                 }}
               >
-                {formValues.jobTitle
-                  ? formValues.jobTitle
+                {formValues?.jobTitle
+                  ? formValues?.jobTitle
                   : `Frontend Developer`}
                 <Divider sx={{ background: "white", width: "50%" }} />
               </Typography>
@@ -178,8 +178,8 @@ export default function FifthStyledTemplate({
                   fontSize: "12px",
                 }}
               >
-                {formValues.Summary
-                  ? formValues.Summary
+                {formValues?.Summary
+                  ? formValues?.Summary
                   : `Dedicated and results-driven Frontend Developer with a strong background
         in building responsive and user-friendly web applications. Proficient in
         React and Material-UI, with extensive experience in creating dynamic

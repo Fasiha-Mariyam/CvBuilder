@@ -2,6 +2,7 @@
 import { Box, Divider, Typography } from "@mui/material";
 import LocalLibraryIcon from "@mui/icons-material/LocalLibrary";
 import React from "react";
+import { useSelector } from "../../../redux/store";
 
 export default function Courses({
   formValues,
@@ -11,31 +12,13 @@ export default function Courses({
   primaryColor,
   fontSize,
 }) {
-  const Courses = [
-    {
-      title: "Intro to Python",
-      description:
-        "An introductory course on Python programming, covering basic concepts and syntax. Offered by DataCamp.",
-    },
-    {
-      title: "Advanced React",
-      description:
-        "An advanced course focusing on complex React patterns and state management. Offered by Udemy.",
-    },
-    {
-      title: "Machine Learning",
-      description:
-        "A comprehensive course on machine learning algorithms and applications. Offered by Coursera.",
-    },
-    {
-      title: "Data Visualization",
-      description:
-        "A course on techniques for visualizing data effectively using various tools. Offered by edX.",
-    },
-  ];
+  const Courses = useSelector((state) => state.form.formData?.courses);
 
+  console.log(Courses, "course");
   const groupedCourses = [];
-  const coursesList = formValues.Courses ? formValues.Courses : Courses;
+  const coursesList =
+    (formValues?.Courses || Courses || []).length > 0 &&
+    (formValues?.Courses || Courses || []);
 
   // Group courses into pairs
   for (let i = 0; i < coursesList.length; i += 2) {
@@ -98,7 +81,7 @@ export default function Courses({
                   color: secondaryColor
                     ? secondaryColor
                     : temp === "fourth"
-                   ? "rgb(30 55 99)"
+                    ? "rgb(30 55 99)"
                     : temp === "fifth"
                     ? "rgb(19 71 119)"
                     : temp === "seventh"
@@ -196,7 +179,7 @@ export default function Courses({
 
         {(temp === "fourth" || temp === "sixth") && (
           <>
-          <Divider sx={{ mb: 1 , background:temp === "fourth" && "black" }} />
+            <Divider sx={{ mb: 1, background: temp === "fourth" && "black" }} />
             {(formValues.Courses ? formValues.Courses : Courses).map(
               (course, index) => (
                 <ul key={index}>
@@ -213,8 +196,7 @@ export default function Courses({
                     <Typography
                       sx={{
                         fontSize:
-                         
-                            fontSize == 2
+                          fontSize == 2
                             ? "15px"
                             : fontSize == 0
                             ? "8px"
@@ -228,13 +210,13 @@ export default function Courses({
                       <Typography
                         sx={{
                           fontSize:
-                          fontSize == 2
-                          ? "12px"
-                          : fontSize == 0
-                          ? "8px"
-                          : fontSize == 1
-                          ? "9px"
-                          : "15px",
+                            fontSize == 2
+                              ? "12px"
+                              : fontSize == 0
+                              ? "8px"
+                              : fontSize == 1
+                              ? "9px"
+                              : "15px",
                         }}
                       >
                         {course.description}

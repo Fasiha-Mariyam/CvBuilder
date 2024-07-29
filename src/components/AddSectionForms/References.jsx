@@ -1,36 +1,43 @@
 /* eslint-disable react/prop-types */
 import { Button, TextField, Box, Typography } from "@mui/material";
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import CreateOutlinedIcon from "@mui/icons-material/CreateOutlined";
 import DeleteOutlinedIcon from "@mui/icons-material/DeleteOutlined";
+import { useSelector } from "react-redux";
 
-export default function Reference({ addedCustomSections, number, addedSections }) {
-  const [references, setReferences] = useState([]);
+export default function Reference({ addedCustomSections, number, addedSections, handleInputChange }) {
+  const References = useSelector((state) => state.form.formData?.references);
+
+  const [references, setReferences] = useState(References || []);
   const [isFormVisible, setIsFormVisible] = useState(true);
   const [referenceName, setReferenceName] = useState("");
   const [referenceEmail, setReferenceEmail] = useState("");
   const [formError, setFormError] = useState("");
   const [editIndex, setEditIndex] = useState(null); // Index of the reference being edited
 
-
+  useEffect(() => {
+    setReferences(References || []);
+  }, [References]);
   const handleAddClick = () => {
     if (referenceName && referenceEmail) {
+      let updatedReferences;
       if (editIndex !== null) {
         // Update existing reference
-        const updatedReferences = [...references];
+        updatedReferences = [...references];
         updatedReferences[editIndex] = { name: referenceName, email: referenceEmail };
-        setReferences(updatedReferences);
         setEditIndex(null); // Reset edit index
       } else {
         // Add new reference
         const newReference = { name: referenceName, email: referenceEmail };
-        setReferences([...references, newReference]);
+        updatedReferences = [...references, newReference];
 
         // Add number to addedCustomSections if not already present
         if (!addedSections.includes(number)) {
           addedCustomSections(number);
         }
       }
+      setReferences(updatedReferences);
+      handleInputChange({ target: { name: 'references', value: updatedReferences } });
       setReferenceName("");
       setReferenceEmail("");
       setFormError("");
@@ -55,6 +62,7 @@ export default function Reference({ addedCustomSections, number, addedSections }
   const handleDeleteClick = (index) => {
     const updatedReferences = references.filter((_, i) => i !== index);
     setReferences(updatedReferences);
+    handleInputChange({ target: { name: 'references', value: updatedReferences } });
   };
 
   return (

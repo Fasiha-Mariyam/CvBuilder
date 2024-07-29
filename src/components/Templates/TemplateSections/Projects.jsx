@@ -27,17 +27,23 @@ export default function Projects({
     gap: 1,
   };
   const projects = {};
-  Object.keys(formValues).forEach((key) => {
-    let match = key.match(/^(project\d+)_/);
-    if (match) {
-      const prefix = match[1];
-      if (!projects[prefix]) {
-        projects[prefix] = {};
+  // Check if formValues is not undefined or null
+  if (formValues) {
+    Object.keys(formValues).forEach((key) => {
+      let match = key.match(/^(project\d+)_/);
+      if (match) {
+        const prefix = match[1];
+        if (!projects[prefix]) {
+          projects[prefix] = {};
+        }
+        projects[prefix][key.replace(`${prefix}_`, "")] = formValues[key];
       }
-      projects[prefix][key.replace(`${prefix}_`, "")] = formValues[key];
-    }
-  });
-  console.log("projectTemp", projects);
+    });
+  } else {
+    // Handle the case where formValues is undefined or null
+    console.warn("formValues is undefined or null");
+  }
+
   return (
     <>
       {temp !== "sixth" && (
@@ -55,7 +61,11 @@ export default function Projects({
                   : "2em",
               fontWeight: "600",
               mt:
-                (temp == "fourth" || temp == "fifth" || temp == "eighth" || temp == "second") && 2,
+                (temp == "fourth" ||
+                  temp == "fifth" ||
+                  temp == "eighth" ||
+                  temp == "second") &&
+                2,
               ml: temp === "eighth" && 2.5,
               border: temp === "seventh" && "1px solid rgb(4 50 128)",
               borderRadius: temp === "seventh" && "50px",

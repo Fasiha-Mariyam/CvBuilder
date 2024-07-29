@@ -1,31 +1,39 @@
 /* eslint-disable react/prop-types */
 import { Button, TextField, Box, Typography } from "@mui/material";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import CreateOutlinedIcon from "@mui/icons-material/CreateOutlined";
 import DeleteOutlinedIcon from "@mui/icons-material/DeleteOutlined";
+import { useSelector } from "../../redux/store";
 
 export default function Certificate({
   addedCustomSections,
   number,
   addedSections,
+  handleInputChange
 }) {
-  const [certificates, setCertificates] = useState([]);
+  const Certificates = useSelector((state) => state.form.formData?.certificates);
+  const [certificates, setCertificates] = useState(Certificates || []);
   const [isFormVisible, setIsFormVisible] = useState(true);
   const [certificateName, setCertificateName] = useState("");
   const [institute, setInstitute] = useState("");
   const [formError, setFormError] = useState("");
-  const [editIndex, setEditIndex] = useState(null); // Index of the certificate being edited
+  const [editIndex, setEditIndex] = useState(null);
+
+  // Sync component state with Redux state on initial render
+  useEffect(() => {
+    setCertificates(Certificates || []);
+  }, [Certificates]);
 
   const handleAddClick = () => {
     if (certificateName && institute) {
+      let updatedCertificates;
       if (editIndex !== null) {
         // Update existing certificate
-        const updatedCertificates = [...certificates];
+        updatedCertificates = [...certificates];
         updatedCertificates[editIndex] = {
           name: certificateName,
           institution: institute,
         };
-        setCertificates(updatedCertificates);
         setEditIndex(null); // Reset edit index
       } else {
         // Add new certificate
@@ -33,11 +41,13 @@ export default function Certificate({
           name: certificateName,
           institution: institute,
         };
-        setCertificates([...certificates, newCertificate]);
+        updatedCertificates = [...certificates, newCertificate];
         if (!addedSections.includes(number)) {
           addedCustomSections(number);
         }
       }
+      setCertificates(updatedCertificates);
+      handleInputChange({ target: { name: "certificates", value: updatedCertificates } });
       setCertificateName("");
       setInstitute("");
       setFormError("");
@@ -62,6 +72,7 @@ export default function Certificate({
   const handleDeleteClick = (index) => {
     const updatedCertificates = certificates.filter((_, i) => i !== index);
     setCertificates(updatedCertificates);
+    handleInputChange({ target: { name: "certificates", value: updatedCertificates } });
   };
 
   return (
@@ -95,7 +106,6 @@ export default function Certificate({
               </Typography>
             </Box>
             <Box>
-              {" "}
               <Button
                 onClick={() => handleEditClick(index)}
                 color="primary"

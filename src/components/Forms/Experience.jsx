@@ -7,16 +7,21 @@ export default function Experience({handleInputChange , formValues}) {
   const [experiences, setExperiences] = React.useState([1]);
   const [openExperience, setOpenExperience] = React.useState(1);
   const exp = {};
-  Object.keys(formValues).forEach((key) => {
-    const match = key.match(/^(experience\d+)_/);
-    if (match) {
-      const prefix = match[1];
-      if (!exp[prefix]) {
-        exp[prefix] = {};
+  if (formValues) {
+    Object.keys(formValues).forEach((key) => {
+      const match = key.match(/^(experience\d+)_/);
+      if (match) {
+        const prefix = match[1];
+        if (!exp[prefix]) {
+          exp[prefix] = {};
+        }
+        exp[prefix][key.replace(`${prefix}_`, "")] = formValues[key];
       }
-      exp[prefix][key.replace(`${prefix}_`, "")] = formValues[key];
-    }
-  });
+    });
+  } else {
+    // Handle the case where formValues is undefined or null
+    console.warn('formValues is undefined or null');
+  }
   const handleAddExperience = () => {
     const newExperience = experiences.length + 1;
     setExperiences([...experiences, newExperience]);

@@ -2,6 +2,7 @@
 import React from "react";
 import { Box, Divider, Typography, LinearProgress } from "@mui/material";
 import InterpreterModeIcon from "@mui/icons-material/InterpreterMode";
+import { useSelector } from "react-redux";
 
 export default function Links({
   formValues,
@@ -11,12 +12,7 @@ export default function Links({
   primaryColor,
   fontSize,
 }) {
-  const links = [
-    { title: "Portfolio", url: "https://example.com/english" },
-    { title: "Spanish link   Resources", url: "https://example.com/spanish" },
-    { title: "French link   Resources", url: "https://example.com/french" },
-    { title: "German link   Resources", url: "https://example.com/german" },
-  ];
+  const links = useSelector((state) => state.form.formData?.links);
 
   const temp6style = {
     fontSize:
@@ -103,8 +99,8 @@ export default function Links({
                 background: (temp == "fourth" || temp == "fifth") && "black",
               }}
             />
-            {(formValues.links ? formValues.links : links).map(
-              (link, index) => (
+            {(formValues?.links || links || []).length > 0 &&
+              (formValues?.links || links || []).map((link, index) => (
                 <Box
                   key={index}
                   sx={{
@@ -158,8 +154,7 @@ export default function Links({
                     </Box>
                   </Box>
                 </Box>
-              )
-            )}
+              ))}
           </>
         )}
         {(temp === "fourth" || temp === "sixth") && (
@@ -170,7 +165,7 @@ export default function Links({
                 background: (temp == "fourth" || temp == "fifth") && "black",
               }}
             />
-            {(formValues.links ? formValues.links : links).map(
+            {(formValues?.links ? formValues?.links : links).map(
               (link, index) => (
                 <ul key={index}>
                   <li

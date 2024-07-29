@@ -2,6 +2,7 @@
 import { Box, Divider, Typography } from "@mui/material";
 import SocialDistanceIcon from "@mui/icons-material/SocialDistance";
 import React from "react";
+import { useSelector } from "react-redux";
 
 export default function Reference({
   formValues,
@@ -11,17 +12,13 @@ export default function Reference({
   primaryColor,
   fontSize,
 }) {
-  const References = [
-    { name: "Alice", email: "alice@example.com" },
-    { name: "Bob", email: "bob@example.com" },
-    { name: "Charlie", email: "charlie@example.com" },
-    { name: "Diana", email: "diana@example.com" },
-  ];
+
+  const References = useSelector((state) => state.form.formData?.references);
+
 
   const groupedReferences = [];
-  const referencesList = formValues.References
-    ? formValues.References
-    : References;
+  const referencesList = (formValues?.References || References || []).length > 0 &&
+  (formValues?.References || References || [])
 
   // Group references into pairs
   for (let i = 0; i < referencesList.length; i += 2) {

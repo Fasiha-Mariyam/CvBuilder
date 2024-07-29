@@ -2,7 +2,7 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
 import { Button } from "@mui/material";
-import TemplateCard from "../Card/TemplateCard"; 
+import TemplateCard from "../Card/TemplateCard";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import Certificate from "../AddSectionForms/Certificate";
 import Courses from "../AddSectionForms/Courses";
@@ -20,6 +20,7 @@ export default function CustomizeForm({
   addedSections,
   setSelectedTemplate,
   addedCustomSections,
+  handleInputChange,
 }) {
   const handleTemplateSelect = (number) => {
     setSelectedTemplate(number);
@@ -35,6 +36,7 @@ export default function CustomizeForm({
         return (
           <Certificate
             number={"certificate"}
+            handleInputChange={handleInputChange}
             addedCustomSections={addedCustomSections}
             addedSections={addedSections}
           />
@@ -44,6 +46,7 @@ export default function CustomizeForm({
           <Courses
             number={"course"}
             addedCustomSections={addedCustomSections}
+            handleInputChange={handleInputChange}
             addedSections={addedSections}
           />
         );
@@ -52,6 +55,7 @@ export default function CustomizeForm({
           <References
             number={"reference"}
             addedCustomSections={addedCustomSections}
+            handleInputChange={handleInputChange}
             addedSections={addedSections}
           />
         );
@@ -60,6 +64,7 @@ export default function CustomizeForm({
           <Language
             number={"Language"}
             addedCustomSections={addedCustomSections}
+            handleInputChange={handleInputChange}
             addedSections={addedSections}
           />
         );
@@ -68,6 +73,7 @@ export default function CustomizeForm({
           <Awards
             number={"Awards and Honors"}
             addedCustomSections={addedCustomSections}
+            handleInputChange={handleInputChange}
             addedSections={addedSections}
           />
         );
@@ -77,12 +83,14 @@ export default function CustomizeForm({
             number={"Links"}
             addedCustomSections={addedCustomSections}
             addedSections={addedSections}
+            handleInputChange={handleInputChange}
           />
         );
       case "Volunteer Experience":
         return (
           <Volunteer
             number={"Volunteer Experience"}
+            handleInputChange={handleInputChange}
             addedCustomSections={addedCustomSections}
             addedSections={addedSections}
           />
@@ -91,6 +99,7 @@ export default function CustomizeForm({
         return (
           <TechnicalSkills
             number={"Technical Skills"}
+            handleInputChange={handleInputChange}
             addedCustomSections={addedCustomSections}
             addedSections={addedSections}
           />
@@ -99,6 +108,7 @@ export default function CustomizeForm({
         return (
           <Publication
             number={"Publications"}
+            handleInputChange={handleInputChange}
             addedCustomSections={addedCustomSections}
             addedSections={addedSections}
           />
@@ -106,6 +116,7 @@ export default function CustomizeForm({
       case "Customize":
         return (
           <CustomSection
+            handleInputChange={handleInputChange}
             number={"Customize"}
             addedCustomSections={addedCustomSections}
             addedSections={addedSections}

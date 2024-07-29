@@ -117,8 +117,8 @@ export default function EighthStyledTemplate({
                 fontFamily: fontFamily,
               }}
             >
-              {formValues.firstName ? formValues.firstName : "Fasiha"}
-              {formValues.lastName ? formValues.lastName : " Mariyam"}
+              {formValues?.firstName ? formValues?.firstName : "Fasiha"}
+              {formValues?.lastName ? formValues?.lastName : " Mariyam"}
             </Typography>
             <Typography
               sx={{
@@ -136,7 +136,9 @@ export default function EighthStyledTemplate({
                 fontFamily: fontFamily,
               }}
             >
-              {formValues.jobTitle ? formValues.jobTitle : `Frontend Developer`}
+              {formValues?.jobTitle
+                ? formValues?.jobTitle
+                : `Frontend Developer`}
               <Divider sx={{ background: "white", width: "50%" }} />
             </Typography>
             <Typography
@@ -156,8 +158,8 @@ export default function EighthStyledTemplate({
                 fontFamily: fontFamily,
               }}
             >
-              {formValues.Summary
-                ? formValues.Summary
+              {formValues?.Summary
+                ? formValues?.Summary
                 : `Dedicated and results-driven Frontend Developer with a strong background
         in building responsive and user-friendly web applications. Proficient in
         React and Material-UI, with extensive experience in creating dynamic
@@ -424,7 +426,7 @@ export default function EighthStyledTemplate({
           selectedTemplate === "reference" && (
             <References
               formValues={formValues}
-              fontFamily={fontFamily} 
+              fontFamily={fontFamily}
               primaryColor={primaryColor}
               temp={"eighth"}
               secondaryColor={secondaryColor}

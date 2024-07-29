@@ -71,8 +71,8 @@ export default function Summary({
                   : "20px",
             }}
           >
-            {formValues.Summary
-              ? formValues.Summary
+            {formValues?.Summary
+              ? formValues?.Summary
               : `Dedicated and results-driven Frontend Developer with a strong background
         in building responsive and user-friendly web applications. Proficient in
         React and Material-UI, with extensive experience in creating dynamic
@@ -122,8 +122,8 @@ export default function Summary({
               fontFamily: fontFamily,
             }}
           >
-            {formValues.Summary
-              ? formValues.Summary
+            {formValues?.Summary
+              ? formValues?.Summary
               : `Dedicated and results-driven Frontend Developer with a strong background
          in building responsive and user-friendly web applications. Proficient in
          React and Material-UI, with extensive experience in creating dynamic
@@ -150,21 +150,21 @@ export default function Summary({
               lineHeight: "1",
               mt: 0.5,
               fontSize:
-              fontSize == 2
-                ? "12px"
-                : fontSize == 0
-                ? "8px"
-                : fontSize == 1
-                ? "10px"
-                : "20px",
+                fontSize == 2
+                  ? "12px"
+                  : fontSize == 0
+                  ? "8px"
+                  : fontSize == 1
+                  ? "10px"
+                  : "20px",
               fontFamily: fontFamily,
               color: "rgb(166 166 166)",
               mb: 3,
               textAlign: "center",
             }}
           >
-            {formValues.Summary
-              ? formValues.Summary
+            {formValues?.Summary
+              ? formValues?.Summary
               : `Dedicated and results-driven Frontend Developer with a strong background
          in building responsive and user-friendly web applications. Proficient in
          React and Material-UI, with extensive experience in creating dynamic

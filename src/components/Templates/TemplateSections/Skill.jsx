@@ -80,7 +80,7 @@ export default function Skill({
             <>
               {" "}
               <Divider sx={{ mb: 1 }} />
-              {(formValues.skills ? formValues.skills : skills).map(
+              {(formValues?.skills ? formValues?.skills : skills).map(
                 (skill, index) => (
                   <Box
                     key={index}
@@ -97,25 +97,28 @@ export default function Skill({
                       mb: 0.5,
                       cursor: "pointer",
                       fontSize:
-                      fontSize == 2
-                        ? "10px"
-                        : fontSize == 0
-                        ? "8px"
-                        : fontSize == 1
-                        ? "9px"
-                        : "15px",
+                        fontSize == 2
+                          ? "10px"
+                          : fontSize == 0
+                          ? "8px"
+                          : fontSize == 1
+                          ? "9px"
+                          : "15px",
                       marginRight: "8px",
                     }}
                   >
                     <Typography
-                      sx={{   fontSize:
-                        fontSize == 2
-                          ? "12px"
-                          : fontSize == 0
-                          ? "8px"
-                          : fontSize == 1
-                          ? "10px"
-                          : "20px", fontFamily: fontFamily }}
+                      sx={{
+                        fontSize:
+                          fontSize == 2
+                            ? "12px"
+                            : fontSize == 0
+                            ? "8px"
+                            : fontSize == 1
+                            ? "10px"
+                            : "20px",
+                        fontFamily: fontFamily,
+                      }}
                     >
                       {skill}
                     </Typography>
@@ -126,19 +129,19 @@ export default function Skill({
           )}
           {(temp === "fourth" || temp === "seventh") && (
             <>
-              {(formValues.skills ? formValues.skills : skills).map(
+              {(formValues?.skills ? formValues?.skills : skills).map(
                 (skill, index) => (
                   <ul key={index} style={{ fontFamily: fontFamily }}>
                     <li
                       style={{
                         fontSize:
-                        fontSize == 2
-                          ? "12px"
-                          : fontSize == 0
-                          ? "8px"
-                          : fontSize == 1
-                          ? "10px"
-                          : "20px",
+                          fontSize == 2
+                            ? "12px"
+                            : fontSize == 0
+                            ? "8px"
+                            : fontSize == 1
+                            ? "10px"
+                            : "20px",
                         fontFamily: fontFamily,
                         color: primaryColor
                           ? primaryColor
@@ -162,7 +165,7 @@ export default function Skill({
             <SportsBasketballIcon /> SKILLS
           </Typography>
           <Divider sx={{ mb: 1 }} />
-          {(formValues.skills ? formValues.skills : skills).map(
+          {(formValues?.skills ? formValues?.skills : skills).map(
             (skill, index) => (
               <Box
                 key={index}
@@ -178,26 +181,26 @@ export default function Skill({
                   mb: 0.5,
                   cursor: "pointer",
                   fontSize:
-                  fontSize == 2
-                    ? "10px"
-                    : fontSize == 0
-                    ? "8px"
-                    : fontSize == 1
-                    ? "9px"
-                    : "15px",
+                    fontSize == 2
+                      ? "10px"
+                      : fontSize == 0
+                      ? "8px"
+                      : fontSize == 1
+                      ? "9px"
+                      : "15px",
                   marginRight: "8px",
                 }}
               >
                 <Typography
                   sx={{
                     fontSize:
-                    fontSize == 2
-                      ? "12px"
-                      : fontSize == 0
-                      ? "8px"
-                      : fontSize == 1
-                      ? "10px"
-                      : "20px",
+                      fontSize == 2
+                        ? "12px"
+                        : fontSize == 0
+                        ? "8px"
+                        : fontSize == 1
+                        ? "10px"
+                        : "20px",
                     fontFamily: fontFamily,
                   }}
                 >

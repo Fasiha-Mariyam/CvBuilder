@@ -1,12 +1,15 @@
 /* eslint-disable react/prop-types */
 import { Button, TextField, Box, Typography, MenuItem, Select, FormControl, InputLabel } from '@mui/material';
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import CreateOutlinedIcon from '@mui/icons-material/CreateOutlined';
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
+import { useSelector } from 'react-redux';
 
-const proficiencyLevels = ["Beginner", "Intermediate", "Advanced","Expert","Specialist"];
+const proficiencyLevels = ["Beginner", "Intermediate", "Advanced", "Expert", "Specialist"];
 
-export default function TechnicalSkills({ addedCustomSections, number, addedSections }) {
+export default function TechnicalSkills({ addedCustomSections, number, addedSections, handleInputChange }) {
+  const TechnicalSkills = useSelector((state) => state.form.formData?.technicalSkills);
+
   const [skills, setSkills] = useState([]);
   const [isFormVisible, setIsFormVisible] = useState(true);
   const [skillName, setSkillName] = useState('');
@@ -14,7 +17,9 @@ export default function TechnicalSkills({ addedCustomSections, number, addedSect
   const [formError, setFormError] = useState('');
   const [editIndex, setEditIndex] = useState(null);
 
-
+  useEffect(() => {
+    setSkills(TechnicalSkills || []);
+  }, [TechnicalSkills]);
 
   const handleAddClick = () => {
     if (skillName && proficiencyLevel) {
@@ -23,11 +28,14 @@ export default function TechnicalSkills({ addedCustomSections, number, addedSect
         const updatedSkills = [...skills];
         updatedSkills[editIndex] = { name: skillName, level: proficiencyLevel };
         setSkills(updatedSkills);
+        handleInputChange({ target: { name: 'technicalSkills', value: updatedSkills } });
         setEditIndex(null); // Reset edit index
       } else {
         // Add new skill
         const newSkill = { name: skillName, level: proficiencyLevel };
-        setSkills([...skills, newSkill]);
+        const updatedSkills = [...skills, newSkill];
+        setSkills(updatedSkills);
+        handleInputChange({ target: { name: 'technicalSkills', value: updatedSkills } });
 
         // Add number to addedCustomSections if not already present
         if (!addedSections.includes(number)) {
@@ -58,13 +66,22 @@ export default function TechnicalSkills({ addedCustomSections, number, addedSect
   const handleDeleteClick = (index) => {
     const updatedSkills = skills.filter((_, i) => i !== index);
     setSkills(updatedSkills);
+    handleInputChange({ target: { name: 'technicalSkills', value: updatedSkills } });
+
+    // Remove number from addedCustomSections if no skills remain
+    if (updatedSkills.length === 0 && addedSections.includes(number)) {
+      // Implement a function to remove the number from addedCustomSections if needed
+      // Example: removeCustomSection(number);
+    }
   };
 
   return (
     <Box sx={{ padding: 2, border: '1px solid grey', borderRadius: 2, maxWidth: 400, mx: 'auto' }}>
-      <Typography variant="h6" gutterBottom sx={{textAlign:"start"}}>
-        Technical Skills
-      </Typography>
+      {skills.length > 0 && (
+        <Typography variant="h6" gutterBottom sx={{ textAlign: "start" }}>
+          Technical Skills
+        </Typography>
+      )}
       {skills.map((skill, index) => (
         <Box key={index} sx={{ mb: 1, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
           <Box>

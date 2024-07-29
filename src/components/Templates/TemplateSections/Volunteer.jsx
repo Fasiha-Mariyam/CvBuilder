@@ -2,6 +2,7 @@
 import React from "react";
 import { Box, Divider, Typography, LinearProgress } from "@mui/material";
 import InterpreterModeIcon from "@mui/icons-material/InterpreterMode";
+import { useSelector } from "react-redux";
 
 export default function Volunteer({
   formValues,
@@ -11,21 +12,7 @@ export default function Volunteer({
   primaryColor,
   fontSize,
 }) {
-  const Volunteer = [
-    { organization: "Childern House", role: "Teacher" },
-    {
-      organization: "Spanish volunteer   Resources",
-      role: "https://example.com/spanish",
-    },
-    {
-      organization: "French volunteer   Resources",
-      role: "https://example.com/french",
-    },
-    {
-      organization: "German volunteer   Resources",
-      role: "https://example.com/german",
-    },
-  ];
+  const Volunteer = useSelector((state) => state.form.formData?.volunteers);
 
   const temp6style = {
     fontSize:
@@ -113,7 +100,8 @@ export default function Volunteer({
                 background: (temp == "fourth" || temp == "fifth") && "black",
               }}
             />
-            {(formValues.Volunteer ? formValues.Volunteer : Volunteer).map(
+            {(formValues?.Volunteer || Volunteer || []).length > 0 &&
+              (formValues?.Volunteer || Volunteer || []).map(
               (volunteer, index) => (
                 <Box
                   key={index}

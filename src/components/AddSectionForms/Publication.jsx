@@ -1,10 +1,13 @@
 /* eslint-disable react/prop-types */
 import { Button, TextField, Box, Typography } from '@mui/material';
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import CreateOutlinedIcon from '@mui/icons-material/CreateOutlined';
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
+import { useSelector } from 'react-redux';
 
-export default function Publication({ addedCustomSections, number, addedSections }) {
+export default function Publication({ addedCustomSections, number, addedSections, handleInputChange }) {
+    const Publications = useSelector((state) => state.form.formData?.publications || []);
+  console.log(Publications,"pub")
   const [publications, setPublications] = useState([]);
   const [isFormVisible, setIsFormVisible] = useState(true);
   const [publicationTitle, setPublicationTitle] = useState('');
@@ -12,6 +15,9 @@ export default function Publication({ addedCustomSections, number, addedSections
   const [formError, setFormError] = useState('');
   const [editIndex, setEditIndex] = useState(null);
 
+  useEffect(() => {
+    setPublications(Publications || []);
+  }, [Publications]);
 
   const handleAddClick = () => {
     if (publicationTitle && publicationDate) {
@@ -20,11 +26,14 @@ export default function Publication({ addedCustomSections, number, addedSections
         const updatedPublications = [...publications];
         updatedPublications[editIndex] = { title: publicationTitle, date: publicationDate };
         setPublications(updatedPublications);
+        handleInputChange({ target: { name: 'publications', value: updatedPublications } });
         setEditIndex(null); // Reset edit index
       } else {
         // Add new publication
         const newPublication = { title: publicationTitle, date: publicationDate };
-        setPublications([...publications, newPublication]);
+        const updatedPublications = [...publications, newPublication];
+        setPublications(updatedPublications);
+        handleInputChange({ target: { name: 'publications', value: updatedPublications } });
 
         // Add number to addedCustomSections if not already present
         if (!addedSections.includes(number)) {
@@ -55,13 +64,22 @@ export default function Publication({ addedCustomSections, number, addedSections
   const handleDeleteClick = (index) => {
     const updatedPublications = publications.filter((_, i) => i !== index);
     setPublications(updatedPublications);
+    handleInputChange({ target: { name: 'publications', value: updatedPublications } });
+
+    // Remove number from addedCustomSections if no publications remain
+    if (updatedPublications.length === 0 && addedSections.includes(number)) {
+      // Implement a function to remove the number from addedCustomSections if needed
+      // Example: removeCustomSection(number);
+    }
   };
 
   return (
     <Box sx={{ padding: 2, border: '1px solid grey', borderRadius: 2, maxWidth: 400, mx: 'auto' }}>
-      <Typography variant="h6" gutterBottom sx={{textAlign:"start"}}>
-        Publications
-      </Typography>
+      {publications.length > 0 && (
+        <Typography variant="h6" gutterBottom sx={{ textAlign: "start" }}>
+          Publications
+        </Typography>
+      )}
       {publications.map((publication, index) => (
         <Box key={index} sx={{ mb: 1, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
           <Box>

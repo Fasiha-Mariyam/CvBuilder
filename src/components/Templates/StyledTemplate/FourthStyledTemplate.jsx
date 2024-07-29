@@ -130,50 +130,49 @@ export default function FourthStyledTemplate({
                 />
               </Grid>
               <Grid item>
-                
-              {addedCustomSections.includes("reference") ? (
-              <References
-                formValues={formValues}
-                fontFamily={fontFamily}
-                temp={"fourth"}
-                primaryColor={primaryColor}
-                secondaryColor={secondaryColor}
-                fontSize={fontSize}
-              />
-            ) : (
-              selectedTemplate === "reference" && (
-                <References
-                  formValues={formValues}
-                  fontFamily={fontFamily}
-                  primaryColor={primaryColor}
-                  temp={"fourth"}
-                  secondaryColor={secondaryColor}
-                  fontSize={fontSize}
-                />
-              )
-            )}
-             </Grid>
-             {addedCustomSections.includes("Language") ? (
-              <Language
-                formValues={formValues}
-                temp={"fourth"}
-                fontFamily={fontFamily}
-                primaryColor={primaryColor}
-                secondaryColor={secondaryColor}
-                fontSize={fontSize}
-              />
-            ) : (
-              selectedTemplate === "Language" && (
+                {addedCustomSections.includes("reference") ? (
+                  <References
+                    formValues={formValues}
+                    fontFamily={fontFamily}
+                    temp={"fourth"}
+                    primaryColor={primaryColor}
+                    secondaryColor={secondaryColor}
+                    fontSize={fontSize}
+                  />
+                ) : (
+                  selectedTemplate === "reference" && (
+                    <References
+                      formValues={formValues}
+                      fontFamily={fontFamily}
+                      primaryColor={primaryColor}
+                      temp={"fourth"}
+                      secondaryColor={secondaryColor}
+                      fontSize={fontSize}
+                    />
+                  )
+                )}
+              </Grid>
+              {addedCustomSections.includes("Language") ? (
                 <Language
                   formValues={formValues}
+                  temp={"fourth"}
                   fontFamily={fontFamily}
                   primaryColor={primaryColor}
                   secondaryColor={secondaryColor}
                   fontSize={fontSize}
-                  temp={"fourth"}
                 />
-              )
-            )}                                                               
+              ) : (
+                selectedTemplate === "Language" && (
+                  <Language
+                    formValues={formValues}
+                    fontFamily={fontFamily}
+                    primaryColor={primaryColor}
+                    secondaryColor={secondaryColor}
+                    fontSize={fontSize}
+                    temp={"fourth"}
+                  />
+                )
+              )}
             </Grid>
           </Grid>
 
@@ -196,8 +195,8 @@ export default function FourthStyledTemplate({
                   color: secondaryColor ? secondaryColor : "",
                 }}
               >
-                {formValues.firstName ? formValues.firstName : "Fasiha"}
-                {formValues.lastName ? formValues.lastName : " Mariyam"}
+                {formValues?.firstName ? formValues?.firstName : "Fasiha"}
+                {formValues?.lastName ? formValues?.lastName : " Mariyam"}
               </Typography>
               <Typography
                 sx={{
@@ -215,8 +214,8 @@ export default function FourthStyledTemplate({
                   color: secondaryColor ? secondaryColor : "",
                 }}
               >
-                {formValues.jobTitle
-                  ? formValues.jobTitle
+                {formValues?.jobTitle
+                  ? formValues?.jobTitle
                   : `Frontend Developer`}
               </Typography>
             </div>{" "}
@@ -295,7 +294,6 @@ export default function FourthStyledTemplate({
                 />
               )
             )}
-          
             {addedCustomSections.includes("Awards and Honors") ? (
               <Awards
                 formValues={formValues}
@@ -422,7 +420,6 @@ export default function FourthStyledTemplate({
                 />
               )
             )}
-          
           </Grid>
         </Grid>
       </Box>

@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import * as React from "react";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
@@ -33,7 +34,7 @@ export default function PersonalInfo({ handleInputChange ,formValues}) {
             <Typography sx={textStyle}>First Name</Typography>
             <TextField
               name="firstName"
-              value={formValues.firstName}
+              value={formValues?.firstName}
               onChange={handleInputChange}
               id="outlined-basic"
               variant="outlined"
@@ -45,9 +46,9 @@ export default function PersonalInfo({ handleInputChange ,formValues}) {
             <Typography sx={textStyle}>Last Name</Typography>
             <TextField
              name="lastName"
-             value={formValues.lastName}
+             value={formValues?.lastName}
              onChange={handleInputChange}
-              id="outlined-basic"
+              id="outlined-basic"x
               placeholder="Last Name"
               variant="outlined"
               fullWidth
@@ -59,7 +60,7 @@ export default function PersonalInfo({ handleInputChange ,formValues}) {
             <Typography sx={textStyle}>Email</Typography>
             <TextField
              name="email"
-             value={formValues.email}
+             value={formValues?.email}
              onChange={handleInputChange}
               id="outlined-basic"
               variant="outlined"
@@ -72,7 +73,7 @@ export default function PersonalInfo({ handleInputChange ,formValues}) {
             <TextField
              name="jobTitle"
              onChange={handleInputChange}
-             value={formValues.jobTitle}
+             value={formValues?.jobTitle}
               id="outlined-basic"
               placeholder="Job Title"
               variant="outlined"
@@ -85,7 +86,7 @@ export default function PersonalInfo({ handleInputChange ,formValues}) {
             <Typography sx={textStyle}>Address</Typography>
             <TextField
              name="Address"
-             value={formValues.Address}
+             value={formValues?.Address}
              onChange={handleInputChange}
               id="outlined-basic"
               variant="outlined"
@@ -97,7 +98,7 @@ export default function PersonalInfo({ handleInputChange ,formValues}) {
             <Typography sx={textStyle}>Phone Number</Typography>
             <TextField
              name="phoneNumber"
-             value={formValues.phoneNumber}
+             value={formValues?.phoneNumber}
              onChange={handleInputChange}
               id="outlined-basic"
               placeholder="Phone Number"
@@ -122,7 +123,7 @@ export default function PersonalInfo({ handleInputChange ,formValues}) {
             <Typography sx={textStyle}>LinkedIn</Typography>
             <TextField
              name="LinkedIn"
-             value={formValues.LinkedIn}
+             value={formValues?.LinkedIn}
              onChange={handleInputChange}
               id="outlined-basic"
               variant="outlined"
@@ -134,7 +135,7 @@ export default function PersonalInfo({ handleInputChange ,formValues}) {
             <Typography sx={textStyle}>GitHub</Typography>
             <TextField
               name="GitHub"
-              value={formValues.GitHub}
+              value={formValues?.GitHub}
               onChange={handleInputChange}
               id="outlined-basic"
               placeholder="GitHub"

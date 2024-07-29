@@ -2,6 +2,7 @@
 import { Box, Divider, Typography } from "@mui/material";
 import EmojiEventsIcon from "@mui/icons-material/EmojiEvents";
 import React from "react";
+import { useSelector } from "react-redux";
 
 export default function Award({
   formValues,
@@ -11,11 +12,8 @@ export default function Award({
   primaryColor,
   fontSize,
 }) {
-  const defaultAwards = [
-    { title: "Best Developer", date: "2021-12-01" },
-    { title: "Top Performer", date: "2020-11-01" },
-    { title: "Employee of the Month", date: "2019-10-01" },
-  ];
+  const Award = useSelector((state) => state.form.formData?.awards);
+
   const temp6style = {
     fontSize:
       fontSize == 2
@@ -102,7 +100,8 @@ export default function Award({
                 background: (temp == "fourth" || temp == "fifth") && "black",
               }}
             />
-            {(formValues.Awards ? formValues.Awards : defaultAwards).map(
+            {(formValues?.Awards || Award || []).length > 0 &&
+              (formValues?.Awards || Award || []).map(
               (award, index) => (
                 <Box
                   key={index}
@@ -186,7 +185,7 @@ export default function Award({
                 background: (temp == "fourth" || temp == "fifth") && "black",
               }}
             />
-            {(formValues.Awards ? formValues.Awards : defaultAwards).map(
+            {(formValues.Awards ? formValues.Awards : Award).map(
               (award, index) => (
                 <ul key={index}>
                   <li

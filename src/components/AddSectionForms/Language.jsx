@@ -1,12 +1,14 @@
 /* eslint-disable react/prop-types */
 import { Button, TextField, Box, Typography, Autocomplete } from '@mui/material';
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import CreateOutlinedIcon from '@mui/icons-material/CreateOutlined';
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
+import { useSelector } from 'react-redux';
 
 const proficiencyOptions = ["Native", "Proficient", "Advanced", "Intermediate", "Beginner"];
 
-export default function Language({ addedCustomSections, number, addedSections }) {
+export default function Language({ addedCustomSections, number, addedSections, handleInputChange }) {
+  const Language = useSelector((state) => state.form.formData?.languages);
   const [languages, setLanguages] = useState([]);
   const [isFormVisible, setIsFormVisible] = useState(true);
   const [languageName, setLanguageName] = useState('');
@@ -14,25 +16,30 @@ export default function Language({ addedCustomSections, number, addedSections })
   const [formError, setFormError] = useState('');
   const [editIndex, setEditIndex] = useState(null);
 
+  useEffect(() => {
+    setLanguages(Language || []);
+  }, [Language]);
 
   const handleAddClick = () => {
     if (languageName && proficiency) {
+      let updatedLanguages;
       if (editIndex !== null) {
         // Update existing language
-        const updatedLanguages = [...languages];
+        updatedLanguages = [...languages];
         updatedLanguages[editIndex] = { name: languageName, proficiency };
-        setLanguages(updatedLanguages);
         setEditIndex(null); // Reset edit index
       } else {
         // Add new language
         const newLanguage = { name: languageName, proficiency };
-        setLanguages([...languages, newLanguage]);
+        updatedLanguages = [...languages, newLanguage];
 
         // Add number to addedCustomSections if not already present
         if (!addedSections.includes(number)) {
           addedCustomSections(number);
         }
       }
+      setLanguages(updatedLanguages);
+      handleInputChange({ target: { name: 'languages', value: updatedLanguages } });
       setLanguageName('');
       setProficiency(null);
       setFormError('');
@@ -57,6 +64,7 @@ export default function Language({ addedCustomSections, number, addedSections })
   const handleDeleteClick = (index) => {
     const updatedLanguages = languages.filter((_, i) => i !== index);
     setLanguages(updatedLanguages);
+    handleInputChange({ target: { name: 'languages', value: updatedLanguages } });
   };
 
   return (

@@ -12,16 +12,21 @@ export default function Experience({
   secondaryColor,
 }) {
   const experiences = {};
-  Object.keys(formValues).forEach((key) => {
-    const match = key.match(/^(experience\d+)_/);
-    if (match) {
-      const prefix = match[1];
-      if (!experiences[prefix]) {
-        experiences[prefix] = {};
+  if (formValues) {
+    Object.keys(formValues).forEach((key) => {
+      const match = key.match(/^(experience\d+)_/);
+      if (match) {
+        const prefix = match[1];
+        if (!experiences[prefix]) {
+          experiences[prefix] = {};
+        }
+        experiences[prefix][key.replace(`${prefix}_`, "")] = formValues[key];
       }
-      experiences[prefix][key.replace(`${prefix}_`, "")] = formValues[key];
-    }
-  });
+    });
+  } else {
+    // Handle the case where formValues is undefined or null
+    console.warn('formValues is undefined or null');
+  }
   console.log(experiences, "experience");
   return (
     <>
